@@ -1,0 +1,5 @@
+<h1><%= human_action_name(:folders, :new)%></h1>
+<p id="notice"><%= flash[:notice] %></p>
+<%= render 'form' %>
+
+<%= link_to human_action_name(nil, :back), folders_path(:action => :list) %>

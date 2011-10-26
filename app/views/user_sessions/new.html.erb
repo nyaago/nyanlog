@@ -1,0 +1,49 @@
+<h1><%= human_action_name(:user_sessions, :new) %></h1>
+<p id="notice">
+  <%= flash[:notice] %>
+</p>
+<% if @user_session.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+    <%= activerecord_error_message(:record_invalid, 
+    :errors => @user_session.errors.count) %>
+    </h2>
+    <ul>
+    <% @user_session.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  
+<%= form_for( @user_session,
+      :url => { :action => "create"}, :method => :get )   do |f|   %>
+  <fieldset id="user_sessions_new">
+    <legend><%= User.model_name.human %></legend>
+
+    <div class="field" id="login">
+      <%= f.label User.human_attribute_name(:login)  %><br />
+      <%= f.text_field :login %>
+    </div>
+    <div class="field" id="password">
+      <%= f.label User.human_attribute_name(:password)  %><br />
+      <%= f.password_field :password %>
+    </div>
+    <div class="field" id="auto_login">
+      <%= f.label User.human_attribute_name(:auto_login)  %>
+      <%= check_box :user, :auto_login %>
+    </div>
+    
+    <%= hidden_field_tag 'back_controller', params[:back_controller] %>
+    <%= hidden_field_tag 'back_action', params[:back_action] %>
+    </div>
+  </fieldset>
+    
+  <div class="actions">
+    <%= f.submit human_action_name(:user_sessions, :create) %>
+  </div>
+
+<% end %>
+  
+

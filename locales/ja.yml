@@ -1,0 +1,355 @@
+ja:
+# extract from activesupport
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      short: "%m/%d"
+      middle: "%Y年%m月%d日"
+      long: "%Y年%m月%d日(%a)"
+
+    day_names: [日曜日, 月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日] 
+    abbr_day_names: [日, 月, 火, 水, 木, 金, 土] 
+
+    month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+
+    order:
+      - :year
+      - :month
+      - :day
+    
+  month:
+    time:
+      formats:
+        default: "%Y年%-m月"    
+        short: "%Y/%m"
+        long: "%Y年%m月"
+
+    date:
+      formats:
+        default: "%Y年%-m月"    
+        short: "%Y/%m"
+        long: "%Y年%m月"
+
+
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%y/%m/%d %H:%M"
+      long: "%Y年%m月%d日 %H時%M分%S秒"
+      full: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
+    am: "午前"
+    pm: "午後"
+
+  support:
+    array:
+      words_connector: "と"
+      two_words_connector: "と"
+      last_word_connector: "と"
+
+# extract from actionpack/actionview
+  number:
+    format:
+      separator: "." 
+      delimiter: "," 
+      precision: 3
+
+    currency:
+      format:
+        format: "%n%u"
+        unit: "円"
+        separator: "." 
+        delimiter: "," 
+        precision: 0
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+      storage_units:
+        format: "%u%n"
+        units:
+          byte:
+            one: "バイト"
+            other: "バイト"
+          kb: "キロバイト"
+          mb: "メガバイト"
+          gb: "ギガバイト"
+          tb: "テラバイト"
+
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "30秒前後"
+      less_than_x_seconds:
+        one:   "1秒以内"
+        other: "%{count}秒以内"
+      x_seconds:
+        one:   "1秒"
+        other: "%{count}秒"
+      less_than_x_minutes:
+        one:   "1分以内"
+        other: "%{count}分以内"
+      x_minutes:
+        one:   "1分"
+        other: "%{count}分"
+      about_x_hours:
+        one:   "約1時間"
+        other: "約%{count}時間"
+      x_days:
+        one:   "1日"
+        other: "%{count}日"
+      about_x_months:
+        one:   "約1ヶ月"
+        other: "約%{count}ヶ月"
+      x_months:
+        one:   "1ヶ月"
+        other: "%{count}ヶ月"
+      about_x_years:
+        one:   "約%{count}年"
+        other: "約%{count}年"
+      over_x_years:
+        one:   "%{count}年以上"
+        other: "%{count}年以上"
+      almost_x_years:
+        one:   "約%{count}年"
+        other: "約%{count}年"
+    prompts:
+      year:   "年"
+      month:  "月"
+      day:    "日"
+      hour:   "時"
+      minute: "分"
+      second: "秒"
+
+  helpers:
+    select:
+      prompt: "選択してください。"
+
+    submit:
+      create: '%{model}を登録'
+      update: '%{model}を更新'
+      submit: '%{model}を保存'
+
+
+# extract from activemodel
+  errors:
+    format: "%{attribute}%{message}"
+
+    messages:
+      inclusion: "は一覧にありません。"
+      exclusion: "は予約されています。"
+      invalid: "は不正な値です。"
+      confirmation: "が一致しません。"
+      accepted: "を受諾してください。"
+      empty: "を入力してください。 "
+      blank: "を入力してください。 "
+      too_long: "は%{count}文字以内で入力してください。"
+      too_short: "は%{count}文字以上で入力してください。"
+      wrong_length: "は%{count}文字で入力してください。"
+      not_a_number: "は数値で入力してください。"
+      not_an_integer: "は整数で入力してください。"
+      greater_than: "は%{count}より大きい値にしてください。"
+      greater_than_or_equal_to: "は%{count}以上の値にしてください。"
+      equal_to: "は%{count}にしてください。"
+      less_than: "は%{count}より小さい値にしてください。"
+      less_than_or_equal_to: "は%{count}以下の値にしてください。"
+      odd: "は奇数にしてください。"
+      even: "は偶数にしてください。"
+      taken: "はすでに存在します。"
+      
+    folder:
+      messages:
+        invalid_date: 'の入力が不正です。全て入力するか全て未入力にしてください。'
+
+# extract from activerecord
+  # Attributes names common to most models
+  attributes:
+    created_at: "登録日時"
+    updated_at: "更新日時"
+    created_by_id: "登録者"
+    updated_by_id: "更新者"
+    
+
+  # Active Record models configuration
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "%{errors}つの入力エラーがあります。 "
+        # Append your own errors here or at the model/attributes scope.
+
+      # You can define own errors for models or model attributes.
+      # The values :model, :attribute and :value are always available for interpolation.
+      #
+      # For example,
+      #   models:
+      #     user:
+      #       blank: "This is a custom blank message for %{model}: %{attribute}"
+      #       attributes:
+      #         login:
+      #           blank: "This is a custom blank message for User login"
+      # Will define custom blank validation message for User model and
+      # custom blank validation message for login attribute of User model.
+      #models:
+
+    # Translate model names. Used in Model.human_name().
+    models:
+      user: 'ユーザー'
+      user_session: 'ユーザー'
+      site: 'サイト'
+      article: '記事'
+      folder: 'フォルダー'
+      # For example,
+      #   user: "Dude"
+      # will translate User model name to "Dude"
+
+    # Translate model attribute names. Used in Model.human_attribute_name(attribute).
+    attributes:
+      user:
+        login: "アカウント"
+        email: "EMailアドレス"  
+        password: "パスワード"  
+        password_confirmation: 'パスワード確認'
+        auto_login: "次回自動ログインする"
+        
+      user_session:
+        
+      site:
+        name: '名前'
+        title: 'タイトル'
+        description: '概要'
+        opened_at: '公開開始日時'
+        closed_at: '公開停止日時'
+        not_in_public: '非公開（メンバーのみ閲覧）'
+        
+      folder:
+        name: '名前'
+        title: 'タイトル'
+        description: '概要'
+        opened_at: '公開開始日時'
+        closed_at: '公開停止日時'
+        not_in_public: '非公開（メンバーのみ閲覧）'
+        ordeting_type: '記事並び順'
+        article_count_by_page: '1ページの表示記事数'
+        owner_id: '所有者'
+        ordering_types:
+          by_created_at_desc: '作成された順番-降順'
+          by_updated_at_desc: '更新された順番-降順'
+          by_created_at_asc: '作成された順番-昇順' 
+          by_created_at_asc: '更新された順番-昇順' 
+          specifying: '明示する（初期-作成昇順）' 
+      
+      article:
+        name: '名前'
+        title:  'タイトル'
+        folder_id: 'フォルダー'
+        content: '内容'
+        order_of_display: '表示順'
+        opened_at: '公開開始日時'
+        closed_at: '公開停止日時'
+        
+      # For example,
+      #   user:
+      #     login: "Handle"
+      # will translate User attribute "login" as "Handle"
+
+
+  authlogic:
+    error_messages:
+      login_blank: "を入力してください。"
+      login_not_found: "は登録されていません。"
+      login_invalid: "には、アルファベット・数字・半角空白・ピリオド・ハイフン・アットマーク以外使えません。"
+      consecutive_failed_logins_limit_exceeded: "ログインの失敗回数が規定を超えました。"
+      email_invalid: "は、正しいアドレスではありません。"
+      password_blank: "を入力してください。"
+      password_invalid: "は、正しくありません。"
+      not_active: "あなたのアカウントは有効化されていません。"
+      not_confirmed: "あなたのアカウントは確認されていません。"
+      not_approved: "あなたのアカウントは許可されていません。"
+      no_authentication_details: "アカウント、パスワードを入力してください。"
+    models:
+      user_session: "ログイン情報"
+    attributes:
+      user_session:
+        login: "ログイン名"
+        email: "電子メール"
+        password: "パスワード"
+        remember_me: "ログイン情報を記憶"
+        
+  controllers:
+    actions:
+      edit: '変更'
+      create: '作成'
+      update: '更新'
+      destroy: '削除'
+      show: '表示'
+      back: '戻る'
+      
+    messages:
+      site_not_found: '指定されたサイトはありません'
+      folder_not_found: '指定されたフォルダーはありません'
+      
+    user_sessions:
+      actions:
+        new: 'ログイン'
+        create: 'ログイン'
+      messages:
+        required_to_login: 'ログインしてください'
+        
+    sites:
+      actions:
+        index: 'サイト一覧'
+        new: '新規サイト'
+        edit: 'サイトの変更'
+        create: 'サイト作成'
+        update: 'サイト更新'
+        destroy: 'サイト削除'
+        show: 'サイトの表示'
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定されたサイトは存在しません。'
+        destroyed: 'サイトを削除しました。'
+        updated: 'サイトを更新しました。'
+        created: 'サイトを作成しました。'
+        
+    folders:
+      actions:
+        list: 'フォルダー一覧'
+        new: '新規フォルダー'
+        edit: 'フォルダーの変更'
+        create: 'フォルダー作成'
+        update: 'フォルダー更新'
+        destroy: 'フォルダー削除'
+        show: 'フォルダーの表示'
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定されたフォルダーは存在しません。'
+        destroyed: 'フォルダーを削除しました。'
+        updated: 'フォルダーを更新しました。'
+        created: 'フォルダーを作成しました。'
+        
+    articles:
+      actions:
+        list: '記事一覧'
+        new: '新規記事'
+        edit: '記事の変更'
+        create: '記事作成'
+        update: '記事更新'
+        destroy: '記事削除'
+        show: '記事の表示'
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定された記事は存在しません。'
+        destroyed: '記事を削除しました。'
+        updated: '記事を更新しました。'
+        created: '記事を作成しました。'
+
+      

@@ -1,0 +1,43 @@
+<h1>
+  <%= @folder.title %> 
+  <%= human_action_name(:articles, :list) %>
+</h1>
+
+<p id="notice"><%= flash[:notice] %></p>
+<table>
+  <tr>
+    <th><%= Article.human_attribute_name(:title) %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @articles.each do |article| %>
+  <tr>
+    <td><%= article.title %></td>
+    <td>
+    </td>
+    <td>
+    <%= link_to human_action_name(nil, :edit), 
+    edit_article_path(article,  url_options_from_params) %>
+    </td>
+    <td><%= link_to human_action_name(nil, :destroy), 
+    article_path(article,url_options_from_params), 
+    :confirm =>  message(:articles, :destroy_confirmation), 
+    :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= will_paginate @articles %>
+
+<div class="actions">
+<%= link_to human_action_name(:articles, :new), 
+new_article_path(url_options_from_params)
+%>
+</div>

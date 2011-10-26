@@ -1,0 +1,45 @@
+<%= form_for(@article) do |f| %>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= activerecord_error_message(:record_invalid, 
+        :errors => @article.errors.count) %>
+      </h2>
+      <ul>
+      <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset id="article_fields">
+    <legend><%= Article.model_name.human %></legend>
+    <div class="field" id="title">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field" id="content">
+      <%= f.label :content %><br />
+      <%= f.text_area :content, :cols=>'40', :rows => '20' %>
+    </div>
+    <div class="field" id="opened_at">
+      <%= f.label :opened_at %><br />
+      <%= f.select :opened_year, @years.collect {|y| [y,y]}, { :include_blank => true } %>
+      <%= f.select :opened_month, @months.collect {|m| [m,m]}, { :include_blank => true } %>
+      <%= f.select :opened_day, @days.collect {|d| [d,d]} , { :include_blank => true } %>
+      <%= f.select :opened_hour, @hours.collect {|h| [h,h]} %>
+      <%= f.select :opened_min, @minutes.collect {|m| [m,m]} %>
+    </div>
+    <div class="field" id="closed_at">
+      <%= f.label :closed_at %><br />
+      <%= f.select :closed_year, @years.collect {|y| [y,y]} , { :include_blank => true } %>
+      <%= f.select :closed_month, @months.collect {|m| [m,m]} , { :include_blank => true } %>
+      <%= f.select :closed_day, @days.collect {|d| [d,d]} , { :include_blank => true } %>
+      <%= f.select :closed_hour, @hours.collect {|h| [h,h]} %>
+      <%= f.select :closed_min, @minutes.collect {|m| [m,m]} %>
+    </div>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

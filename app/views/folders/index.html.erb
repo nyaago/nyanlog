@@ -1,0 +1,40 @@
+<h1><%= human_action_name(:folders, :list) %></h1>
+
+<p id="notice"><%= flash[:notice] %></p>
+<table>
+  <tr>
+    <th><%= Folder.human_attribute_name(:name) %></th>
+    <th><%= Folder.human_attribute_name(:title) %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @folders.each do |folder| %>
+  <tr>
+    <td><%= folder.name %></td>
+    <td><%= folder.title %></td>
+    <td>
+    </td>
+    <td>
+    <%= link_to human_action_name(nil, :edit), 
+    edit_folder_path(folder,  url_options_from_params) %>
+    </td>
+    <td><%= link_to human_action_name(nil, :destroy), 
+    folder_path(folder,url_options_from_params), 
+    :confirm =>  message(:folders, :destroy_confirmation), 
+    :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= will_paginate @folders %>
+
+<div class="actions">
+<%= link_to human_action_name(:folders, :new), new_folder_path(:site => @site.name) %>
+</div>

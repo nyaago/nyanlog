@@ -1,0 +1,59 @@
+<%= form_for(@folder) do |f| %>
+  <% if @folder.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= activerecord_error_message(:record_invalid, 
+        :errors => @folder.errors.count) %>
+      </h2>
+      <ul>
+      <% @folder.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset id="folder_fields">
+    <legend><%= Folder.model_name.human %></legend>
+    <div class="field" id="name">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field" id="title">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field" id="description">
+      <%= f.label :description %><br />
+      <%= f.text_area :description, :cols=>'40', :rows => '5' %>
+    </div>
+    <div class="field" id="opened_at">
+      <%= f.label :opened_at %><br />
+      <%= f.select :opened_year, @years.collect {|y| [y,y]}, { :include_blank => true } %>
+      <%= f.select :opened_month, @months.collect {|m| [m,m]}, { :include_blank => true } %>
+      <%= f.select :opened_day, @days.collect {|d| [d,d]} , { :include_blank => true } %>
+      <%= f.select :opened_hour, @hours.collect {|h| [h,h]} %>
+      <%= f.select :opened_min, @minutes.collect {|m| [m,m]} %>
+    </div>
+    <div class="field" id="closed_at">
+      <%= f.label :closed_at %><br />
+      <%= f.select :closed_year, @years.collect {|y| [y,y]} , { :include_blank => true } %>
+      <%= f.select :closed_month, @months.collect {|m| [m,m]} , { :include_blank => true } %>
+      <%= f.select :closed_day, @days.collect {|d| [d,d]} , { :include_blank => true } %>
+      <%= f.select :closed_hour, @hours.collect {|h| [h,h]} %>
+      <%= f.select :closed_min, @minutes.collect {|m| [m,m]} %>
+    </div>
+    <div class="field" id="article_count_by_page">
+      <%= f.label :article_count_by_page %><br />
+      <%= f.select :article_count_by_page, 
+      (1..@max_article_count_by_page).to_a.collect {|c| [c,c]} %>
+    </div>
+    <div class="field" id="ordering_type">
+      <%= f.label :ordering_type %><br />
+      <%= f.select :ordering_type, @ordering_types %>
+    </div>
+    
+  </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

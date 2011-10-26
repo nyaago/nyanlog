@@ -1,0 +1,33 @@
+<h1>
+  <%= @folder.title %> 
+</h1>
+
+<p id="notice"><%= flash[:notice] %></p>
+
+<div id="articles"> 
+<% @articles.each do |article| %>
+  <div class="article" id="article_<%= article.id %>">
+    <h2 class="article_title">
+      <%= article.title %>
+    </h2>
+    <div class="article_informations">
+      <span class="updated_at">
+      <%= I18n.l(article.updated_at.to_date ,:format => :default) %>
+      </span>
+    </div>
+    <div class="content">
+      <%= article.content.html_safe %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<br />
+
+<%= will_paginate @articles %>
+
+<div class="actions">
+<%= link_to human_action_name(:articles, :new), 
+new_article_path(url_options_from_params)
+%>
+</div>

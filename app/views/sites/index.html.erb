@@ -1,0 +1,37 @@
+<h1><%= human_action_name(:sites, :index)%></h1>
+<p id="notice"><%= flash[:notice] %></p>
+<table>
+  <tr>
+    <th><%= Site.human_attribute_name(:name) %></th>
+    <th><%= Site.human_attribute_name(:title) %></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sites.each do |site| %>
+  <tr>
+    <td><%= site.name %></td>
+    <td><%= site.title %></td>
+    <td>
+    <%= link_to human_action_name(nil, :edit), 
+    edit_site_path(site, url_options_from_params) %>
+    </td>
+    <td>
+    <%= link_to human_action_name(nil, :destroy), 
+    site_path(site, url_options_from_params), 
+    :confirm =>  message(:sites, :destroy_confirmation), 
+    :method => :delete %>
+    <%= site_path(site, :gog => 100) %>
+    
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= will_paginate @sites %>
+
+<div class="actions">
+<%= link_to human_action_name(:sites, :new), new_site_path %>
+</div>
