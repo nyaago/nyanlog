@@ -22,6 +22,13 @@ class UserSessionsController < ApplicationController
       render :action => :new
     end
   end
+  
+  def destroy
+    if current_user_session
+      current_user_session.destroy
+    end
+    redirect_to :controller => :user_sessions, :action => :new
+  end
 
   protected
   
