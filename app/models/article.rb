@@ -3,11 +3,11 @@ class Article < ActiveRecord::Base
   include ::OpenAndCloseAt
   
   @@ordering_map = {
-    'ByCreatedAtDesc' =>  'created_at desc',
-    'ByUpdatedAtDesc' => 'updated_at desc',
-    'ByCreatedAtAsc' =>  'created_at asc',
-    'ByCreatedAtAsc' =>  'updated_at asc',
-    'Specifying' => 'order_of_display, created_at asc'
+    Folder::ORDERING_BY_CREATED_AT_DESC =>  'created_at desc',
+    Folder::ORDERING_BY_UPDATED_AT_DESC => 'updated_at desc',
+    Folder::ORDERING_BY_CREATED_AT_ASC =>  'created_at asc',
+    Folder::ORDERING_BY_UPDATED_AT_ASC =>  'updated_at asc',
+    Folder::ORDERING_SPECIFYING => 'order_of_display, created_at asc'
   }
   
   belongs_to  :folder

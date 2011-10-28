@@ -44,6 +44,9 @@ class SitesController < ApplicationController
       return redirect_to sites_path
     rescue ActiveRecord::RecordInvalid  => ex
       render :action => :new
+    rescue => ex
+      p ex.message
+      raise ex
     end
   end
 

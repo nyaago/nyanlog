@@ -132,8 +132,13 @@ module OpenAndCloseAt
       if !@opened_year.blank? && !@opened_month.blank? && !@opened_day.blank? && 
         !@opened_hour.blank? && !@opened_min.blank?
         begin
-          Time.new(@opened_year.to_i,@opened_month.to_i,@opened_day.to_i,
+          tm = Time.new(@opened_year.to_i,@opened_month.to_i,@opened_day.to_i,
           @opened_hour.to_i,@opened_min.to_i)
+          if tm.month != @opened_month.to_i
+            nil
+          else
+            tm
+          end
         rescue
           nil
         end
@@ -153,8 +158,13 @@ module OpenAndCloseAt
       if !@closed_year.blank? && !@closed_month.blank? && !@closed_day.blank? && 
         !@closed_hour.blank? && !@closed_min.blank?
         begin
-          Time.new(@closed_year.to_i,@closed_month.to_i,@closed_day.to_i,
+          tm = Time.new(@closed_year.to_i,@closed_month.to_i,@closed_day.to_i,
           @closed_hour.to_i,@closed_min.to_i)
+          if tm.month != @closed_month.to_i
+            nil
+          else
+            tm
+          end
         rescue
           nil
         end

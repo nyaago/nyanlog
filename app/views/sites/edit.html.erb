@@ -1,4 +1,4 @@
 <h1><%= human_action_name(:sites, :edit)%></h1>
 <p id="notice"><%= flash[:notice] %></p>
 <%= render 'form' %>
-<%= link_to human_action_name(nil, :back), sites_path %>
+<%= link_to human_action_name(nil, :back), sites_path(url_options_from_params) %>

@@ -12,22 +12,22 @@ Nyanlog::Application.routes.draw do
   end
 
   # folders
-  get ":site/folders" , :to => 'folders#index#:site'
   get ":site/folders/new" , :to => 'folders#new#:site'
   get ":site/folders/list" , :to => 'folders#list#:site'
   get ":site/folders/:name/edit" , :to => 'folders#edit#:site#:name'
   put ":site/folders/:name" , :to => 'folders#update#:site#:name'
   post ":site/folders" , :to => 'folders#create#:site'
   delete ":site/folders/:name" , :to => 'folders#destroy#:site'
+  get ":site/folders" , :to => 'folders#index#:site'
 
   # articles
-  get ":site/:folder" , :to => 'articles#index#:site#:folder'
   get ":site/:folder/new" , :to => 'articles#new#:site#:folder'
   get ":site/:folder/list" , :to => 'articles#list#:site#:folder'
   get ":site/:folder/:id/edit" , :to => 'articles#edit#:site#:folder#:id'
   put ":site/:folder/:id" , :to => 'articles#update#:site#:folder#:id'
   post ":site/:folder" , :to => 'articles#create#:site#:folder'
   delete ":site/:folder/:id" , :to => 'articles#destroy#:site#:id'
+  get ":site/:folder" , :to => 'articles#index#:site#:folder'
 
   
   #resources :folders do

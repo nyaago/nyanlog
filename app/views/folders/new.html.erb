@@ -2,4 +2,5 @@
 <p id="notice"><%= flash[:notice] %></p>
 <%= render 'form' %>
 
-<%= link_to human_action_name(nil, :back), folders_path(:action => :list) %>
+<%= link_to human_action_name(nil, :back), 
+folders_path({:action => :list}.merge(url_options_from_params)) %>

@@ -10,7 +10,8 @@ Sham.email { |index| "account#{index}@hogehoge.com" }
 Sham.site_name  { |index| "site#{index}"}
 Sham.site_title  {|index| "サイト#{index}"}
 
-Sham.page_name  {|index| "page" + ('a'..'z').to_a[index] }
+Sham.folder_name  {|index| "folder" + ('a'..'z').to_a[index] }
+Sham.folder_title  {|index| "folderタイトル" + ('a'..'z').to_a[index] }
 Sham.article_title  {|index| "記事#{index}"}
 Sham.article_content  {|index| "<p>記事#{index}</p>"}
 
@@ -20,9 +21,26 @@ User.blueprint do
   password_confirmation { 'password' }
   email { Sham.email }
 end
-p "@@@@@@@"
-p User.all
 
-User.make
+Site.blueprint do
+  name { Sham.site_name }
+  title { Sham.site_title }
+end
+
+Folder.blueprint do
+  name { Sham.folder_name }
+  title { Sham.folder_title }
+  
+end
+
+Article.blueprint do
+  title { Sham.article_title }
+  content { Sham.article_content }
+end
 
 
+#User.make
+#Site.make
+
+#p User.all
+#p Site.all
