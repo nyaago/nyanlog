@@ -207,6 +207,12 @@ ja:
       site: 'サイト'
       article: '記事'
       folder: 'フォルダー'
+      notes:
+        user: 'ユーザー'
+        user_session: 'ユーザー'
+        site: 'サイト'
+        article: '記事'
+        folder: 'フォルダー'
       # For example,
       #   user: "Dude"
       # will translate User model name to "Dude"
@@ -229,6 +235,13 @@ ja:
         opened_at: '公開開始日時'
         closed_at: '公開停止日時'
         not_in_public: '非公開（メンバーのみ閲覧）'
+        notes:
+          name: 'urlに含まれる名前です。'
+          title: 'ページのタイトル、見出しで表示されます。'
+          description: 'メタタグのcontentに書き込まれる内容です'
+          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+          closed_at: '公開が停止されることになる日時です。'
+          not_in_public: 'チェックすると、メンバーのみ閲覧できます'
         
       folder:
         name: '名前'
@@ -246,15 +259,29 @@ ja:
           by_created_at_asc: '作成された順番-昇順' 
           by_updated_at_asc: '更新された順番-昇順' 
           specifying: '明示する（初期-作成昇順）' 
+        notes:
+          name: 'urlに含まれる名前です。'
+          title: 'ページのタイトル、見出しで表示されます。'
+          description: 'メタタグのcontentに書き込まれる内容です。入力しなければ、サイトの設定が使用されます。'
+          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+          closed_at: '公開が停止されることになる日時です。'
+          article_count_by_page: ''
+          ordering_type: ''
+          owner_id: ''
       
       article:
-        name: '名前'
         title:  'タイトル'
         folder_id: 'フォルダー'
         content: '内容'
         order_of_display: '表示順'
         opened_at: '公開開始日時'
         closed_at: '公開停止日時'
+        notes:
+          title: 'ページのタイトル、見出しで表示されます。'
+          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+          closed_at: '公開が停止されることになる日時です。'
+          content: ''
+          order_of_display: ''
         
       # For example,
       #   user:

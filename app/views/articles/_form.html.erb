@@ -16,6 +16,7 @@
     <legend><%= Article.model_name.human %></legend>
     <div class="field" id="title">
       <%= f.label :title %><br />
+      <span class="note"><%= note_about_attribute(:article, :title )%></span><br />
       <%= f.text_field :title %>
     </div>
     <div class="field" id="content">
@@ -24,6 +25,7 @@
     </div>
     <div class="field" id="opened_at">
       <%= f.label :opened_at %><br />
+      <span class="note"><%= note_about_attribute(:article, :opened_at )%></span><br />
       <%= f.select :opened_year, @years.collect {|y| [y,y]}, { :include_blank => true } %>
       <%= f.select :opened_month, @months.collect {|m| [m,m]}, { :include_blank => true } %>
       <%= f.select :opened_day, @days.collect {|d| [d,d]} , { :include_blank => true } %>
@@ -32,6 +34,7 @@
     </div>
     <div class="field" id="closed_at">
       <%= f.label :closed_at %><br />
+      <span class="note"><%= note_about_attribute(:article, :closed_at )%></span><br />
       <%= f.select :closed_year, @years.collect {|y| [y,y]} , { :include_blank => true } %>
       <%= f.select :closed_month, @months.collect {|m| [m,m]} , { :include_blank => true } %>
       <%= f.select :closed_day, @days.collect {|d| [d,d]} , { :include_blank => true } %>

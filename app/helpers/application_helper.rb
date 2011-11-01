@@ -24,5 +24,13 @@ module ApplicationHelper
       {:scope => if controller;[:controllers, controller];else;[:controllers];end  + [:messages]}.
       merge(options)
   end
+  
+  # the note about activerecord model attribute.
+  # It refers to I18n entries as following.
+  # * <locale>/activerecord/attributes/<model>/notes/<attribute> 
+  def note_about_attribute(model, attribute)
+    I18n.t attribute, :scope => [:activerecord, :attributes, model, :notes]
+  end
+  
     
 end

@@ -16,10 +16,12 @@
     <legend><%= Site.model_name.human %></legend>
     <div class="field">
       <%= f.label :name %><br />
+      <span class="note"><%= note_about_attribute(:site, :name )%></span><br />
       <%= f.text_field :name %>
     </div>
     <div class="field">
       <%= f.label :title %><br />
+      <span class="note"><%= note_about_attribute(:site, :title )%></span><br />
       <%= f.text_field :title %>
     </div>
   </fieldset>
