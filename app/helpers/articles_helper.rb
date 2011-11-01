@@ -81,12 +81,20 @@ module ArticlesHelper
   def articles_path(options = {})
     url_for(options.merge( {
     :controller => :articles,
-    :action =>
+    :action => 
       if options[:action].blank? 
-        'index' 
+        if params[:action] == 'new' ||  params[:action] == 'create'
+          'create'
+        elsif params[:action] == 'show' 
+          'show'
+        elsif params[:action] == 'index' 
+          'index'
+        else
+          'index' 
+        end
       else 
         options[:action] 
-      end, 
+      end,
     :site => site(options),
     :folder => folder(options)
     } ))

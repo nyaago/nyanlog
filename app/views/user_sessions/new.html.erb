@@ -1,7 +1,10 @@
 <h1><%= human_action_name(:user_sessions, :new) %></h1>
-<p id="notice">
-  <%= flash[:notice] %>
-</p>
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
 <% if @user_session.errors.any? %>
   <div id="error_explanation">
     <h2>

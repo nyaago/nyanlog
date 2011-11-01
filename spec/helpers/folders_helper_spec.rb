@@ -137,18 +137,18 @@ describe FoldersHelper do
     
     it "should return the path for  index action " + 
       "(A site is specified as an option.)" do
-      folders_path(:site => @site).should == "/#{@site.name}/folders"
+      folders_path(:site => @site).should == "/#{@site.name}"
     end
 
     it "should return the path for index action " do
       params[:site] = @site.name
-      folders_path.should == "/#{@site.name}/folders"
+      folders_path.should == "/#{@site.name}"
     end
 
     it "should return the path for index action (optional parameter is included)" do
       params[:site] = @site.name
       params[:page] = '2'
-      folders_path(url_options_from_params).should == "/#{@site.name}/folders?page=2"
+      folders_path(url_options_from_params).should == "/#{@site.name}?page=2"
     end
 
     it "should return the path for list action " + 
