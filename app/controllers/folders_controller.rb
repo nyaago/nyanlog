@@ -14,8 +14,7 @@ class FoldersController < ApplicationController
   def index
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      redirect_to '/'
+      return render_404
     end
     @folders = @site.folders.listing.
                 paginate(:per_page => PER_PAGE, :page => params[:page])
@@ -32,8 +31,7 @@ class FoldersController < ApplicationController
   def list
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      redirect_to '/'
+      return render_404
     end
     @folders = @site.folders.listing.
                 paginate(:per_page => PER_PAGE, :page => params[:page])
@@ -54,8 +52,7 @@ class FoldersController < ApplicationController
   def new
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      redirect_to :action => :list
+      return render_404
     end
     @folder = Folder.new(:site => @site)
     generate_selections!(@folder)
@@ -69,8 +66,7 @@ class FoldersController < ApplicationController
   def create
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      redirect_to '/'
+      return render_404
     end
     @folder = Folder.new(:site => @site)
     @folder.attributes = params[:folder]
@@ -96,14 +92,12 @@ class FoldersController < ApplicationController
   def edit
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:name]).first
     generate_selections!(@folder)
     if @folder.nil?
-      flash[:notice] = message(:folder, :not_found)
-      redirect_to '/'
+      return render_404
     end
     respond_to do |format|
       format.html  { render :action => :new}
@@ -115,12 +109,10 @@ class FoldersController < ApplicationController
   def update
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:name]).first
     if @folder.nil?
-      flash[:notice] = message(:folder, :not_found)
       redirect_to :action => :list
     end
     @folder.attributes = params[:folder]
@@ -139,8 +131,7 @@ class FoldersController < ApplicationController
   def destroy
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:name]).first
     if @folder.nil?

@@ -13,13 +13,11 @@ class ArticlesController < ApplicationController
   def list
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      flash[:notice] = message(nil, :folder_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @articles = @folder.articles.listing(@folder).
                 paginate(:per_page => PER_PAGE, :page => params[:page])
@@ -36,13 +34,11 @@ class ArticlesController < ApplicationController
   def index
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      flash[:notice] = message(nil, :folder_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @articles = @folder.articles.listing(@folder).
                 paginate(:per_page => @folder.article_count_by_page, 
@@ -62,13 +58,11 @@ class ArticlesController < ApplicationController
   def edit
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      flash[:notice] = message(nil, :folder_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @article = @folder.articles.by_id(params[:id]).first
     generate_selections!(@article)
@@ -87,13 +81,11 @@ class ArticlesController < ApplicationController
   def new
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      flash[:notice] = message(nil, :folder_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @article = Article.new(:folder => @folder)
     generate_selections!(@article)
@@ -106,13 +98,11 @@ class ArticlesController < ApplicationController
   def update
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      flash[:notice] = message(nil, :folder_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @article = @folder.articles.by_id(params[:id]).first
     @article.attributes = params[:article]
@@ -130,13 +120,11 @@ class ArticlesController < ApplicationController
   def create
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      flash[:notice] = message(nil, :folder_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @article = Article.new(:folder => @folder)
     @article.attributes = params[:article]
@@ -154,13 +142,11 @@ class ArticlesController < ApplicationController
   def destroy
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      flash[:notice] = message(nil, :site_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      flash[:notice] = message(nil, :folder_not_found)
-      return redirect_to '/'
+      return render_404
     end
     @article = @folder.articles.by_id(params[:id]).first
     begin

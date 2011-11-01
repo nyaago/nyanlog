@@ -16,7 +16,7 @@ class AppSettingsController < ApplicationController
 
   # GET /app_settings/1
   def show
-    format.html { redirect_to app_settings_url }
+    return render_404
   end
 
   # GET /app_settings/new
@@ -71,6 +71,6 @@ class AppSettingsController < ApplicationController
 
   # DELETE /app_settings/1
   def destroy
-    format.html { redirect_to app_settings_url }
+    return render_404
   end
 end

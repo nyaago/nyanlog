@@ -36,6 +36,22 @@ class ApplicationController < ActionController::Base
     end
     return true
   end
+  
+  # Renders the 404 (page which is not found) page.
+  # It is rendered if 'public/404_<locale>.html' can be read. 
+  # Otherwise, 'public/404.html' is displayed. 
+  
+  def render_404
+    def path_for_404
+      path = "#{::Rails.root.to_s}/public/404_#{I18n.locale.to_s}.html"  
+      if File.readable?(path)
+        path
+      else
+        "#{::Rails.root.to_s}/public/404.html"
+      end
+    end
+    render :file => path_for_404, :status => 404
+  end
 
   # Redirects the browser to the target specified by the  'back_controller' request parameter
   # and the 'back_action' request parameter, Or the target specified by  arguments.   

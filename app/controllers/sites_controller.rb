@@ -14,8 +14,7 @@ class SitesController < ApplicationController
   def edit
     @site = Site.find_by_id(params[:id])
     if @site.nil?
-      flash[:notice] = message(:sites, :not_found)
-      return redirect_to :index
+      return render_404
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -34,8 +33,7 @@ class SitesController < ApplicationController
   def update
     @site = Site.find_by_id(params[:id])
     if @site.nil?
-      flash[:notice] = message(:sites, :not_found)
-      return redirect_to :edit
+      return render_404
     end
     @site.attributes = params[:site]
     begin
