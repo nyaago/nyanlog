@@ -1,6 +1,11 @@
 <h1><%= human_action_name(:folders, :list) %></h1>
 
+<% unless flash[:notice].blank? %>
 <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
 <table>
   <tr>
     <th><%= Folder.human_attribute_name(:name) %></th>

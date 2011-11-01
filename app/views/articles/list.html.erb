@@ -3,14 +3,15 @@
   <%= human_action_name(:articles, :list) %>
 </h1>
 
+<% unless flash[:notice].blank? %>
 <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
 <table>
   <tr>
     <th><%= Article.human_attribute_name(:title) %></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -18,8 +19,6 @@
 <% @articles.each do |article| %>
   <tr>
     <td><%= article.title %></td>
-    <td>
-    </td>
     <td>
     <%= link_to human_action_name(nil, :edit), 
     edit_article_path(article,  url_options_from_params) %>

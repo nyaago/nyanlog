@@ -1,0 +1,422 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+/* 
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com 
+Twitter: @rich_clark
+*/
+/*
+html5doctor.com Reset Stylesheet
+v1.4
+2009-07-27
+Author: Richard Clark - http://richclarkdesign.com
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, menu, nav, section,
+time, mark, audio, video {
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+}
+body {
+	line-height:1;
+}
+
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+	display:block;
+}
+
+nav ul {
+	list-style:none;
+}
+
+blockquote, q {
+	quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content:'';
+	content:none;
+}
+
+a {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+}
+
+ins {
+	background-color:#ff9;
+	color:#000;
+	text-decoration:none;
+}
+
+mark {
+	background-color:#ff9;
+	color:#000;
+	font-style:italic;
+	font-weight:bold;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+	border-bottom:1px dotted #000;
+	cursor:help;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+	vertical-align:middle;
+}
+
+/**
+ =========
+ element 
+ =========
+*/
+
+fieldset {
+	border-width:2px;
+	border-style:ridge;
+	padding: 0.5em 1em;
+	margin-left: 1.0em;
+	margin-right: 0.7em;
+	margin-top: 1.0em;
+	margin-bottom: 0.5em;
+	width: 90%;
+}
+
+table {
+  border-top:1px #999999 solid;
+  border-left:1px #999999 solid;
+  border-collapse:collapse;
+  border-spacing:0;
+  background-color:#FFFFFF;
+  margin: 0.5em 0.5em 0.5em 0.5em;
+  empty-cells:show;
+}
+th{
+  border-right:1px #999999 solid;
+  border-bottom:1px #999999 solid;
+  color:#330000;
+  background-color:#CCCCCC;
+/*    background-image:url(../img/table-back.gif); */
+  background-position:left top;
+  padding:0.3em 1em;
+  text-align:center;
+  font-weight: bold;
+}
+td{
+  border-right:1px #999999 solid;
+  border-bottom:1px #999999 solid;
+  padding:0.3em 1em;
+}
+
+h1 {
+  margin-top: 0.5em;
+  margin-bottom: 0.9em;
+  width: 60%;
+  position: static;
+  font-size: 1.5em;
+  background-color: #FF9999;
+  padding: 0.4em 0.6em 0.4em 0.6em;
+  border: solid 1px #FF6633;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+}
+
+h2 {
+  margin-top: 0.5em;
+  font-size: 1.2em;
+}
+
+a:link {
+  color: #1111cc;
+  text-decoration: underline;
+}
+
+a:visited {
+ color: #9900CC;
+ text-decoration: underline;
+}
+
+a:hover { 
+ color: #ff6633;
+ background-color: #333333;
+ text-decoration: underline;
+} 
+
+a:active { 
+  color: #ff0000;;
+  background-color: #333333;
+} 
+
+p, ol, ul, td {
+  font-size: 1em;
+  line-height: 1.2em; }
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 1em; }
+
+
+/**
+ =========
+ Layout
+ =========
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center; 
+  font:  "Lucida Grande", "Lucida Sans Unicode", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Helvetica, Arial, Verdana sans-serif;
+  *font-family:  "Lucida Grande", "ＭＳ Ｐゴシック", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif; 
+  background-color: #ffffcc; 
+/*  background-color: transparent;   */
+/*  -webkit-font-smoothing: antialiased; */
+}
+
+#page_wrapper {
+  text-align: center;
+  background-color: #ffffcc; 
+}
+
+#container_wrapper {
+  text-align: center;
+  margin-top: 12px;
+}
+
+#header_wrapper {
+  text-align: center;
+}
+
+#footer_wrapper {
+  margin-top: 12px;
+  clear: both;
+  text-align: center;
+  height: 100%;
+}
+
+#container {
+  clear: both;
+  text-align: center;
+  width: 950px;
+  margin: 0 auto;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  background-color: #ffffff; 
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+#user_nav {
+  text-align: left;
+  top: 0px;
+  width: 80%;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  padding-left: 1em;
+}
+
+
+#main {
+  text-align: left;
+  top: 0px;
+  padding-left: 1em;
+  float: center;
+  width: 80%;
+  
+}
+
+#sidebar {
+  float: right;
+  width: 20%;
+}
+
+header {
+  width: 950px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  background-color: #ffffff; 
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+footer {
+  width: 950px;
+  text-align: left;
+  clear: both;
+  margin: 0 auto;
+}
+
+
+/**
+ =========
+ class
+ =========
+*/
+.actions {
+  width: 100%;
+  margin-top: 3px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.actions input {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.actions a {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.fields {
+  margin-bottom: 8px;
+}
+
+.field {
+  margin-bottom: 8px;
+}
+
+
+
+#top_nav *  {
+}
+
+#top_nav {
+  height: 3.5em;
+}
+
+#top_nav ul { 
+  margin:1em 0;
+}
+
+#top_nav li {
+  float: left;
+  display: block;
+  width: 100px;
+  background-color:#ffcc99;
+  margin: 5px 2px;
+  height:3em;
+  text-align:center;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  
+}
+#top_nav  a {   /* 通常時 */
+  font:bold;
+  text-decoration: none;
+}
+
+#top_nav  a:hover {   /* マウスが乗った時,カレント時 */
+}
+
+/*
+ ========================== 
+ errors 
+*/
+
+#notice {
+  margin: 5px 5px 10px 5px;
+  padding: 0.3em 0.5em 0.3em 0.5em ;
+  width: 98%;
+  background-color: #ffffff; 
+  border-color: green; 
+  border-style: solid;
+  border-width: 2px;
+  color: green; 
+}
+
+#warning {
+  margin: 5px 5px 10px 5px;
+  padding: 0.3em 0.5em 0.3em 0.5em ;
+  width: 98%;
+  background-color: #ff99cc; 
+  border-color: #ff6699; 
+  border-style: solid;
+  border-width: 2px;
+  color: green; 
+}
+
+
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+

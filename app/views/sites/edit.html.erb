@@ -1,4 +1,8 @@
 <h1><%= human_action_name(:sites, :edit)%></h1>
+<% unless flash[:notice].blank? %>
 <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
 <%= render 'form' %>
-<%= link_to human_action_name(nil, :back), sites_path(url_options_from_params) %>

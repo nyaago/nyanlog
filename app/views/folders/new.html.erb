@@ -1,6 +1,8 @@
 <h1><%= human_action_name(:folders, :new)%></h1>
+<% unless flash[:notice].blank? %>
 <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
 <%= render 'form' %>
-
-<%= link_to human_action_name(nil, :back), 
-folders_path({:action => :list}.merge(url_options_from_params)) %>

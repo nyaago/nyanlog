@@ -4,13 +4,13 @@ class UserSessionsController < ApplicationController
 
   skip_filter :checks_authenticated
 
-  # GET user_session
+  # GET user_sessions
   # displaying the login page.
   def new
     @user_session = UserSession.new
   end
 
-  # POST user_session/create
+  # POST user_sessions
   # Completion of login. 
   def create
     @user_session = UserSession.new(params[:user_session])
@@ -23,6 +23,7 @@ class UserSessionsController < ApplicationController
     end
   end
   
+  # DELETE user_sessions
   def destroy
     if current_user_session
       current_user_session.destroy

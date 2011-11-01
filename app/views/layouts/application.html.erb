@@ -7,8 +7,37 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div id="page_wrapper">
+<div id="header_wrapper">
+<header>
+    <%= render "/layouts/header" %>
+</header>   <!-- header -->
+</div>
+<div id="container_wrapper">
+<div id="container">
+  <div id="user_nav">    
+   <%= render "/layouts/user_nav" %>
+  </div>
+    
+  <div id="sidebar">
+      
+  <%= render "/layouts/sidebar" %>
 
-<%= yield %>
+  </div>   <!-- side -->
 
+  <div id="main">
+
+  <%= yield %>
+
+  </div>   <!-- main -->
+
+</div>   <!-- container -->
+</div>   <!-- container_wrapper -->
+<div id="footer_wrapper">
+<footer>
+  <%= render "/layouts/footer" %>
+</footer>
+</div>
+</div>
 </body>
 </html>

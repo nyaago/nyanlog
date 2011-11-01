@@ -3,8 +3,10 @@
   <%= human_action_name(:articles, :edit) %>
 </h1>
 
+<% unless flash[:notice].blank? %>
 <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
 <%= render 'form' %>
-
-<%= link_to human_action_name(nil, :back), 
-articles_path({:action => :list}.merge(url_options_from_params)) %>

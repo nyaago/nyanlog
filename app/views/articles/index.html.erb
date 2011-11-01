@@ -2,7 +2,12 @@
   <%= @folder.title %> 
 </h1>
 
+<% unless flash[:notice].blank? %>
 <p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
 
 <div id="articles"> 
 <% @articles.each do |article| %>

@@ -237,14 +237,14 @@ ja:
         opened_at: '公開開始日時'
         closed_at: '公開停止日時'
         not_in_public: '非公開（メンバーのみ閲覧）'
-        ordeting_type: '記事並び順'
+        ordering_type: '記事並び順'
         article_count_by_page: '1ページの表示記事数'
         owner_id: '所有者'
         ordering_types:
           by_created_at_desc: '作成された順番-降順'
           by_updated_at_desc: '更新された順番-降順'
           by_created_at_asc: '作成された順番-昇順' 
-          by_created_at_asc: '更新された順番-昇順' 
+          by_updated_at_asc: '更新された順番-昇順' 
           specifying: '明示する（初期-作成昇順）' 
       
       article:

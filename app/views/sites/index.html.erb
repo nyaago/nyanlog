@@ -1,5 +1,12 @@
 <h1><%= human_action_name(:sites, :index)%></h1>
-<p id="notice"><%= flash[:notice] %></p>
+<% unless flash[:notice].blank? %>
+  <% unless flash[:notice].blank? %>
+  <p id="notice"><%= flash[:notice] %></p>
+  <% end %>
+  <% unless flash[:warning].blank? %>
+  <p id="notice"><%= flash[:warning] %></p>
+  <% end %>
+<% end %>
 <table>
   <tr>
     <th><%= Site.human_attribute_name(:name) %></th>
@@ -10,7 +17,7 @@
 
 <% @sites.each do |site| %>
   <tr>
-    <td><%= site.name %></td>
+    <td><%= link_to(site.name,folders_path(:action => :index, :site => site)) %></td>
     <td><%= site.title %></td>
     <td>
     <%= link_to human_action_name(nil, :edit), 

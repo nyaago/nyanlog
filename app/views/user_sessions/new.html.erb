@@ -18,26 +18,26 @@
 
   
 <%= form_for( @user_session,
-      :url => { :action => "create"}, :method => :get )   do |f|   %>
+      :url => { :action => "create"}, :method => :post )   do |f|   %>
   <fieldset id="user_sessions_new">
     <legend><%= User.model_name.human %></legend>
 
-    <div class="field" id="login">
+    <p class="field" id="login">
       <%= f.label User.human_attribute_name(:login)  %><br />
       <%= f.text_field :login %>
-    </div>
-    <div class="field" id="password">
+    </p>
+    <p class="field" id="password">
       <%= f.label User.human_attribute_name(:password)  %><br />
       <%= f.password_field :password %>
-    </div>
-    <div class="field" id="auto_login">
+    </p>
+    <p class="field" id="auto_login">
       <%= f.label User.human_attribute_name(:auto_login)  %>
       <%= check_box :user, :auto_login %>
-    </div>
-    
+    </p>
+    <p>
     <%= hidden_field_tag 'back_controller', params[:back_controller] %>
     <%= hidden_field_tag 'back_action', params[:back_action] %>
-    </div>
+    </p>
   </fieldset>
     
   <div class="actions">
