@@ -207,6 +207,7 @@ ja:
       site: 'サイト'
       article: '記事'
       folder: 'フォルダー'
+      app_setting: 'アプリケーション設定'
       notes:
         user: 'ユーザー'
         user_session: 'ユーザー'
@@ -282,6 +283,11 @@ ja:
           closed_at: '公開が停止されることになる日時です。'
           content: ''
           order_of_display: ''
+      
+      app_setting:
+        default_site_id: 'デフォルトのサイト'
+        notes:
+          default_site_id: 'ゲストがTopのURLを訪れたときに表示されるサイトです。'
         
       # For example,
       #   user:
@@ -378,5 +384,15 @@ ja:
         destroyed: '記事を削除しました。'
         updated: '記事を更新しました。'
         created: '記事を作成しました。'
+
+    app_settings:
+      actions:
+        new: 'アプリケーション設定編集'
+        edit: 'アプリケーション設定編集'
+        create: '設定の登録'
+        update: '設定の登録'
+      messages:
+        updated: '更新しました。'
+        created: '作成しました。'
 
       

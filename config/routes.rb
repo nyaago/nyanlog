@@ -1,6 +1,14 @@
 Nyanlog::Application.routes.draw do
 
 
+  resources :app_settings
+  
+#  get "app_settings", :to => "app_settings#index"
+#  get "app_settings/:id/edit", :to => "app_settings#edit#:id"
+#  get "app_settings/new", :to => "app_settings#edit"
+#  put "app_settings/:id", :to => "app_settings#update#:id"
+#  post "app_settings", :to => "app_settings#create"
+
 #    match '' => 'sites#index'
 #    match 'index' => 'sites#index'
     
@@ -29,6 +37,7 @@ Nyanlog::Application.routes.draw do
   post ":site/:folder" , :to => 'articles#create#:site#:folder'
   delete ":site/:folder/:id" , :to => 'articles#destroy#:site#:id'
   get ":site/:folder" , :to => 'articles#index#:site#:folder'
+
 
   
   #resources :folders do

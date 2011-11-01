@@ -11,15 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021003445) do
+ActiveRecord::Schema.define(:version => 20111101091656) do
+
+  create_table "app_settings", :force => true do |t|
+    t.integer  "default_site_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "articles", :force => true do |t|
     t.integer  "folder_id"
     t.string   "title"
     t.text     "content"
     t.integer  "order_of_display"
-    t.date     "opend_at"
-    t.date     "closed_at"
+    t.datetime "opened_at"
+    t.datetime "closed_at"
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
     t.datetime "created_at"

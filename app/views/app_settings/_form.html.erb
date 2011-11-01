@@ -1,0 +1,26 @@
+<%= form_for(@app_setting) do |f| %>
+  <% if @app_setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@app_setting.errors.count, "error") %> prohibited this app_setting from being saved:</h2>
+
+      <ul>
+      <% @app_setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <fieldset id="app_settings_fields">
+    <p class="field">
+      <%= f.label :default_site_id %><br />
+      <span class="note"><%= note_about_attribute(:app_setting, :default_site_id )%></span><br />
+      <%= f.select :default_site_id, @sites.collect {|site| [site.name, site.id]}, 
+      { :include_blank => true } %>
+    </p>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </filedset>
+<% end %>
