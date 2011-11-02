@@ -28,6 +28,9 @@ class ApplicationController < ActionController::Base
   # 認証されていなければ、ログインページへのリダイレクト.
   # また、権限がなければ、権限エラーのページへリダイレクト.
   def checks_authenticated
+    if can_skip_auth
+      return true
+    end
     if current_user.nil? 
       flash[:notice] = message(:user_sessions, :required_to_login)
       redirect_to :controller => '/user_sessions', :action => :new,
@@ -78,6 +81,11 @@ class ApplicationController < ActionController::Base
   def message(controller, key, options = {})
     I18n.t key, {:scope => [:controllers, controller, :messages]}.merge(options)
   end
+  
+  # whether the requested action can skip authorization.
+  def can_skip_auth
+    self.class.can_skip_auth(params[:action].to_sym)
+  end
 
   private
   
@@ -95,6 +103,24 @@ class ApplicationController < ActionController::Base
         request.session_options[:expire_after] = nil
       end
     end
+  end
+  
+  protected
+  
+  # skips authorization when actions requested.
+  def self.skip_auth(*actions)
+    @@auth_skipped_actions ||= {}
+    @@auth_skipped_actions[self.name] ||= []
+    actions.each do |action|
+      @@auth_skipped_actions[self.name] << action.to_sym
+    end
+  end
+  
+  # whether the  action can skip authorization.
+  def self.can_skip_auth(action)
+    return false if @@auth_skipped_actions.nil?
+    return false if @@auth_skipped_actions[self.name].nil?
+    @@auth_skipped_actions[self.name].include?(action.to_sym)
   end
   
 end

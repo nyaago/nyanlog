@@ -2,3 +2,46 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //= require jquery.cleditor
+
+
+#articles {
+  
+}
+
+#articles .article h2 {
+  border-left: 9px solid #ffcc66;
+  font-weight: bold;
+  padding-top:3px;
+  padding-bottom:4px;
+  padding-left: 3px;
+  font-size: 1.1em;
+  text-align: left;
+}
+
+#articles .article {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  margin-left: 0px;
+  margin-right: 2px;
+  padding: 8px 8px ;
+  border-color: #999999;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  
+}
+
+#articles .article .article_informations {
+  text-align: right;
+}
+
+#articles .article .content {
+  margin-top: 4px;
+  margin-left: 6px;
+}
+
+#articles .article .content li {
+  margin-left: 2em;
+}
+

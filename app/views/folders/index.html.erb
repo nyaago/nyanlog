@@ -38,7 +38,7 @@
 
 <br />
 
-<%= will_paginate @folders %>
+<%= will_paginate @folders,:previous_label => '<=', :next_label => '=>' %>
 
 <div class="actions">
 <%= link_to human_action_name(:folders, :new), new_folder_path(:site => @site.name) %>

@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
   include ArticlesHelper
   include ::OpenAndCloseAt
 
+  skip_auth :index
+
   PER_PAGE = 8
 
   # GET :site/:folder/articles/list

@@ -33,7 +33,7 @@
 
 <br />
 
-<%= will_paginate @articles %>
+<%= will_paginate @articles,:previous_label => '<=', :next_label => '=>' %>
 
 <div class="actions">
 <%= link_to human_action_name(:articles, :new), 

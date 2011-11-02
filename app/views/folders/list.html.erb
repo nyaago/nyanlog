@@ -17,7 +17,11 @@
 
 <% @folders.each do |folder| %>
   <tr>
-    <td><%= folder.name %></td>
+    <td>
+    <%= link_to(folder.name,
+        articles_path({:folder => folder}))
+    %>
+    </td>
     <td><%= folder.title %></td>
     <td>
     <%= link_to human_action_name(nil, :edit), 
@@ -30,7 +34,7 @@
     </td>
     <td>
     <%= link_to human_action_name(:articles, :list), 
-    articles_path(url_options_from_params.merge({:folder => folder})) %>
+    articles_path({:folder => folder, :action => :list}) %>
     </td>
   </tr>
 <% end %>
@@ -38,7 +42,7 @@
 
 <br />
 
-<%= will_paginate @folders %>
+<%= will_paginate @folders, :previous_label => '<=', :next_label => '=>'%>
 
 <div class="actions">
 <%= link_to human_action_name(:folders, :new), new_folder_path(:site => @site.name) %>
