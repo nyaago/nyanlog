@@ -19,6 +19,23 @@ describe SitesController do
     end
   end
 
+  describe "GET 'default'" do
+    it "if default site is set, it redirects to folders/index " do
+      @setting = AppSetting.make(:default_site_id => @site.id)
+      get 'default'
+      response.should redirect_to(:controller => :folders, :action => :index, :site => @site.name)
+    end
+
+    it "if default site is not  set, it redirects to sites/index " do
+      @setting = AppSetting.make(:default_site_id => nil)
+      get 'default'
+      response.should redirect_to(:controller => :sites, :action => :index)
+    end
+
+  end
+
+
+
   describe "GET 'edit'" do
     it "returns http success" do
       get 'edit', :id => @site.id

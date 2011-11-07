@@ -82,13 +82,13 @@ ActiveRecord::Schema.define(:version => 20111101091656) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.boolean  "auto_login"
-    t.boolean  "is_admin"
-    t.boolean  "is_site_admin"
-    t.boolean  "is_editor"
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_admin"
+    t.boolean  "is_site_admin"
+    t.boolean  "is_editor"
   end
 
 end

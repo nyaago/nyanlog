@@ -1,0 +1,64 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= activerecord_error_message(:record_invalid, 
+        :errors => @user.errors.count) %>
+      </h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset id="user_fields">
+    <legend><%= Site.model_name.human %></legend>
+    <div class="field" id="login">
+      <%= f.label :login %><br />
+      <span class="note"><%= note_about_attribute(:user, :login )%></span><br />
+      <%= f.text_field :login %>
+    </div>
+    <div class="field" id="password">
+      <%= f.label :password %><br />
+      <span class="note"><%= note_about_attribute(:user, :password )%></span><br />
+      <%= f.password_field :password %>
+    </div>
+    <div class="field" id="password_confirmation">
+      <%= f.label :password_confirmation %><br />
+      <span class="note"><%= note_about_attribute(:user, :password_confirmation )%></span><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <% if @site.nil? %>
+    <div class="field" id="site">
+      <%= f.label :site_id %><br />
+      <span class="note"><%= note_about_attribute(:user, :site_id )%></span><br />
+      <%= f.select :site_id, @sites.collect {|site| [site.name, site.id]}, 
+      { :include_blank => true } %>
+    </div>
+    <% end %>
+    <div class="field" id="email">
+      <%= f.label :email %><br />
+      <span class="note"><%= note_about_attribute(:user, :email )%></span><br />
+      <%= f.text_field :email %>
+    </div>
+    <div class="field" id="is_admin">
+      <%= f.label :is_admin %><br />
+      <span class="note"><%= note_about_attribute(:user, :is_admin )%></span><br />
+      <%= f.check_box :is_admin %>
+    </div>
+    <div class="field" id="is_site_admin">
+      <%= f.label :is_site_admin %><br />
+      <span class="note"><%= note_about_attribute(:user, :is_site_admin )%></span><br />
+      <%= f.check_box :is_site_admin %>
+    </div>
+    <div class="field" id="is_editor">
+      <%= f.label :is_editor %><br />
+      <span class="note"><%= note_about_attribute(:user, :is_editor )%></span><br />
+      <%= f.check_box :is_editor %>
+    </div>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

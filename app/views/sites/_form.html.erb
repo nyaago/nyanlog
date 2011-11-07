@@ -3,10 +3,10 @@
     <div id="error_explanation">
       <h2>
         <%= activerecord_error_message(:record_invalid, 
-        :errors => @user_session.errors.count) %>
+        :errors => @site.errors.count) %>
       </h2>
       <ul>
-      <% @hoge.errors.full_messages.each do |msg| %>
+      <% @site.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

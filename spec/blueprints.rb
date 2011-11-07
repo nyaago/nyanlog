@@ -38,6 +38,9 @@ Article.blueprint do
   content { Sham.article_content }
 end
 
+AppSetting.blueprint do
+end
+
 
 #User.make
 #Site.make

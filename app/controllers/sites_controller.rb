@@ -9,6 +9,18 @@ class SitesController < ApplicationController
       format.html # index.html.erb
     end
   end
+  
+  # GET /
+  # if the default site is set, it redirects to folders/index,
+  # otherwise it redirects to site/index
+  def default
+    @site = if setting = AppSetting.setting; setting.default_site;else;nil;end
+    if @site
+      redirect_to :controller => :folders, :action => :index, :site => @site.name
+    else
+      redirect_to :controller => :sites, :action => :index
+    end
+  end
 
   # GET sites/edit/:id
   def edit

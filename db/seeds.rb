@@ -7,7 +7,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 user = User.new(:login => 'moomin', :password => 'moomin', :password_confirmation => 'moomin', 
-:email => 'nyaago@bf.wakwak.com')
+:email => 'nyaago@bf.wakwak.com', :is_admin => true)
 user.save!
 
 site = Site.new(:name => 'moomin', :title => 'ムーミン')

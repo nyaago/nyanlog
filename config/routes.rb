@@ -2,6 +2,8 @@ Nyanlog::Application.routes.draw do
 
 
   resources :app_settings
+  resources :sites
+  resources :users
   
 #  get "app_settings", :to => "app_settings#index"
 #  get "app_settings/:id/edit", :to => "app_settings#edit#:id"
@@ -11,14 +13,9 @@ Nyanlog::Application.routes.draw do
 
 #    match '' => 'sites#index'
 #    match 'index' => 'sites#index'
-    
   get "user_sessions", :to => "user_sessions#new"
   post "user_sessions", :to => "user_sessions#create"
   delete "user_sessions/destroy", :to => "user_sessions#destroy"
-    
-    
-  resources :sites do
-  end
 
   # folders
   get ":site/folders/new" , :to => 'folders#new#:site'
@@ -107,7 +104,7 @@ Nyanlog::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => 'sites#index'
+  root :to => 'sites#default'
 
   # See how all your routes lay out with "rake routes"
 

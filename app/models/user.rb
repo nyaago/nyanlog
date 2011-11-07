@@ -11,6 +11,23 @@ class User < ActiveRecord::Base
   belongs_to  :site
   has_many    :folders, :class_name => 'User',
               :foreign_key => 'owner_id'
+  # filtering by the user
+  scope :filter_by_user, lambda { |user|
+    unless user.is_admin
+      where("site_id = ?", user.site_id)
+    end
+  }
+  # filtering by the site
+  scope :filter_by_site, lambda { |site|
+    if site
+      where("site_id = ?", if site.respond_to?(:id);site_id;else;site;end)
+    end
+  }
+  # listing
+  scope :listing, order('login')
+  
+  validates_presence_of :site_id, :unless => Proc.new { |user| user.is_admin }
+  
   
   # 認証を行うモデルとしての拡張
   acts_as_authentic do |config|
@@ -18,6 +35,21 @@ class User < ActiveRecord::Base
     #
     config.crypto_provider = Authlogic::CryptoProviders::MD5
     config.maintain_sessions = true
+  end
+  
+  # whether the user can manage users
+  def can_manage_users?
+    is_admin || is_site_admin
+  end
+
+  # whether the user can manage users
+  def can_manage_user?(user)
+    is_admin || (is_site_admin && self.site_id == user.site_id)
+  end
+  
+  # whether the user can manage site
+  def can_manage_site?(site)
+    is_admin || (site && is_site_admin && self.site_id == site.id)
   end
   
   # Generates a password for  reissuing a password.

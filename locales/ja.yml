@@ -223,9 +223,27 @@ ja:
       user:
         login: "アカウント"
         email: "EMailアドレス"  
+        site_id: 'サイト'
+        role: '役割'
+        is_admin: '管理者'
+        is_site_admin: 'サイト管理'
+        is_editor: '編集者'
         password: "パスワード"  
         password_confirmation: 'パスワード確認'
         auto_login: "次回自動ログインする"
+        notes:
+          login: ""
+          email: "送信先となるEMailアドレスです"  
+          site_id: ''
+          role: 'ユーザの役割'
+          password: ""  
+          password_confirmation: ''
+          auto_login: ""
+          is_admin: 'アプリケーション全体の管理者です'
+          is_site_admin: 'サイトの管理者です'
+          is_editor: '（オーナーとなっている記事以外を編集できる）編集者です'
+          
+          
         
       user_session:
         
@@ -352,6 +370,22 @@ ja:
         destroyed: 'サイトを削除しました。'
         updated: 'サイトを更新しました。'
         created: 'サイトを作成しました。'
+
+    users:
+      actions:
+        index: 'ユーザ一覧'
+        new: '新規ユーザ'
+        edit: 'ユーザの変更'
+        create: 'ユーザ作成'
+        update: 'ユーザ更新'
+        destroy: 'ユーザ削除'
+        show: 'ユーザの表示'
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定されたユーザは存在しません。'
+        destroyed: 'ユーザを削除しました。'
+        updated: 'ユーザを更新しました。'
+        created: 'ユーザを作成しました。'
         
     folders:
       actions:
@@ -392,7 +426,7 @@ ja:
         create: '設定の登録'
         update: '設定の登録'
       messages:
-        updated: '更新しました。'
-        created: '作成しました。'
+        updated: 'アプリケーション設定を更新しました。'
+        created: 'アプリケーション設定を作成しました。'
 
       

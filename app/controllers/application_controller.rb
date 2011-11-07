@@ -118,6 +118,7 @@ class ApplicationController < ActionController::Base
   
   # whether the  action can skip authorization.
   def self.can_skip_auth(action)
+    @@auth_skipped_actions ||= {}
     return false if @@auth_skipped_actions.nil?
     return false if @@auth_skipped_actions[self.name].nil?
     @@auth_skipped_actions[self.name].include?(action.to_sym)
