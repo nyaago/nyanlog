@@ -16,27 +16,42 @@
     <legend><%= Site.model_name.human %></legend>
     <div class="field" id="login">
       <%= f.label :login %><br />
-      <span class="note"><%= note_about_attribute(:user, :login )%></span><br />
       <%= f.text_field :login %>
     </div>
     <div class="field" id="password">
       <%= f.label :password %><br />
-      <span class="note"><%= note_about_attribute(:user, :password )%></span><br />
       <%= f.password_field :password %>
     </div>
     <div class="field" id="password_confirmation">
       <%= f.label :password_confirmation %><br />
-      <span class="note"><%= note_about_attribute(:user, :password_confirmation )%></span><br />
       <%= f.password_field :password_confirmation %>
     </div>
     <% if @site.nil? %>
     <div class="field" id="site">
       <%= f.label :site_id %><br />
       <span class="note"><%= note_about_attribute(:user, :site_id )%></span><br />
+      <span>
+      <% if @user.new_record? %>
       <%= f.select :site_id, @sites.collect {|site| [site.name, site.id]}, 
       { :include_blank => true } %>
+      <% else %>
+        <%= if @user.site;@user.site.name;else;'-';end %>
+      <% end %>
+      </span>
+    </div>
+    <% else %>
+      <% f.hidden_field :site, @site.id %>
+    <% end %>
+    <% if @folders %>
+    <div class="field" id="default_folder_id">
+      <%= f.label :default_folder_id %><br />
+      <span class="note"><%= note_about_attribute(:site, :default_folder_id )%></span><br />
+      <%= f.select :default_folder_id, @folders.collect {|folder| [folder.name, folder.id]},
+                    {:include_blank => true}
+      %>
     </div>
     <% end %>
+    
     <div class="field" id="email">
       <%= f.label :email %><br />
       <span class="note"><%= note_about_attribute(:user, :email )%></span><br />

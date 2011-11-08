@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101091656) do
+ActiveRecord::Schema.define(:version => 20111107101938) do
 
   create_table "app_settings", :force => true do |t|
     t.integer  "default_site_id"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20111101091656) do
   end
 
   create_table "sites", :force => true do |t|
-    t.string   "name",          :null => false
+    t.string   "name",              :null => false
     t.string   "title"
     t.text     "description"
     t.date     "opend_at"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20111101091656) do
     t.integer  "updated_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "default_folder_id"
   end
 
   create_table "user_sessions", :force => true do |t|
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20111101091656) do
     t.boolean  "is_admin"
     t.boolean  "is_site_admin"
     t.boolean  "is_editor"
+    t.integer  "default_folder_id"
   end
 
 end

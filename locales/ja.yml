@@ -231,10 +231,11 @@ ja:
         password: "パスワード"  
         password_confirmation: 'パスワード確認'
         auto_login: "次回自動ログインする"
+        default_folder_id: 'デフォルトのフォルダー'
         notes:
           login: ""
           email: "送信先となるEMailアドレスです"  
-          site_id: ''
+          site_id: 'ユーザが属するサイト'
           role: 'ユーザの役割'
           password: ""  
           password_confirmation: ''
@@ -242,8 +243,7 @@ ja:
           is_admin: 'アプリケーション全体の管理者です'
           is_site_admin: 'サイトの管理者です'
           is_editor: '（オーナーとなっている記事以外を編集できる）編集者です'
-          
-          
+          default_folder_id: 'ユーザーがサイトのベースURLにアクセスしたときに表示されるフォルダーです'
         
       user_session:
         
@@ -254,6 +254,7 @@ ja:
         opened_at: '公開開始日時'
         closed_at: '公開停止日時'
         not_in_public: '非公開（メンバーのみ閲覧）'
+        default_folder_id: 'デフォルトのフォルダー'
         notes:
           name: 'urlに含まれる名前です。'
           title: 'ページのタイトル、見出しで表示されます。'
@@ -261,6 +262,7 @@ ja:
           opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
           closed_at: '公開が停止されることになる日時です。'
           not_in_public: 'チェックすると、メンバーのみ閲覧できます'
+          default_folder_id: 'サイトのベースURLにアクセスしたときに表示されるフォルダーです'
         
       folder:
         name: '名前'

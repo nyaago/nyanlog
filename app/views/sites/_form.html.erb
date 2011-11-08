@@ -14,15 +14,22 @@
   <% end %>
   <fieldset id="site_fields">
     <legend><%= Site.model_name.human %></legend>
-    <div class="field">
+    <div class="field" id="name">
       <%= f.label :name %><br />
       <span class="note"><%= note_about_attribute(:site, :name )%></span><br />
       <%= f.text_field :name %>
     </div>
-    <div class="field">
+    <div class="field" id="title">
       <%= f.label :title %><br />
       <span class="note"><%= note_about_attribute(:site, :title )%></span><br />
       <%= f.text_field :title %>
+    </div>
+    <div class="field" id="default_folder_id">
+      <%= f.label :default_folder_id %><br />
+      <span class="note"><%= note_about_attribute(:site, :default_folder_id )%></span><br />
+      <%= f.select :default_folder_id, @folders.collect {|folder| [folder.name, folder.id]},
+                    {:include_blank => true}
+      %>
     </div>
   </fieldset>
   <div class="actions">

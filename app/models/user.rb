@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   belongs_to  :created_by, :class_name => 'User',
               :foreign_key => 'created_by_id'
   belongs_to  :site
+  belongs_to  :default_folder, :class_name => 'Folder',
+              :foreign_key => 'default_folder_id'
   has_many    :folders, :class_name => 'User',
               :foreign_key => 'owner_id'
   # filtering by the user
@@ -25,6 +27,24 @@ class User < ActiveRecord::Base
   }
   # listing
   scope :listing, order('login')
+  # only administrators
+  scope :administrators, where("is_admin = true")
+  # site administrators
+  scope :site_administrators, lambda { |site| where("site_id = ? AND is_site_admin = true", site.id) }
+  # users who can administer  the site (administrators and site administrators)
+  scope :site_administable, lambda { |site| 
+          where("is_admin = true OR  site_id = ? AND is_site_admin = true", site.id) }
+  # site editors
+  scope :editors, lambda { |site| where("site_id = ? AND is_editor = true", site.id) }
+  # users who can edit  the site (administrators and site administrators and site editors)
+  scope :editable, lambda { |site| 
+          where("is_admin = true OR site_id = ? AND (is_site_admin = true or is_editor = true)",
+          site.id) }
+  # users belonging to a site 
+  scope :site_belongs_to, lambda { |site| where("site_id = ?", site.id) }
+  # users who can own folders of the site(administrator and users belonging to the site )
+  scope :can_own_folder_of, lambda { |site| 
+          where("site_id = ? OR is_admin = ?", site.id, true) }
   
   validates_presence_of :site_id, :unless => Proc.new { |user| user.is_admin }
   

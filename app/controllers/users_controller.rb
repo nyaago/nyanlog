@@ -11,7 +11,11 @@ class UsersController < ApplicationController
     if params[:site]
       Site.find_by_name(params[:site])
     else
-      nil
+      unless current_user.is_admin
+        current_user.site
+      else
+        nil
+      end
     end
     unless current_user.can_manage_site?(@site)
       return render_404
@@ -114,13 +118,22 @@ class UsersController < ApplicationController
     if params[:site]
       Site.find_by_name(params[:site])
     else
-      nil
+      unless current_user.is_admin
+        current_user.site
+      else
+        nil
+      end
     end
     @sites = 
     if @site.nil?
       @sites = Site.listing
     end
+    @folders = 
+    if @site
+      @site.folders.opened.listing
+    else
+      nil
+    end
   end
 
-  
 end

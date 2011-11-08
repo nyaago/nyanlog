@@ -28,6 +28,7 @@ class SitesController < ApplicationController
     if @site.nil?
       return render_404
     end
+    generate_selections!(@site)
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -36,6 +37,7 @@ class SitesController < ApplicationController
   # GET sites/new
   def new
     @site = Site.new
+    generate_selections!(@site)
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -53,6 +55,7 @@ class SitesController < ApplicationController
       flash[:notice] = message(:sites, :updated)
       return redirect_to sites_path
     rescue ActiveRecord::RecordInvalid  => ex
+      generate_selections!(@site)
       render :action => :new
     rescue => ex
       p ex.message
@@ -68,6 +71,7 @@ class SitesController < ApplicationController
       flash[:notice] = message(:sites, :created)
       return redirect_to sites_path
     rescue ActiveRecord::RecordInvalid  => ex
+      generate_selections!(@site)
       render :action => :new
     end
   end
@@ -93,6 +97,11 @@ class SitesController < ApplicationController
 
 
   private
+
+  # フォームでの選択肢となるコレクションの生成
+  def generate_selections!(site)
+    @folders = site.folders.opened.listing
+  end
   
 #  def index_path
     

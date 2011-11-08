@@ -19,6 +19,8 @@ class Folder < ActiveRecord::Base
     ]
   
   belongs_to  :site
+  belongs_to  :owner, :class_name => 'User',
+              :foreign_key => 'owner_id'
   belongs_to  :updated_by, :class_name => 'User',
               :foreign_key => 'updated_by_id'
   belongs_to  :created_by, :class_name => 'User',
@@ -36,6 +38,8 @@ class Folder < ActiveRecord::Base
   scope   :by_name, lambda { |name|
     where("name = ?", name)
   }
+  
+  scope   :opened, where('opened_at IS NULL OR opened_at >= ?', Date.today)
 
   validates_presence_of   :name
   validates_uniqueness_of :name, :scope => :site_id

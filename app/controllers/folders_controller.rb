@@ -16,11 +16,24 @@ class FoldersController < ApplicationController
     if @site.nil?
       return render_404
     end
-    @folders = @site.folders.listing.
-                paginate(:per_page => PER_PAGE, :page => params[:page])
-    respond_to do |format|
-      format.html { render :action => :list}
+    if current_user
+      if current_user.default_folder
+        if current_user.default_folder.site_id != @site.id
+          return render_404
+        end
+        return redirect_to :controller => :articles, :action => :index, 
+                            :folder => current_user.default_folder.name
+      end
     end
+    if @site.default_folder
+      return redirect_to :controller => :articles, :action => :index, 
+                          :folder => @site.default_folder.name
+    end
+    if @site.folders.count > 0
+      return redirect_to :controller => :articles, :action => :index, 
+                          :folder => @site.folders.first.name
+    end
+    return render_404
   end
 
   
@@ -154,7 +167,9 @@ class FoldersController < ApplicationController
     @minutes = minutes
     @ordering_types = Folder.ordering_types
     @max_article_count_by_page = Folder::MAX_ARTICLE_COUNT_BY_PAGE
+    @users = User.can_own_folder_of(folder.site).listing
   end
+  
   
   
 end
