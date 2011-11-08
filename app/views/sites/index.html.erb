@@ -7,23 +7,42 @@
   <p id="notice"><%= flash[:warning] %></p>
   <% end %>
 <% end %>
-<table>
+<table id="sites">
   <tr>
-    <th><%= Site.human_attribute_name(:name) %></th>
-    <th><%= Site.human_attribute_name(:title) %></th>
-    <th></th>
-    <th></th>
+    <th class="name"><%= Site.human_attribute_name(:name) %></th>
+    <th class="title"><%= Site.human_attribute_name(:title) %></th>
+    <th class="default_folder"><%= Site.human_attribute_name(:default_folder_id) %></th>
+    <th class="actions list"><%= Folder.model_name.human %></th>
+    <th class="actions" colspan="2"></th>
   </tr>
 
 <% @sites.each do |site| %>
   <tr>
-    <td><%= link_to(site.name,folders_path(:action => :index, :site => site)) %></td>
-    <td><%= site.title %></td>
-    <td>
+    <td class="name">
+    <%= link_to(site.name,folders_path(:action => :index, :site => site)) %>
+    </td>
+    <td class="title">
+    <%= site.title %>
+    </td>
+    <td class="default_folder">
+    <%= 
+      if site.default_folder 
+        link_to(site.default_folder.name ,folders_path(:controller => :folders,
+                                    :action => :index, :site => site.name)) 
+      else
+        '-'
+      end
+    %>
+    </td>
+    <td class="list actions">
+    <%= link_to human_action_name(nil, :list), 
+    folders_path(url_options_from_params.merge({:action => :list, :site => site.name})) %>
+    </td>
+    <td class="edit actions">
     <%= link_to human_action_name(nil, :edit), 
     edit_site_path(site, url_options_from_params) %>
     </td>
-    <td>
+    <td class="destroy actions">
     <%= link_to human_action_name(nil, :destroy), 
     site_path(site, url_options_from_params), 
     :confirm =>  message(:sites, :destroy_confirmation), 
@@ -36,7 +55,8 @@
 <br />
 
 <%= will_paginate @sites %>
-
+<% if current_user.is_admin %>
 <div class="actions">
 <%= link_to human_action_name(:sites, :new), new_site_path %>
 </div>
+<% end %>

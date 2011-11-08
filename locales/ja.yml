@@ -339,6 +339,7 @@ ja:
         
   controllers:
     actions:
+      list: '一覧'
       edit: '変更'
       create: '作成'
       update: '更新'

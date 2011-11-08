@@ -7,41 +7,42 @@
   <p id="notice"><%= flash[:warning] %></p>
   <% end %>
 <% end %>
-<table>
+<table id="users">
   <tr>
-    <th><%= User.human_attribute_name(:login) %></th>
+    <th class="login"><%= User.human_attribute_name(:login) %></th>
     <% if @site.nil? %>
-    <th><%= User.human_attribute_name(:site_id) %></th>
-    <th><%= User.human_attribute_name(:is_admin) %></th>
+    <th class="site"><%= User.human_attribute_name(:site_id) %></th>
+    <th class="is_admin"><%= User.human_attribute_name(:is_admin) %></th>
     <% end %>
-    <th><%= User.human_attribute_name(:is_site_admin) %></th>
-    <th><%= User.human_attribute_name(:is_editor) %></th>
-    <th></th>
-    <th></th>
+    <th class="is_site_admin"><%= User.human_attribute_name(:is_site_admin) %></th>
+    <th class="is_editor"><%= User.human_attribute_name(:is_editor) %></th>
+    <th class="actions" colspan="2"></th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.login %></td>
+    <td class="login">
+    <%= user.login %>
+    </td>
     <% if @site.nil? %>
-    <td>
+    <td class="site">
       <% if user.site %><%= user.site.name %><% end %>
     </td>
-    <td>
+    <td class="is_admin">
       <% if user.is_admin %>Yes<% end %>
     </td>
     <% end %>
-    <td>
+    <td class="is_site_admin">
       <% if user.is_site_admin %>Yes<% end %>
     </td>
-    <td>
+    <td class="is_editor">
       <% if user.is_editor %>Yes<% end %>
     </td>
-    <td>
+    <td class="actions edit">
     <%= link_to human_action_name(nil, :edit), 
     edit_user_path(user, url_options_from_params) %>
     </td>
-    <td>
+    <td class="actions destroy">
     <%= link_to human_action_name(nil, :destroy), 
     user_path(user, url_options_from_params), 
     :confirm =>  message(:users, :destroy_confirmation), 

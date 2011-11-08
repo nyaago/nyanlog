@@ -8,9 +8,7 @@ class FoldersController < ApplicationController
   PER_PAGE = 8
 
   # GET :site/folders
-  # = instace fields receiced to the view
-  # * @site
-  # * @folders
+  # it redirects to articles/index of default folder,
   def index
     @site = Site.find_by_name(params[:site])
     if @site.nil?

@@ -1,3 +1,57 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#users {
+  width: 90%;
+}
+
+#users .login {
+  width: 15%;
+}
+
+#users .site {
+  width: 15%;
+}
+
+#users .is_admin {
+  width: 8%;
+}
+
+#users  .is_site_admin {
+  width: 8%;
+}
+
+#users  .is_editor {
+  width: 8%;
+}
+
+#users  .edit {
+  width: 10%;
+}
+
+#users  .destroy {
+  width: 10%;
+}
+
+#users .actions {
+  text-align: center;
+}
+
+#user_fields #login input {
+  width: 20em;
+}
+
+#user_fields #password input {
+  width: 20em;
+}
+
+#user_fields #password_confirmation input {
+  width: 20em;
+}
+
+#user_fields #email input {
+  width: 40em;
+}
+
+
+

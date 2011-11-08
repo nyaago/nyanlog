@@ -32,5 +32,9 @@ module ApplicationHelper
     I18n.t attribute, :scope => [:activerecord, :attributes, model, :notes]
   end
   
-    
+  # return the current login user
+  def current_user
+    @current_user
+  end
+  
 end

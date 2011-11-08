@@ -1,3 +1,44 @@
 // Place all the styles related to the site controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#sites {
+  width: 90%;
+}
+
+#sites .name {
+  width: 15%;
+}
+
+#sites .title {
+  width: 30%;
+}
+
+#sites .default_folder {
+  width: 15%;
+}
+
+#sites .edit {
+  width: 10%;
+}
+
+#sites .destroy {
+  width: 10%;
+}
+
+#sites .list {
+  width: 10%;
+}
+
+#sites td.actions {
+  text-align: center;
+}
+
+#site_fields #name input {
+  width: 20em;
+}
+
+
+#site_fields #title input {
+  width: 30em;
+}
+

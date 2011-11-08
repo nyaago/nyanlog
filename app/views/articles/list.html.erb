@@ -9,21 +9,39 @@
 <% unless flash[:warning].blank? %>
 <p id="notice"><%= flash[:warning] %></p>
 <% end %>
-<table>
+<table id="articles">
   <tr>
-    <th><%= Article.human_attribute_name(:title) %></th>
-    <th></th>
-    <th></th>
+    <th class="title"><%= Article.human_attribute_name(:title) %></th>
+    <th class="updated_by"><%= Article.human_attribute_name(:updated_by_id) %></th>
+    <th class="updated_at"><%= Article.human_attribute_name(:updated_at) %></th>
+    <th class="created_at"><%= Article.human_attribute_name(:created_at) %></th>
+    <th class="actions" colspan=2></th>
   </tr>
 
 <% @articles.each do |article| %>
   <tr>
-    <td><%= article.title %></td>
-    <td>
+    <td class="title"><%= article.title %></td>
+    <td class="updated_by">
+      <%= 
+        if article.updated_by
+          article.updated_by.login
+        else
+          ''
+        end
+      %>
+    </td>
+    <td class="updated_at">
+      <%= I18n.l article.updated_at, :format => :short %>
+    </td>
+    <td class="created_at">
+      <%= I18n.l article.created_at, :format => :short %>
+    </td>
+    <td class="actions edit">
     <%= link_to human_action_name(nil, :edit), 
     edit_article_path(article,  url_options_from_params) %>
     </td>
-    <td><%= link_to human_action_name(nil, :destroy), 
+    <td class="actions destroy">
+    <%= link_to human_action_name(nil, :destroy), 
     article_path(article,url_options_from_params), 
     :confirm =>  message(:articles, :destroy_confirmation), 
     :method => :delete %></td>

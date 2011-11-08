@@ -3,11 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //= require jquery.cleditor
 
-
-#articles {
-  
-}
-
 #articles .article h2 {
   border-left: 9px solid #ffcc66;
   font-weight: bold;
@@ -45,3 +40,30 @@
   margin-left: 2em;
 }
 
+table#articles {
+  width: 90%;
+}
+
+table#articles .title {
+  width: 20%;
+}
+table#articles .updated_by {
+  width: 15%;
+}
+
+table#articles .updated_at {
+  width: 15%;
+}
+
+table#articles .created_at {
+  width: 15%;
+}
+
+
+table#articles .actions {
+  width: 10%;
+}
+
+#article_fields #title input {
+  width: 20em;
+}
