@@ -1,3 +1,60 @@
-<nav>
-  ユーザナビ
+<script type='text/javascript'>
+  $(function() {
+    $('#user_nav ul').droppy();
+  });
+</script>
+<nav id="user_nav" class="drop_nav">
+  <ul>
+    <% if current_folder && current_user.can_edit_folder?(current_folder) %>
+    <li id="menu_item_articles_index">
+    <%= link_to(human_action_name(:articles, :index), 
+    articles_path(:folder => current_folder.name,:site => current_site.name))%></a>
+    </li>
+    <li id="menu_item_articles_new">
+    <%= link_to(human_action_name(:articles, :new), 
+    new_article_path(:folder => current_folder.name,:site => current_site.name))%></a>
+    </li>
+    <li  id="menu_item_articles_list">
+    <%= link_to(human_action_name(:articles, :list), 
+    articles_path(:folder => current_folder.name, :action => :list, 
+    :site => current_site.name))%></a>
+    </li>
+    <% end %>
+    <li id="menu_item_folders">
+    <%= link_to(Folder.model_name.human, "#") %>
+    <ul>
+      <% editable_folders.each do |folder| %>
+        <li><%= link_to(folder.name, articles_path(:folder => folder.name, 
+        :site => current_site.name)) %></li>
+      <% end %>
+      <% if current_site %>
+      <li><%= link_to(human_action_name(:folders, :list), 
+      folders_path(:action => :list, :site => current_site.name))%></li>
+      <% end %>
+    </ul>
+    </li>
+    <% if current_site && current_user.can_manage_site?(current_site) %>
+    <li id="menu_item_sites">
+      <%= link_to(Site.model_name.human, "#") %>
+      <ul>
+        <li>
+        <%= link_to(human_action_name(:sites, :edit), edit_site_path(current_site)) %>
+        </li>
+        <li>
+        <%= link_to(human_action_name(:users, :index), users_path(:site => current_site.name)) %>
+        </li>
+      </ul>
+    </li>
+    <% end %>
+    <% if current_user.is_admin %>
+    <li id="menu_item_settings">
+      <%= link_to('application', "#") %>
+      <ul>
+        <li><%= link_to(human_action_name(:sites, :index), sites_path) %></li>
+        <li><%= link_to(human_action_name(:users, :index), users_path) %></li>
+        <li><%= link_to(human_action_name(:app_settings, :index), app_settings_path) %></li>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
 </nav>

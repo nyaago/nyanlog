@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   belongs_to  :site
   belongs_to  :default_folder, :class_name => 'Folder',
               :foreign_key => 'default_folder_id'
-  has_many    :folders, :class_name => 'User',
+  has_many    :folders, :class_name => 'Folder',
               :foreign_key => 'owner_id'
   # filtering by the user
   scope :filter_by_user, lambda { |user|
@@ -70,6 +70,33 @@ class User < ActiveRecord::Base
   # whether the user can manage site
   def can_manage_site?(site)
     is_admin || (site && is_site_admin && self.site_id == site.id)
+  end
+
+  # whether the user can manage site
+  def can_edit_folder?(folder)
+    site = folder.site
+    is_admin || (site && (is_site_admin || is_editor) && self.site_id == site.id) ||
+    self == folder.owner 
+  end
+  
+  # return folders which the user can edit.
+  def editable_folders(current_site = nil)
+    @editable_folders ||=
+    if is_admin
+      if current_site
+        current_site.folders
+      else
+        []
+      end
+    elsif is_site_admin || is_editor
+      if current_site && current_site != self.site
+        []
+      else
+        site.folders
+      end
+    else
+      folders
+    end
   end
   
   # Generates a password for  reissuing a password.

@@ -408,6 +408,7 @@ ja:
         
     articles:
       actions:
+        index: '記事表示'
         list: '記事一覧'
         new: '新規記事'
         edit: '記事の変更'
@@ -424,6 +425,7 @@ ja:
 
     app_settings:
       actions:
+        index: 'アプリケーション設定'
         new: 'アプリケーション設定編集'
         edit: 'アプリケーション設定編集'
         create: '設定の登録'

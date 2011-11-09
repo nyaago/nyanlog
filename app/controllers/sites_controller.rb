@@ -4,6 +4,10 @@ class SitesController < ApplicationController
   
   # GET sites
   def index
+    @site = 
+    if params[:site]
+      Site.find_by_name(params[:site])
+    end
     @sites = Site.listing.paginate(:page => params[:page], :per_page => PER_PAGE)
     respond_to do |format|
       format.html # index.html.erb
@@ -53,7 +57,7 @@ class SitesController < ApplicationController
     begin
       @site.save!(:validate => true)
       flash[:notice] = message(:sites, :updated)
-      return redirect_to sites_path
+      return redirect_to sites_path(:site => @site.name)
     rescue ActiveRecord::RecordInvalid  => ex
       generate_selections!(@site)
       render :action => :new
@@ -69,7 +73,7 @@ class SitesController < ApplicationController
     begin
       @site.save!(:validate => true)
       flash[:notice] = message(:sites, :created)
-      return redirect_to sites_path
+      return redirect_to sites_path(:site => @site.name)
     rescue ActiveRecord::RecordInvalid  => ex
       generate_selections!(@site)
       render :action => :new

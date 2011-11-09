@@ -37,4 +37,38 @@ module ApplicationHelper
     @current_user
   end
   
+  # return the current site
+  def current_site
+    @current_site ||= @site
+  end
+  
+  # return the current folder
+  def current_folder
+    @current_folder ||= if @folder;@folder;else;default_folder;end
+  end
+  
+  # return folders which the current user can edit.
+  def editable_folders
+    if current_user
+      current_user.editable_folders(@site)
+    else
+      []
+    end
+  end
+  
+  # Gets the default folder
+  def default_folder
+    @default_folder = 
+    if current_user
+      current_user.default_folder
+    else
+      if @site
+        @site.default_folder
+      else
+        nil
+      end
+    end
+  end
+  
+  
 end
