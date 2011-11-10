@@ -10,10 +10,10 @@
     nav.drop_nav ul ul ul { top: 0; }
     
 /* Essentials - configure this */
-
+/*
 nav.drop_nav ul ul { width: 130px; }
 nav.drop_nav ul ul ul { left: 131px; }
-
+*/
 /* Everything else is theming */
  
 nav.drop_nav ul { background-color: #CCCC99; height: 24px; }

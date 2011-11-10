@@ -3,7 +3,7 @@ class Folder < ActiveRecord::Base
   include ::OpenAndCloseAt
   
   MAX_ARTICLE_COUNT_BY_PAGE = 15
-  
+
   # 
   ORDERING_BY_CREATED_AT_DESC = 'ByCreatedAtDesc' 
   ORDERING_BY_UPDATED_AT_DESC = 'ByUpdatedAtDesc'
@@ -17,6 +17,10 @@ class Folder < ActiveRecord::Base
     ORDERING_BY_UPDATED_AT_ASC,
     ORDERING_SPECIFYING
     ]
+
+  # if ordering type is 'ordering_specifying'
+  # the order of  display of articles is set 
+  after_save :set_order_of_articles_if_ordering_specifying_type!
   
   belongs_to  :site
   belongs_to  :owner, :class_name => 'User',
@@ -65,6 +69,32 @@ class Folder < ActiveRecord::Base
         :scope => [:activerecord,:attributes,:folder,:ordering_types]), 
       type]
     end
+  end
+  
+  # the order of  display of articles is set 
+  def set_order_of_articles!
+    n = 1
+    articles.order('order_of_display, created_at asc').each do |article|
+      article.order_of_display = n
+      n += 1
+      class << article
+        def record_timestamps; false; end
+      end
+      article.save!(:validate => false)
+    end
+  end
+
+  # if ordering type is 'ordering_specifying'
+  # the order of  display of articles is set 
+  def set_order_of_articles_if_ordering_specifying_type!
+    if ordering_type == ORDERING_SPECIFYING
+      set_order_of_articles!
+    end
+  end
+
+  
+  def ordered_by_specification?
+     ordering_type == ORDERING_SPECIFYING
   end
 
   private 

@@ -13,12 +13,12 @@ describe FoldersController do
     @folder = Folder.make(:site => @site)
   end
 
-  describe "GET 'index'" do
-    it "returns http success" do
-      get 'index', :site => @site.name
-      response.should be_success
-    end
-  end
+#  describe "GET 'index'" do
+#    it "returns http success" do
+#      get 'index', :site => @site.name
+#      response.should be_success
+#    end
+#  end
 
   describe "GET 'list'" do
     it "returns http success" do

@@ -97,7 +97,7 @@ module ArticlesHelper
       end,
     :site => site(options),
     :folder => folder(options)
-    } ))
+    }.merge(url_options_from_params) ))
   end
 
   def articles_url(options = {})

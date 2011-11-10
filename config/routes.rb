@@ -29,12 +29,13 @@ Nyanlog::Application.routes.draw do
   # articles
   get ":site/:folder/new" , :to => 'articles#new#:site#:folder'
   get ":site/:folder/list" , :to => 'articles#list#:site#:folder'
+  put ":site/:folder/:id/move_behind" , :to => 'articles#move_behind#:site#:folder#:id'
+  put ":site/:folder/:id/move_ahead" , :to => 'articles#move_ahead#:site#:folder#:id'
   get ":site/:folder/:id/edit" , :to => 'articles#edit#:site#:folder#:id'
   put ":site/:folder/:id" , :to => 'articles#update#:site#:folder#:id'
   post ":site/:folder" , :to => 'articles#create#:site#:folder'
   delete ":site/:folder/:id" , :to => 'articles#destroy#:site#:id'
   get ":site/:folder" , :to => 'articles#index#:site#:folder'
-
 
   
   #resources :folders do

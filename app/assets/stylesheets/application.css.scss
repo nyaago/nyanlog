@@ -376,6 +376,24 @@ footer {
   float: right;
 }
 
+#user_nav li {
+  width: 85px;
+  text-align: center;
+}
+
+#user_nav li li {
+  text-align: left;
+  width: 120px;
+}
+
+
+#user_nav ul *:hover { background-color: black; }
+
+#user_nav li ul li {
+/*  width: 150px; */
+}
+
+
 
 /*
  ========================== 

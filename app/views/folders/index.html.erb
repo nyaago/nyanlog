@@ -6,6 +6,7 @@
 <% unless flash[:warning].blank? %>
 <p id="notice"><%= flash[:warning] %></p>
 <% end %>
+
 <table id="folders">
   <tr>
     <th class="name"><%= Folder.human_attribute_name(:name) %></th>

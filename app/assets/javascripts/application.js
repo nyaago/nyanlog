@@ -7,3 +7,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+$.fn.ajaxReplace = function(options) {
+
+  var elem = this;
+  
+  options = $.extend(
+  {
+    success: function(html){
+      elem.replaceWith(html);
+    }
+  }, 
+  options || {} );
+
+  $.ajax(options);
+};

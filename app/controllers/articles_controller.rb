@@ -67,6 +67,9 @@ class ArticlesController < ApplicationController
       return render_404
     end
     @article = @folder.articles.by_id(params[:id]).first
+    if @article.nil?
+      return render_404
+    end
     generate_selections!(@article)
     respond_to do |format|
       format.html
@@ -107,6 +110,9 @@ class ArticlesController < ApplicationController
       return render_404
     end
     @article = @folder.articles.by_id(params[:id]).first
+    if @article.nil?
+      return render_404
+    end
     @article.attributes = params[:article]
     begin
       @article.save!(:validate => true)
@@ -157,6 +163,61 @@ class ArticlesController < ApplicationController
       return redirect_to :action => 'list'
     end
   end
+  
+  # PUT :site/:folder/:id/move_to_front (ajax)
+  # moves the article ahead
+  def move_ahead
+    @site = Site.find_by_name(params[:site])
+    if @site.nil?
+      return render_404
+    end
+    @folder = @site.folders.by_name(params[:folder]).first
+    if @folder.nil?
+      return render_404
+    end
+    @article = @folder.articles.by_id(params[:id]).first
+    if @article.nil?
+      return render_404
+    end
+    begin
+      ActiveRecord::Base.transaction do
+        @article.move_ahead!
+      end
+    end
+    @articles = @folder.articles.listing(@folder).
+                paginate(:per_page => PER_PAGE, :page => params[:page])
+    respond_to do |format|
+      format.html { render :file => '/articles/_article_table', :layout => false}
+    end
+  end
+
+  # PUT :site/:folder/:id/move_to_front (ajax)
+  # moves the article behind
+  def move_behind
+    @site = Site.find_by_name(params[:site])
+    if @site.nil?
+      return render_404
+    end
+    @folder = @site.folders.by_name(params[:folder]).first
+    if @folder.nil?
+      return render_404
+    end
+    @article = @folder.articles.by_id(params[:id]).first
+    if @article.nil?
+      return render_404
+    end
+    begin
+      ActiveRecord::Base.transaction do
+        @article.move_behind!
+      end
+    end
+    @articles = @folder.articles.listing(@folder).
+                paginate(:per_page => PER_PAGE, :page => params[:page])
+    respond_to do |format|
+      format.html { render :file => '/articles/_article_table', :layout => false}
+    end
+  end
+
 
   private 
   

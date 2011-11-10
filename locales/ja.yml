@@ -179,6 +179,14 @@ ja:
     updated_by_id: "更新者"
     
 
+  # 
+  application_helpers:
+    marks:
+      above: '△'
+      below: '▽'
+
+    
+
   # Active Record models configuration
   activerecord:
     errors:

@@ -4,9 +4,12 @@ describe Article do
 
   before do
     @folder = Folder.make
-    @article = Article.make(:folder => @folder)
+    @article1 = @article = Article.make(:folder => @folder)
     @article2 = Article.make(:folder => @folder)
     @article3 = Article.make(:folder => @folder)
+    @article4 = Article.make(:folder => @folder)
+    
+    @articles = [@article1,@article2,@article3,@article4,]
   end
   
   describe 'opened_at' do
@@ -147,5 +150,120 @@ describe Article do
     
     
   end
+  
+  describe "move ahead " do
+    it " move ahead  " do
+      @folder.ordering_type = Folder::ORDERING_SPECIFYING
+      @folder.save!(:validate => false)
+      @articles.each_with_index do |article, i|
+        @articles[i] = article.reload
+      end
+
+      @folder = @folder.reload
+      n2 = @articles[2].order_of_display
+      n1 = @articles[1].order_of_display
+      @articles[2].move_ahead!
+      @articles[2] = @articles[2].reload
+      @articles[1] = @articles[1].reload
+      @articles[2].order_of_display.should == n1
+      @articles[1].order_of_display.should == n2
+    end
+  end
+
+  describe "move ahead " do
+    it " not move ahead (when the article is the first article  in the folder)  " do
+      @folder.ordering_type = Folder::ORDERING_SPECIFYING
+      @folder.save!(:validate => false)
+      @articles.each_with_index do |article, i|
+        @articles[i] = article.reload
+      end
+      
+      @folder = @folder.reload
+      n2 = @articles[1].order_of_display
+      n1 = @articles[0].order_of_display
+      @articles[0].move_ahead!
+      @articles[1] = @articles[1].reload
+      @articles[0] = @articles[0].reload
+      @articles[1].order_of_display.should == n2
+      @articles[0].order_of_display.should == n1
+    end
+  end
+
+  describe "move ahead " do
+    it "  move ahead (when the article is the last article  in the folder)  " do
+      @folder.ordering_type = Folder::ORDERING_SPECIFYING
+      @folder.save!(:validate => false)
+      @articles.each_with_index do |article, i|
+        @articles[i] = article.reload
+      end
+      i = @folder.articles.size - 1
+      @folder = @folder.reload
+      n2 = @articles[i].order_of_display
+      n1 = @articles[i-1].order_of_display
+      @articles[i].move_ahead!
+      @articles[i-1] = @articles[i-1].reload
+      @articles[i] = @articles[i].reload
+      @articles[i].order_of_display.should == n1
+      @articles[i-1].order_of_display.should == n2
+    end
+  end
+
+  describe "move behind " do
+    it " move behind  " do
+      @folder.ordering_type = Folder::ORDERING_SPECIFYING
+      @folder.save!(:validate => false)
+      @articles.each_with_index do |article, i|
+        @articles[i] = article.reload
+      end
+
+      @folder = @folder.reload
+      n2 = @articles[2].order_of_display
+      n1 = @articles[1].order_of_display
+      @articles[1].move_behind!
+      @articles[2] = @articles[2].reload
+      @articles[1] = @articles[1].reload
+      @articles[2].order_of_display.should == n1
+      @articles[1].order_of_display.should == n2
+    end
+  end
+
+  describe "move  behind " do
+    it " move behind (when the article is the firs article  in the folder)  " do
+      @folder.ordering_type = Folder::ORDERING_SPECIFYING
+      @folder.save!(:validate => false)
+      @articles.each_with_index do |article, i|
+        @articles[i] = article.reload
+      end
+
+      @folder = @folder.reload
+      n2 = @articles[1].order_of_display
+      n1 = @articles[0].order_of_display
+      @articles[0].move_behind!
+      @articles[1] = @articles[1].reload
+      @articles[0] = @articles[0].reload
+      @articles[1].order_of_display.should == n1
+      @articles[0].order_of_display.should == n2
+    end
+  end
+
+  describe "move behind " do
+    it " not move behind (when the article is the last article  in the folder)  " do
+      @folder.ordering_type = Folder::ORDERING_SPECIFYING
+      @folder.save!(:validate => false)
+      @articles.each_with_index do |article, i|
+        @articles[i] = article.reload
+      end
+      i = @folder.articles.size - 1
+      @folder = @folder.reload
+      n2 = @articles[i].order_of_display
+      n1 = @articles[i-1].order_of_display
+      @articles[i].move_behind!
+      @articles[i-1] = @articles[i-1].reload
+      @articles[i] = @articles[i].reload
+      @articles[i].order_of_display.should == n2
+      @articles[i-1].order_of_display.should == n1
+    end
+  end
+
 
 end
