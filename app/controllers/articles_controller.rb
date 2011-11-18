@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
   include ArticlesHelper
-  include ::OpenAndCloseAt
+  include Attribute::OpenAndCloseAt
 
   skip_auth :index
 

@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
 
-  include ::OpenAndCloseAt
-  include ::OrderOfDisplay
+  include Attribute::OpenAndCloseAt
+  include Attribute::OrderOfDisplay
 
   # 
   TRANSLATION_SCOPE = ["errors", "image", "messages"].freeze

@@ -3,7 +3,7 @@
 class FoldersController < ApplicationController
 
   include FoldersHelper
-  include ::OpenAndCloseAt
+  include Attribute::OpenAndCloseAt
 
   PER_PAGE = 8
 

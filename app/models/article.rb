@@ -1,7 +1,7 @@
 class Article < ActiveRecord::Base
 
-  include ::OpenAndCloseAt
-  include ::OrderOfDisplay
+  include Attribute::OpenAndCloseAt
+  include Attribute::OrderOfDisplay
   
   @@ordering_map = {
     Folder::ORDERING_BY_CREATED_AT_DESC =>  'created_at desc',
