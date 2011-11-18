@@ -41,3 +41,4 @@ gem 'rspec-rails'
 
 gem "authlogic"
 gem "will_paginate"
+gem 'paperclip'

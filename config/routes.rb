@@ -37,7 +37,18 @@ Nyanlog::Application.routes.draw do
   delete ":site/:folder/:id" , :to => 'articles#destroy#:site#:id'
   get ":site/:folder" , :to => 'articles#index#:site#:folder'
 
-  
+  # images
+  get ":site/:folder/images/:id/show/:style" , :to => 'images#show#:site#:folder#:id#:style'
+  get ":site/:folder/images/new" , :to => 'images#new#:site#:folder'
+  get ":site/:folder/images/list" , :to => 'images#list#:site#:folder'
+  put ":site/:folder/images/:id/move_behind" , :to => 'images#move_behind#:site#:folder#:id'
+  put ":site/:folder/images/:id/move_ahead" , :to => 'images#move_ahead#:site#:folder#:id'
+  get ":site/:folder/images/:id/edit" , :to => 'images#edit#:site#:folder#:id'
+  put ":site/:folder/images/:id" , :to => 'images#update#:site#:folder#:id'
+  post ":site/:folder/images" , :to => 'images#create#:site#:folder'
+  delete ":site/:folder/images/:id" , :to => 'images#destroy#:site#:id'
+  get ":site/:folder/images" , :to => 'images#index#:site#:folder'
+
   #resources :folders do
   #  member do
   #    get "/:site/folders/new" , :to => 'folders#new#:site'

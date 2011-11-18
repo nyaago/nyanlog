@@ -1,0 +1,12 @@
+<h1>
+  <%= @folder.title %> 
+  <%= human_action_name(:images, :edit) %>
+</h1>
+
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+<%= render 'form' %>

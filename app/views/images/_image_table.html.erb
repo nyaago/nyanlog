@@ -1,0 +1,80 @@
+<table id="images">
+  <tr>
+    <th class="thumb"></th>
+    <th class="title"><%= Image.human_attribute_name(:title) %></th>
+    <th class="description"><%= Image.human_attribute_name(:description) %></th>
+    <th class="updated_by"><%= Image.human_attribute_name(:updated_by_id) %><br/>
+      <%= Image.human_attribute_name(:created_by_id) %>
+    </th>
+    <th class="updated_at">
+      <%= Image.human_attribute_name(:created_on) %><br/>
+      <%= Image.human_attribute_name(:updated_on) %>
+    </th>
+    <% if @folder.ordered_by_specification? %>
+    <th class="actions" colspan="3"></th>
+    <% else %>
+    <th class="actions" colspan="2"></th>
+    <% end %>
+  </tr>
+
+<% @images.each do |image| %>
+  <tr>
+    <td class="thumb">
+      <%= image_tag(image_path(image, url_options_from_params.merge({:style => 'thumb', :action => 'show'}))) %>  
+    </td>
+    <td class="title">
+        <%= image.title %>
+    </td>
+    <td class="description">
+      <%= simple_format(image.description) %>
+    </td>
+    <td class="updated_by">
+      <span>
+      <%= 
+        if image.updated_by
+          image.updated_by.login
+        else
+          if image.created_by
+            image.created_by.login
+          else
+            ''
+          end
+        end
+      %>
+      </span>
+      <span>
+      <%= 
+        if image.created_by
+          image.created_by.login
+        else
+          ''
+        end
+      %>
+      </span>
+    </td>
+    <td class="updated_at">
+      <span><%= I18n.l image.created_at.to_date, :format => :default %></span>
+      <span><%= I18n.l image.updated_at.to_date, :format => :default %></span>
+    </td>
+    <td class="actions edit">
+      <%= link_to human_action_name(nil, :edit), 
+      edit_image_path(image,  url_options_from_params) %>
+<%= link_to human_action_name(nil, :destroy), 
+    image_path(image,url_options_from_params), 
+    :confirm =>  message(:images, :destroy_confirmation), 
+    :method => :delete %></td>
+    <% if @folder.ordered_by_specification? %>
+    <td class="actions change_order">
+      <% url = images_path(:action => :move_ahead, :site => @site.name, 
+      :folder => @folder.name, :id => image.id ) %>
+      <%= button_to_function mark(:above) ,
+        "$('#images').ajaxReplace({url: '#{url}', type: 'PUT', dataType: 'html'});return true;" %>
+        <% url = images_path(:action => :move_behind, :site => @site.name, 
+        :folder => @folder.name, :id => image.id  ) %>
+      <%= button_to_function mark(:below) ,
+      "$('#images').ajaxReplace({url: '#{url}', type: 'PUT', dataType: 'html'});return true;" %>
+    </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>

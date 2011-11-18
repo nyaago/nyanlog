@@ -1,0 +1,111 @@
+// Place all the styles related to the images controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#images .image h2 {
+  border-left: 9px solid #ffcc66;
+  font-weight: bold;
+  padding-top:3px;
+  padding-bottom:4px;
+  padding-left: 3px;
+  font-size: 1.1em;
+  text-align: left;
+}
+
+#images .image {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  margin-left: 0px;
+  margin-right: 2px;
+  padding: 8px 8px ;
+  border-color: #999999;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  
+}
+
+#images .image .image_informations {
+  text-align: right;
+}
+
+#images .image .content {
+  margin-top: 4px;
+  margin-left: 6px;
+}
+
+#images .image .content li {
+  margin-left: 2em;
+}
+
+table#images {
+  width: 98%;
+}
+
+table#images .thumb {
+  width: 10%;
+  vertical-align: middle;
+  
+}
+
+table#images .title {
+  width: 15%;
+  vertical-align: middle;
+}
+
+table#images .description {
+  width: 40%;
+  vertical-align: middle;
+}
+
+table#images .updated_by {
+  width: 10%;
+  vertical-align: middle;
+}
+
+table#images td.updated_by span {
+  display: block;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+table#images .updated_at {
+  width: 10%;
+  vertical-align: middle;
+}
+
+table#images td.updated_at span {
+  display: block;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+
+table#images .actions {
+  width: 10%;
+  vertical-align: middle;
+}
+
+table#images .actions a {
+  display: block;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+
+table#images .change_order {
+  width: 10%;
+  vertical-align: middle;
+}
+
+table#images .change_order input {
+  display: block;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+
+#image_fields #title input {
+  width: 20em;
+}

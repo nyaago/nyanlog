@@ -175,6 +175,8 @@ ja:
   attributes:
     created_at: "登録日時"
     updated_at: "更新日時"
+    created_on: "登録日"
+    updated_on: "更新日"
     created_by_id: "登録者"
     updated_by_id: "更新者"
     
@@ -216,11 +218,13 @@ ja:
       article: '記事'
       folder: 'フォルダー'
       app_setting: 'アプリケーション設定'
+      image: '画像'
       notes:
         user: 'ユーザー'
         user_session: 'ユーザー'
         site: 'サイト'
         article: '記事'
+        image: '画像'
         folder: 'フォルダー'
       # For example,
       #   user: "Dude"
@@ -311,6 +315,27 @@ ja:
           closed_at: '公開が停止されることになる日時です。'
           content: ''
           order_of_display: ''
+      
+      image:
+        title:  'タイトル'
+        description:  '説明'
+        alternative:  '代替テキスト'
+        folder_id: 'フォルダー'
+        order_of_display: '表示順'
+        opened_at: '公開開始日時'
+        closed_at: '公開停止日時'
+        image: '画像'
+        image_file_name: '画像ファイル名'
+        image_content_type: 'コンテンツタイプ'
+        image_file_size: '画像サイズ'
+        notes:
+          title: 'ページのタイトル、見出しで表示されます。'
+          alternative:  '画像タグのalt属性に設定される代替テキストです'
+          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+          closed_at: '公開が停止されることになる日時です。'
+          content: ''
+          order_of_display: ''
+      
       
       app_setting:
         default_site_id: 'デフォルトのサイト'
@@ -430,6 +455,25 @@ ja:
         destroyed: '記事を削除しました。'
         updated: '記事を更新しました。'
         created: '記事を作成しました。'
+
+    images:
+      actions:
+        index: '画像表示'
+        list: '画像一覧'
+        new: '新規画像'
+        edit: '画像の変更'
+        create: '画像作成'
+        update: '画像更新'
+        destroy: '画像削除'
+        show: '画像の表示'
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定された画像は存在しません。'
+        destroyed: '画像を削除しました。'
+        updated: '画像情報を更新しました。'
+        created: '画像情報を作成しました。'
+
+
 
     app_settings:
       actions:

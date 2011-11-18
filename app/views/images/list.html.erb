@@ -1,0 +1,22 @@
+<h1>
+  <%= @folder.title %> 
+  <%= human_action_name(:images, :list) %>
+</h1>
+
+
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+<%= render 'image_table' %>
+<br />
+
+<%= will_paginate @images,:previous_label => '<=', :next_label => '=>' %>
+
+<div class="actions">
+<%= link_to human_action_name(:images, :new), 
+new_image_path(url_options_from_params)
+%>
+</div>

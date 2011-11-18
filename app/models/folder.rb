@@ -21,6 +21,11 @@ class Folder < ActiveRecord::Base
   # if ordering type is 'ordering_specifying'
   # the order of  display of articles is set 
   after_save :set_order_of_articles_if_ordering_specifying_type!
+
+  # if ordering type is 'ordering_specifying'
+  # the order of  display of images is set 
+  after_save :set_order_of_images_if_ordering_specifying_type!
+  
   
   belongs_to  :site
   belongs_to  :owner, :class_name => 'User',
@@ -32,6 +37,7 @@ class Folder < ActiveRecord::Base
   belongs_to  :owner, :class_name => 'User',
               :foreign_key => 'owner_id'
   has_many    :articles,  :dependent => :destroy
+  has_many    :images,  :dependent => :destroy
 
   scope   :listing, order('updated_at desc')
   
@@ -89,6 +95,27 @@ class Folder < ActiveRecord::Base
   def set_order_of_articles_if_ordering_specifying_type!
     if ordering_type == ORDERING_SPECIFYING
       set_order_of_articles!
+    end
+  end
+
+  # the order of  display of images is set 
+  def set_order_of_images!
+    n = 1
+    images.order('order_of_display, created_at asc').each do |image|
+      image.order_of_display = n
+      n += 1
+      class << image
+        def record_timestamps; false; end
+      end
+      image.save!(:validate => false)
+    end
+  end
+
+  # if ordering type is 'ordering_specifying'
+  # the order of  display of images is set 
+  def set_order_of_images_if_ordering_specifying_type!
+    if ordering_type == ORDERING_SPECIFYING
+      set_order_of_images!
     end
   end
 

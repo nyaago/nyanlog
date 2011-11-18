@@ -1,0 +1,7 @@
+application:
+  send_file_method: 'x_sendfile'  # x_sendfile or x_accel_redirect
+image:
+  resize_medium: "250x250>"  # 
+  resize_small: "160x160>"  # 
+  resize_thumb: "80x80#"  # 
+  path: "/Users/nyaago/tmp"

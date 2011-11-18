@@ -8,24 +8,43 @@
     <% if current_folder && current_user.can_edit_folder?(current_folder) %>
     <li id="menu_item_articles_index">
     <%= link_to(human_action_name(:articles, :index), 
-    articles_path(:folder => current_folder.name,:site => current_site.name))%></a>
+    articles_path(:folder => current_folder.name,:site => current_site.name))%>
     </li>
     <li id="menu_item_articles_new">
     <%= link_to(human_action_name(:articles, :new), 
-    new_article_path(:folder => current_folder.name,:site => current_site.name))%></a>
+    new_article_path(:folder => current_folder.name,:site => current_site.name))%>
     </li>
     <li  id="menu_item_articles_list">
     <%= link_to(human_action_name(:articles, :list), 
     articles_path(:folder => current_folder.name, :action => :list, 
     :site => current_site.name))%></a>
     </li>
+    <li id="menu_item_images">
+      <%= link_to(Image.model_name.human, "#") %>
+      <ul>
+        <li id="menu_item_images_list">
+          <%= link_to(human_action_name(:images, :list), 
+          images_path(:folder => current_folder.name,:site => current_site.name,
+                      :action => :list))%>
+        </li>
+        <li id="menu_item_images_new">
+          <%= link_to(human_action_name(:images, :new), 
+          new_image_path(:folder => current_folder.name,:site => current_site.name))%></a>
+        </li>
+        </li>
+        <li>
+        </li>
+        <li>
+        </li>
+      </ul>
+    </li>
     <li id="menu_item_folders">
-    <%= link_to(Folder.model_name.human, "#") %>
-    <ul>
-      <li>
-        <%= link_to(human_action_name(:folders, :edit), edit_folder_path(current_folder)) %>
-      </li>
-    </ul>
+      <%= link_to(Folder.model_name.human, "#") %>
+      <ul>
+        <li>
+          <%= link_to(human_action_name(:folders, :edit), edit_folder_path(current_folder)) %>
+        </li>
+      </ul>
     </li>
     <% end %>
     <% if current_site && current_user.can_manage_site?(current_site) %>
