@@ -1,0 +1,47 @@
+<script type="text/javascript">
+//<![CDATA[
+
+  
+  /*
+  jQuery.event.add(window, "load", function(){ 
+
+    });
+*/
+  
+//]]>
+</script>
+<h1>
+  <%= human_attribute_value(:menu, :menu_type, :header) %> 
+  <%= human_action_name(:menu_items, :index) %>
+</h1>
+<div id="hierarchy">
+  <span class="caption"><%= message(:menu_items,:hierarchy) %>:&nbsp;</span>
+  <span>
+  <%= link_to message(:menu_items, :root), 
+      menu_items_path(url_options_from_params.merge(
+      {:action => :index, :parent_id => nil})) %>
+  </span>
+  <% @ancestors.reverse.each_with_index do |item, i| %>
+    &nbsp;&gt;&nbsp;
+    <span>
+    <%= link_to item.title_for_display, 
+        menu_items_path(url_options_from_params.merge(
+        {:action => :index, :parent_id => item.id})) %>
+    </span>
+  <% end %>
+</div>
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+<%= render 'menu_item_table' %>
+<br />
+
+<div class="actions">
+<%= link_to human_action_name(:menu_items, :new), 
+new_menu_item_path(url_options_from_params.
+                  merge({:parent_id => if @parent_menu_item;@parent_menu_item.id;end}))
+%>
+</div>

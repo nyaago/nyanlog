@@ -31,6 +31,14 @@ module ApplicationHelper
   def note_about_attribute(model, attribute)
     I18n.t attribute, :scope => [:activerecord, :attributes, model, :notes]
   end
+
+  # Return the activerecord model attribute humanized value.
+  # It refers to I18n entries as following.
+  # * <locale>/activerecord/attributes/<model>/<attribute>/<value> 
+  def human_attribute_value(model, attribute, value)
+    I18n.t value, :scope => [:activerecord, :attributes, :values, model, attribute]
+  end
+  
   
   # Return the mark.
   # It refers to I18n entries as following.
@@ -77,5 +85,41 @@ module ApplicationHelper
     end
   end
   
+  def render_menu(menu)
+    def render_menu_recursive(menu_items, depth)
+      menu_items.inject("<ul class='top_menu_#{depth}'>") do |html, child|
+        html + 
+        if child.children_count > 0
+          "<li>" + 
+          render_menu_item_link(child) +
+          render_menu_recursive(child.children, depth + 1) +
+          "</li>"
+          
+        else
+          render_menu_item(child)  + "\n"
+        end
+      end + "</ul>"
+    end
+
+    if menu
+      render_menu_recursive(menu.menu_items.roots, 1)
+    else
+      ''
+    end.html_safe
+
+  end
+  
+  def render_menu_item(menu_item)
+    ("<li>" + render_menu_item_link(menu_item) + "</li>")
+  end
+  
+  def render_menu_item_link(menu_item)
+    link_to(menu_item.title_for_display, 
+    if menu_item.folder
+      folder_path(menu_item.folder)
+    else
+      '#'
+    end)
+  end
   
 end

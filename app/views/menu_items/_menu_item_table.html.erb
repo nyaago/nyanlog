@@ -1,0 +1,63 @@
+<table id="menu_items">
+  <tr>
+    <th class="title"><%= MenuItem.human_attribute_name(:title) %></th>
+    <th class="folder">
+      <%= (Folder.model_name.human + "<br/>" + Folder.human_attribute_name(:title)).html_safe %>
+    </th>
+    <th class="children_count"><%= MenuItem.human_attribute_name(:children_count) %></th>
+    <th class="updated_by"><%= MenuItem.human_attribute_name(:updated_by_id) %></th>
+    <th class="updated_at"><%= MenuItem.human_attribute_name(:updated_at) %></th>
+    <th class="created_at"><%= MenuItem.human_attribute_name(:created_at) %></th>
+    <th class="actions" colspan="4"></th>
+  </tr>
+
+<% @menu_items.each do |menu_item| %>
+  <tr>
+    <td class="title"><%= menu_item.title %></td>
+    <td class="folder"><%= if menu_item.folder;menu_item.folder.title;end %></td>
+    <td class="children_count"><%= menu_item.children_count %></td>
+    <td class="updated_by">
+      <%= 
+        if menu_item.updated_by
+          menu_item.updated_by.login
+        else
+          ''
+        end
+      %>
+    </td>
+    <td class="updated_at">
+      <%= I18n.l menu_item.updated_at, :format => :short %>
+    </td>
+    <td class="created_at">
+      <%= I18n.l menu_item.created_at, :format => :short %>
+    </td>
+    <td class="actions edit">
+      <%= link_to human_action_name(nil, :edit), 
+    edit_menu_item_path(menu_item,  url_options_from_params) %>
+    </td>
+    <td class="actions destroy">
+      <%= link_to human_action_name(nil, :destroy), 
+    menu_item_path(menu_item,url_options_from_params), 
+    :confirm =>  message(:menu_items, :destroy_confirmation), 
+    :method => :delete %></td>
+    <td class="actions to_child">
+      <% unless menu_item.max_depth? %>
+      <%= link_to human_action_name(:menu_items, :to_child), 
+      menu_items_path(
+      url_options_from_params.merge({:action => :index, :parent_id => menu_item.id})) 
+      %>
+      <% end %>
+    </td>
+    <td class="actions change_order">
+      <% url = menu_items_path(:action => :move_ahead, :site => @site.name, 
+      :menu_type => @menu.menu_type, :id => menu_item.id ) %>
+      <%= button_to_function mark(:above) ,
+        "$('#menu_items').ajaxReplace({url: '#{url}', type: 'PUT', dataType: 'html'});return true;" %>
+        <% url = menu_items_path(:action => :move_behind, :site => @site.name, 
+        :menu_type => @menu.menu_type, :id => menu_item.id  ) %>
+      <%= button_to_function mark(:below) ,
+      "$('#menu_items').ajaxReplace({url: '#{url}', type: 'PUT', dataType: 'html'});return true;" %>
+    </td>
+  </tr>
+<% end %>
+</table>

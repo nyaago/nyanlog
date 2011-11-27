@@ -1,0 +1,12 @@
+<h1>
+  <%= human_action_name(:menu_items, :new) %>
+</h1>
+
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+<%= render 'form' %>
+

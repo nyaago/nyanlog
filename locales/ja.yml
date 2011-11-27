@@ -170,6 +170,13 @@ ja:
       messages:
         invalid_date: 'の入力が不正です。全て入力するか全て未入力にしてください。'
 
+    menu_item:
+      messages:
+        site_of_menu_must_equals_to_site_of_folder: 'メニューのサイトとフォルダーのサイトは合致している必要があります。'
+        tree_must_not_loop: '階層がループしています。'
+        hierarchy_must_not_beyond_limit: '%{count}階層以上の作成はできません'
+        presence_of_folder_or_title: 'フォルダー、またはタイトルいずれかは入力してください'
+
 # extract from activerecord
   # Attributes names common to most models
   attributes:
@@ -210,6 +217,8 @@ ja:
       # custom blank validation message for login attribute of User model.
       #models:
 
+      
+
     # Translate model names. Used in Model.human_name().
     models:
       user: 'ユーザー'
@@ -219,6 +228,8 @@ ja:
       folder: 'フォルダー'
       app_setting: 'アプリケーション設定'
       image: '画像'
+      menu: 'メニュー'
+      menu_item: 'メニュー項目'
       notes:
         user: 'ユーザー'
         user_session: 'ユーザー'
@@ -336,11 +347,39 @@ ja:
           content: ''
           order_of_display: ''
       
+      menu:
+        menu_type: 'メニュータイプ'
+        site: 'サイト'
+        site_id: 'サイト'
+        hidden: '表示しない'
+        
+        
+      menu_item:
+        title: 'タイトル'
+        folder_id: 'フォルダー'
+        folder: 'フォルダー'
+        parent_id: '上位項目'
+        parent: '上位項目'
+        order_of_display: '表示順'
+        menu_id:  'メニュー'
+        menu:  'メニュー'
+        children: '子要素'
+        children_count: '子要素数'
+        notes:
+          title: 'メニュー項目として表示するタイトルです'
+          folder: 'メニュー選択で表示されるフォルダーです'
+        
       
       app_setting:
         default_site_id: 'デフォルトのサイト'
         notes:
           default_site_id: 'ゲストがTopのURLを訪れたときに表示されるサイトです。'
+      
+      values:
+        menu:
+          menu_type: 
+            header: 'ヘッダーナビゲーション'
+            footer: 'フッターーナビゲーション'
         
       # For example,
       #   user:
@@ -473,6 +512,25 @@ ja:
         updated: '画像情報を更新しました。'
         created: '画像情報を作成しました。'
 
+    menu_items:
+      actions:
+        index: 'メニュー項目一覧'
+        new: '新規メニュー項目'
+        edit: 'メニュー項目の変更'
+        create: 'メニュー項目作成'
+        update: 'メニュー項目更新'
+        destroy: 'メニュー項目削除'
+        show: 'メニュー項目の表示'
+        to_child: '子要素へ'
+        to_parent: '△親階層へ'
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定されたメニュー項目は存在しません。'
+        destroyed: 'メニュー項目を削除しました。'
+        updated: 'メニュー項目を更新しました。'
+        created: 'メニュー項目を作成しました。'
+        hierarchy: '階層'
+        root: '最上位'
 
 
     app_settings:

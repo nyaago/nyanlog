@@ -3,6 +3,10 @@ class Article < ActiveRecord::Base
   include Attribute::OpenAndCloseAt
   include Attribute::OrderOfDisplay
   
+  #
+  # Attribute::OrderOfDisplay::StaticMethods.parent_attrs
+  parent_attrs  :folder_id
+  
   @@ordering_map = {
     Folder::ORDERING_BY_CREATED_AT_DESC =>  'created_at desc',
     Folder::ORDERING_BY_UPDATED_AT_DESC => 'updated_at desc',
@@ -20,6 +24,8 @@ class Article < ActiveRecord::Base
               :foreign_key => 'updated_by_id'
   belongs_to  :created_by, :class_name => 'User',
               :foreign_key => 'created_by_id'
+  
+  #
   scope   :listing, lambda { |folder|
     order( 
     if @@ordering_map.include?(folder.ordering_type)
@@ -28,7 +34,7 @@ class Article < ActiveRecord::Base
       'created_at asc'
     end)
   }
-
+  #
   scope   :by_id, lambda { |id|
     where("id = ?", id)
   }

@@ -5,7 +5,7 @@ module Observer
   class UserAction < ActiveRecord::Observer
     
     # Observed model classes
-    observe Site, Folder, Article, Image
+    observe Site, Folder, Article, Image, Menu, MenuItem
 
     def current_user=(user)
       self.class.current_user = user

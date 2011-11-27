@@ -55,9 +55,11 @@ class SitesController < ApplicationController
     end
     @site.attributes = params[:site]
     begin
-      @site.save!(:validate => true)
-      flash[:notice] = message(:sites, :updated)
-      return redirect_to sites_path(:site => @site.name)
+      ActiveRecord::Base.transaction do
+        @site.save!(:validate => true)
+        flash[:notice] = message(:sites, :updated)
+        return redirect_to sites_path(:site => @site.name)
+      end
     rescue ActiveRecord::RecordInvalid  => ex
       generate_selections!(@site)
       render :action => :new
@@ -71,9 +73,11 @@ class SitesController < ApplicationController
   def create
     @site = Site.new(params[:site])
     begin
-      @site.save!(:validate => true)
-      flash[:notice] = message(:sites, :created)
-      return redirect_to sites_path(:site => @site.name)
+      ActiveRecord::Base.transaction do
+        @site.save!(:validate => true)
+        flash[:notice] = message(:sites, :created)
+        return redirect_to sites_path(:site => @site.name)
+      end
     rescue ActiveRecord::RecordInvalid  => ex
       generate_selections!(@site)
       render :action => :new

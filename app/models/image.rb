@@ -3,6 +3,9 @@ class Image < ActiveRecord::Base
   include Attribute::OpenAndCloseAt
   include Attribute::OrderOfDisplay
 
+
+  parent_attrs  :folder_id
+
   # 
   TRANSLATION_SCOPE = ["errors", "image", "messages"].freeze
   #

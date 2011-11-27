@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
   # Sets the current user for observing model updating.
   before_filter :set_current_user
   
+  # Loads the current site and belongings.
+  before_filter :load_current_site
+  
   protected 
   
   # getting the sesstion of the current login user .
@@ -103,6 +106,18 @@ class ApplicationController < ActionController::Base
         request.session_options[:expire_after] = nil
       end
     end
+  end
+  
+  # Loads the current site and belongings.
+  def load_current_site
+    @site = 
+    if params[:site]
+      Site.find_by_name(params[:site])
+    end
+    if @site
+      @header_menu = @site.menus.by_menu_type(:header).first
+    end
+    
   end
   
   protected

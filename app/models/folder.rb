@@ -38,6 +38,7 @@ class Folder < ActiveRecord::Base
               :foreign_key => 'owner_id'
   has_many    :articles,  :dependent => :destroy
   has_many    :images,  :dependent => :destroy
+  has_many    :menu_items
 
   scope   :listing, order('updated_at desc')
   

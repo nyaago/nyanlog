@@ -307,7 +307,6 @@
   //===============
 
   var fn = cleditor.prototype,
-
   // Expose the following private functions as methods on the cleditor object.
   // The closure compiler will rename the private functions. However, the
   // exposed method names on the cleditor object will remain fixed.
@@ -343,7 +342,7 @@
     var $this = $(this);
     return handler ? $this.bind(CHANGE, handler) : $this.trigger(CHANGE);
   };
-
+  
   //===============
   // Event Handlers
   //===============

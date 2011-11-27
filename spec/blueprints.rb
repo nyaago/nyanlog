@@ -33,6 +33,10 @@ Folder.blueprint do
   
 end
 
+Menu.blueprint do
+  menu_type { 'Header' }
+end
+
 Article.blueprint do
   title { Sham.article_title }
   content { Sham.article_content }

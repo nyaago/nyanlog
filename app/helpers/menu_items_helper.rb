@@ -1,4 +1,4 @@
-module ArticlesHelper
+module MenuItemsHelper
   
   # Generates url options  from the request parameters.
   # Returns - url options (hash).
@@ -8,9 +8,9 @@ module ArticlesHelper
     :direction => if !params[:direction].blank?  then params[:direction]  else nil end}
   end
 
-  def article_path(article, options = {})
+  def menu_item_path(menu_item, options = {})
     url_for(options.merge({
-    :controller => :articles,
+    :controller => :menu_items,
     :action => 
       if options[:action].blank? 
         if params[:action] == 'edit' ||  params[:action] == 'update'
@@ -26,61 +26,58 @@ module ArticlesHelper
         options[:action] 
       end,
     :site => site(options),
-    :folder => folder(options),
     :id => 
-      if article.nil? 
+      if menu_item.nil? 
         params[:id] 
       else
-        if article.respond_to?(:id)   # Article model record
-          unless article.new_record?
-            article.id 
+        if menu_item.respond_to?(:id)   # Article model record
+          unless menu_item.new_record?
+            menu_item.id 
           end
         else 
-          article 
+          menu_item 
         end 
       end}
       ))
   end
   
-  def article_url(article, options = {})
-    article_path(article, options.merge({:only_path => false}))
+  def menu_item_url(menu_item, options = {})
+    menu_item_path(menu_item, options.merge({:only_path => false}))
   end
   
-  def new_article_path(options = {})
+  def new_menu_item_path(options = {})
     url_for(options.merge( {
-    :controller => :articles,
+    :controller => :menu_items,
     :action => :new,
-    :site => site(options),
-    :folder => folder(options)
+    :site => site(options)
     } ))
   end
   
-  def new_article_url(options = {})
-    article_url(options.merge({:only_path => false}))
+  def new_menu_item_url(options = {})
+    menu_item_url(options.merge({:only_path => false}))
   end
 
-  def edit_article_path(article,options = {})
+  def edit_menu_item_path(menu_item,options = {})
     url_for(options.merge( {
-    :controller => :articles,
+    :controller => :menu_items,
     :action => :edit,
     :id => 
-      if article.nil? 
+      if menu_item.nil? 
         params[:id] 
       else
-        if article.respond_to?(:id) # Article model record
-          article.id 
+        if menu_item.respond_to?(:id) # Article model record
+          menu_item.id 
         else 
-          article 
+          menu_item 
         end 
       end,
-    :site => site(options),
-    :folder => folder(options)
+    :site => site(options)
     } ))
   end
 
-  def articles_path(options = {})
+  def menu_items_path(options = {})
     url_for(options.merge( {
-    :controller => :articles,
+    :controller => :menu_items,
     :action => 
       if options[:action].blank? 
         if params[:action] == 'new' ||  params[:action] == 'create'
@@ -95,13 +92,12 @@ module ArticlesHelper
       else 
         options[:action] 
       end,
-    :site => site(options),
-    :folder => folder(options)
+    :site => site(options)
     }.merge(url_options_from_params) ))
   end
 
-  def articles_url(options = {})
-    article_path(options.merge({:only_path => false}))
+  def menu_items_url(options = {})
+    menu_item_path(options.merge({:only_path => false}))
   end
 
   private 
@@ -115,19 +111,6 @@ module ArticlesHelper
         site.name 
       else 
         site 
-      end
-    end
-  end
-  
-  def folder(options)
-    folder = options[:folder]
-    if folder.nil? 
-      params[:folder]
-    else
-      if folder.respond_to?(:name) 
-        folder.name 
-      else 
-        folder
       end
     end
   end

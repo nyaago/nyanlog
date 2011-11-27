@@ -228,7 +228,7 @@ describe Article do
   end
 
   describe "move  behind " do
-    it " move behind (when the article is the firs article  in the folder)  " do
+    it " move behind (when the article is the first article  in the folder)  " do
       @folder.ordering_type = Folder::ORDERING_SPECIFYING
       @folder.save!(:validate => false)
       @articles.each_with_index do |article, i|

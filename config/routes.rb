@@ -49,6 +49,20 @@ Nyanlog::Application.routes.draw do
   delete ":site/:folder/images/:id" , :to => 'images#destroy#:site#:id'
   get ":site/:folder/images" , :to => 'images#index#:site#:folder'
 
+  # menu_items
+  get ":site/menu_items/:menu_type/new" , :to => 'menu_items#new#:site#:menu_type'
+  get ":site/menu_items/:menu_type/:id/edit" , :to => 'menu_items#edit#:site#:menu_type#:id'
+  post ":site/menu_items/:menu_type" , :to => 'menu_items#create#:site#:menu_type'
+  put ":site/menu_items/:menu_type/:id" , :to => 'menu_items#update#:site#:menu_type#:id'
+  delete ":site/menu_items/:menu_type/:id" , :to => 'menu_items#destroy#:site#:menu_type#:id'
+  put ":site/menu_items/:menu_type/:id/move_behind" , 
+        :to => 'menu_items#move_behind#:site#:menu_type#:id'
+  put ":site/menu_items/:menu_type/:id/move_ahead" , 
+        :to => 'menu_items#move_ahead#:site#:menu_type#:id'
+  get ":site/menu_items/:menu_type/:parent_id" , 
+        :to => 'menu_items#index#:site#:menu_type#:parent_id'
+  get ":site/menu_items/:menu_type" , :to => 'menu_items#index#:site#:menu_type'
+
   #resources :folders do
   #  member do
   #    get "/:site/folders/new" , :to => 'folders#new#:site'
