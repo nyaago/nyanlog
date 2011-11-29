@@ -1,7 +1,9 @@
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 $(function()
 {
 	// CLEditor Setting
+	/*
 	$("#content textarea").cleditor({
 	    width:"650px", 
 	    height:"400px",
@@ -11,7 +13,10 @@ $(function()
             "indent | alignleft center alignright justify | undo redo | " +
             "rule image link unlink |  pastetext | print source",
 	});
+	*/
 });
+CKEDITOR.config.height =  "25em";
+
 </script>
 
 <%= form_for(@article) do |f| %>
@@ -37,7 +42,7 @@ $(function()
     </div>
     <div class="field" id="content">
       <%= f.label :content %><br />
-      <%= f.text_area :content, :cols=>'40', :rows => '20' %>
+      <%= f.text_area :content, :cols=>'40', :rows => '20', :class=>'ckeditor' %>
     </div>
     <div class="field" id="opened_at">
       <%= f.label :opened_at %><br />
@@ -62,3 +67,6 @@ $(function()
     <%= f.submit %>
   </div>
 <% end %>
+<script type="text/javascript">
+//CKEDITOR.currentInstance;
+</script>
