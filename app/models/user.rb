@@ -73,6 +73,12 @@ class User < ActiveRecord::Base
   end
 
   # whether the user can manage site
+  def can_edit_site?(site)
+    is_admin || (site && (is_site_admin || is_editor) && self.site_id == site.id)
+  end
+
+
+  # whether the user can manage site
   def can_edit_folder?(folder)
     site = folder.site
     is_admin || (site && (is_site_admin || is_editor) && self.site_id == site.id) ||

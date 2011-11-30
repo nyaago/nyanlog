@@ -1,5 +1,58 @@
 <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
+function selectImages() {
+  window.open('<%= url_for(:controller => :images, :action => :selection_list) %>', 
+  '_blank', 'width=' + (window.outerWidth > 400 ? window.outerWidth - 200 : 200) + 
+          ', height=' + (window.outerHeight > 300 ?   window.outerHeight - 100 : 200) + 
+          ', menubar=no, toolbar=no, scrollbars=yes');
+}
+// insert the image to the editing html
+// == parameters
+// * images - hash - key => url, title, alternative
+// * align - alignment of the image (left | rigjt | center | none )
+function insertImages(images, align) {
+  var editor = CKEDITOR.instances.article_content;
+  var alignStyle = align == "none" ? "" : "text-align: " + align + ";";
+  $.each(images, function(i) {
+    var p;
+    var a = '';
+    var img;
+    if(this['thumb'] != '') {
+      p = '<p style="' + alignStyle + '">';
+      p += '</p>';
+      img = '<img src="' + this['thumb'] +  '" ' + 
+      'alt="' +  (this['alternative'] != "" ? this['alternative'] : this['title'])   +  '" ' +
+      '/>';
+      a = '<a href="' + this['url'] +  '" ' + 
+      'title="' + this['title'] + '" ' +
+      'class="lightbox" '  +
+      '/>';
+    }
+    else {
+      p = '<p style="' + alignStyle + '">';
+      p += '</p>';
+      img = '<img src="' + this['url'] +  '" ' + 
+      'alt="' +  (this['alternative'] != "" ? this['alternative'] : this['title'])   +  '" ' +
+      'title="' + this['title'] + '"' +
+      '/>';
+    }
+    var pElement = CKEDITOR.dom.element.createFromHtml(p);
+    var imgElement = CKEDITOR.dom.element.createFromHtml(img);
+    editor.insertElement(pElement);
+    if(a != '') {
+      var aElement = CKEDITOR.dom.element.createFromHtml(a);
+      pElement.append(aElement );
+      aElement.append(imgElement );
+    }
+    else {
+      pElement.append(imgElement);
+    }
+  }
+  );
+
+}
+
+
 $(function()
 {
 	// CLEditor Setting
@@ -41,7 +94,10 @@ CKEDITOR.config.height =  "25em";
       <%= f.text_field :title %>
     </div>
     <div class="field" id="content">
-      <%= f.label :content %><br />
+      <div class="actions">
+        <span><%= human_action_name(nil, :insert) %></span>
+        <%= button_to_function Image.model_name.human, "selectImages();" %>
+      </div>
       <%= f.text_area :content, :cols=>'40', :rows => '20', :class=>'ckeditor' %>
     </div>
     <div class="field" id="opened_at">

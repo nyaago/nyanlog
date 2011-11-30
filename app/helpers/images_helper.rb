@@ -20,7 +20,7 @@ module ImagesHelper
         elsif params[:action] == 'show' 
           'show'
         else
-          'update' 
+          'show'
         end
       else 
         options[:action] 

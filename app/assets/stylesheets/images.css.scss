@@ -64,6 +64,13 @@ table#images .updated_by {
   vertical-align: middle;
 }
 
+table#images .selection_check {
+  width: 5%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
 table#images td.updated_by span {
   display: block;
   padding-top: 0.3em;
@@ -108,4 +115,47 @@ table#images .change_order input {
 
 #image_fields #title input {
   width: 20em;
+}
+
+/*
+ selection list
+*/
+#filtering {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+
+#filtering  div {
+  float: left;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#filtering  p {
+  float: left;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#submit_filtering {
+  float: left;
+  text-align: left;
+  width: auto;
+  margin-left: 5px;
+  margin-right: 5px;
+  
+}
+
+#settings_for_images {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+
+
+table#images {
+  clear: both;
 }

@@ -1,0 +1,119 @@
+<%= form_tag({:controller => :images, :action => :selection_list, :folder => nil }, 
+{:method => :get}) do |f| %>
+<fieldset id="filtering">
+  <div class="field" id="folder">
+    <%= label :folder, :name, Folder.model_name.human %>
+    <%= select_tag :folder, 
+                options_for_select([['','']] + @folders.collect{|folder| [folder.name, folder.name]},
+                                    if @folder;@folder.name;end) %>
+  </div>
+  <div class="actions" id="submit_filtering">
+    <%= submit_tag human_action_name(nil,:filter) %>
+  </div>
+</fieldset>
+
+<% end %>
+<fieldset id="settings_for_images">              
+  <div class="inputs fields">
+    <div class="field" id="image_size_field">
+      <span class="caption">
+        <%= Image.human_attribute_name(:style) %>:
+      </span>
+      <%= radio_button_tag("image_size", 'original', true ) %>
+      <%= human_attribute_value(:image,:size,'original') %>&nbsp;
+      <%= radio_button_tag("image_size", 'medium', false ) %>
+      <%= human_attribute_value(:image,:size,'medium') %>&nbsp;
+      <%= radio_button_tag("image_size", 'small', false ) %>
+      <%= human_attribute_value(:image,:size,'small') %>&nbsp;
+      <%= radio_button_tag("image_size", 'thumb', false ) %>
+      <%= human_attribute_value(:image,:size,'thumb') %>&nbsp;
+    </div>
+    <div class="field" id="image_align_field">
+      <span class="caption">
+        <%= Image.human_attribute_name(:alignment) %>:
+      </span>
+      <%= radio_button_tag("image_align", 'none', true ) %>
+      <%= human_attribute_value(:image,:alignment,'none') %>&nbsp;
+      <%= radio_button_tag("image_align", 'center', false ) %>
+      <%= human_attribute_value(:image,:alignment,'center') %>&nbsp;
+      <%= radio_button_tag("image_align", 'left', false) %>
+      <%= human_attribute_value(:image,:alignment,'left') %>&nbsp;
+      <%= radio_button_tag("image_align", 'right', false ) %>
+      <%= human_attribute_value(:image,:alignment,'right') %>&nbsp;
+    </div>
+  </div>
+  <div class="actions">
+  <%= button_to_function(human_action_name(nil, :insert), 'return insertImages();') %>
+  </div>
+</fieldset>
+
+<table id="images">
+  <tr>
+    <th class="selection_check">
+      <%= check_box_tag("check_all",1, false, 
+      {:class => 'check_all'}) %>
+    </th>
+    <th class="thumb"></th>
+    <th class="title"><%= Image.human_attribute_name(:title) %></th>
+    <th class="description"><%= Image.human_attribute_name(:description) %></th>
+    <th class="updated_by"><%= Image.human_attribute_name(:updated_by_id) %><br/>
+      <%= Image.human_attribute_name(:created_by_id) %>
+    </th>
+    <th class="updated_at">
+      <%= Image.human_attribute_name(:created_on) %><br/>
+      <%= Image.human_attribute_name(:updated_on) %>
+    </th>
+  </tr>
+
+<% @images.each do |image| %>
+  <tr>
+    <td class="selection_check">
+      <%= check_box_tag "image_#{image.id}", image.id %>
+    </td>
+    <td class="thumb">
+      <%= image_tag(image_path(image, url_options_from_params.merge({:style => 'thumb', :action => 'show'}))) %>  
+    </td>
+    <td class="title">
+        <%= image.title %>
+    </td>
+    <%= hidden_field_tag "image_#{image.id}_alternative", image.alternative %>
+    <td class="description">
+      <%= simple_format(image.description) %>
+    </td>
+    <td class="updated_by">
+      <span>
+      <%= 
+        if image.updated_by
+          image.updated_by.login
+        else
+          if image.created_by
+            image.created_by.login
+          else
+            ''
+          end
+        end
+      %>
+      </span>
+      <span>
+      <%= 
+        if image.created_by
+          image.created_by.login
+        else
+          ''
+        end
+      %>
+      </span>
+    </td>
+    <td class="updated_at">
+      <span><%= I18n.l image.created_at.to_date, :format => :default %></span>
+      <span><%= I18n.l image.updated_at.to_date, :format => :default %></span>
+    </td>
+    <%= hidden_field_tag "image_#{image.id.to_s}_medium", image_url(image, :style => :medium) %>
+    <%= hidden_field_tag "image_#{image.id.to_s}_small", image_url(image, :style => :small) %>
+    <%= hidden_field_tag "image_#{image.id.to_s}_thumb", image_url(image, :style => :thumb) %>
+    <%= hidden_field_tag "image_#{image.id.to_s}_original", image_url(image, :style => :original) %>
+    <%= hidden_field_tag "image_#{image.id}_alternative", image.alternative %>
+    <%= hidden_field_tag "image_#{image.id}_title", image.title %>
+  </tr>
+<% end %>
+</table>

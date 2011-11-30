@@ -1,0 +1,75 @@
+<script type="text/javascript">
+//<![CDATA[
+  
+  $(function()
+  {
+    $('input.check_all').click( function() {
+      var f = $(this).attr('checked') ? 'checked' : false;
+      $('#images .selection_check input:checkbox').each( function(index, elem) {
+        $(elem).attr('checked', f);
+      });
+    });
+  });
+
+  function insertImages() {
+    //
+    var images = new Array();
+    // 
+    var size = $('#image_size_field :radio:checked').val();
+    var align = $('#image_align_field :radio:checked').val();
+  //  var direction = $('#image_ordering_direction_field :radio:checked').val();
+    //alert("size/align/direction = " + size + "/" + align + "/" + direction);
+    //
+    $('#images .selection_check input:checked').each( function() {
+      var checkedId =  $(this).val();
+      var url  = '';
+      var thumb = '';
+      if(size == 'thumb') {
+        url = $('#image_' + checkedId + "_original" ).val();
+        thumb = $('#image_' + checkedId + "_thumb" ).val();
+      }
+      else {
+        url = $('#image_' + checkedId + "_" + size).val();
+      }
+      // alert(url);
+      var image = new Array();
+      image['url'] = url;
+      image['thumb'] = thumb;
+      image['title'] = $('#image_' + checkedId + "_title").val();;
+      image['alternative'] = $('#image_' + checkedId + "_alternative").val();;
+      images.push(image);
+    });
+    if(images.length == 0) {
+      alert("not selected.");
+      return;
+    }
+    /*
+    if(direction == 'asc') {   // 古いもの - 下から
+      images.reverse();
+    }
+    */
+    //
+    window.opener.insertImages(images, align);
+    window.close();
+  }
+
+  
+//]]>
+</script>
+<h1>
+  <%= @folder.title %> 
+  <%= human_action_name(:images, :selection_list) %>
+</h1>
+
+
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+<%= render 'selection_image_table' %>
+<br />
+
+<%= will_paginate @images,:previous_label => '<=', :next_label => '=>' %>
+

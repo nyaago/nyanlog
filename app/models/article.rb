@@ -38,6 +38,12 @@ class Article < ActiveRecord::Base
   scope   :by_id, lambda { |id|
     where("id = ?", id)
   }
+  
+  # editable for the user
+  scope   :editable_for, lambda { |user|
+    folders = Folder.editable_for(user)
+    where("folder_id in (?)", folders.collect {|folder| folder.id})
+  }
 
   # the title must be present
   validates_presence_of :title

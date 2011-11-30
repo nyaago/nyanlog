@@ -339,6 +339,8 @@ ja:
         image_file_name: '画像ファイル名'
         image_content_type: 'コンテンツタイプ'
         image_file_size: '画像サイズ'
+        style: 'サイズ'
+        alignment: 'アラインメント'
         notes:
           title: 'ページのタイトル、見出しで表示されます。'
           alternative:  '画像タグのalt属性に設定される代替テキストです'
@@ -346,6 +348,7 @@ ja:
           closed_at: '公開が停止されることになる日時です。'
           content: ''
           order_of_display: ''
+        
       
       menu:
         menu_type: 'メニュータイプ'
@@ -380,6 +383,17 @@ ja:
           menu_type: 
             header: 'ヘッダーナビゲーション'
             footer: 'フッターーナビゲーション'
+        image:
+          size:
+            original: 'オリジナル'
+            medium: '中ぐらいの画像'
+            small: '小さい画像'
+            thumb: 'サムネイル'
+          alignment:
+            none: 'なし'
+            left: '左'
+            center: '中央'
+            right: '右'
         
       # For example,
       #   user:
@@ -418,6 +432,8 @@ ja:
       destroy: '削除'
       show: '表示'
       back: '戻る'
+      insert: '挿入'
+      filter: 'フィルタリング'
       
     messages:
       site_not_found: '指定されたサイトはありません'
@@ -499,6 +515,7 @@ ja:
       actions:
         index: '画像表示'
         list: '画像一覧'
+        selection_list: '画像選択'
         new: '新規画像'
         edit: '画像の変更'
         create: '画像作成'

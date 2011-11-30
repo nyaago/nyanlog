@@ -40,6 +40,7 @@
   margin-left: 2em;
 }
 
+
 table#articles {
   width: 90%;
 }
@@ -71,3 +72,16 @@ table#articles .change_order {
 #article_fields #title input {
   width: 20em;
 }
+
+
+#article_fields #content .actions {
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+#article_fields #content .actions span{
+  vertical-align: bottom;
+}
+
+
+

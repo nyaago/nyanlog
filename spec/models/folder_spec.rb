@@ -129,5 +129,81 @@ describe Folder do
     
   end
   
+  
+  describe 'editable_for' do
+    
+
+    it "should only owned" do
+      site = Site.make
+      user = User.make(:is_admin => false, :is_editor => false, :site => site)
+      admin = User.make(:is_admin => true, :is_editor => false, :site => site)
+      editor = User.make(:is_admin => false, :is_editor => true, :site => site)
+      folder_count_of_user = 2
+      folder_count_of_editor = 2
+      folder_count_of_admin = 2
+      (1..folder_count_of_user).each do
+        Folder.make(:site => site, :owner => user)
+      end
+      (1..folder_count_of_editor).each do
+        Folder.make(:site => site, :owner => editor)
+      end
+      (1..folder_count_of_admin).each do
+        Folder.make(:site => site, :owner => admin)
+      end
+
+      Folder.editable_for(user).each do |folder|
+        folder.owner_id.should == user.id
+      end
+      Folder.editable_for(user).count.should == folder_count_of_user
+    end
+
+    it "should return  all folders in the site for the admin" do
+      site = Site.make
+      user = User.make(:is_admin => false, :is_editor => false, :site => site)
+      admin = User.make(:is_admin => true, :is_editor => false, :site => site)
+      editor = User.make(:is_admin => false, :is_editor => true, :site => site)
+      folder_count_of_user = 2
+      folder_count_of_editor = 2
+      folder_count_of_admin = 2
+      (1..folder_count_of_user).each do
+        Folder.make(:site => site, :owner => user)
+      end
+      (1..folder_count_of_editor).each do
+        Folder.make(:site => site, :owner => editor)
+      end
+      (1..folder_count_of_admin).each do
+        Folder.make(:site => site, :owner => admin)
+      end
+
+      Folder.editable_for(admin).count.should == folder_count_of_user + 
+                                                folder_count_of_editor + folder_count_of_admin
+    end
+
+
+    it "should return  all folders in the site for the editor" do
+      site = Site.make
+      user = User.make(:is_admin => false, :is_editor => false, :site => site)
+      admin = User.make(:is_admin => true, :is_editor => false, :site => site)
+      editor = User.make(:is_admin => false, :is_editor => true, :site => site)
+      folder_count_of_user = 2
+      folder_count_of_editor = 2
+      folder_count_of_admin = 2
+      (1..folder_count_of_user).each do
+        Folder.make(:site => site, :owner => user)
+      end
+      (1..folder_count_of_editor).each do
+        Folder.make(:site => site, :owner => editor)
+      end
+      (1..folder_count_of_admin).each do
+        Folder.make(:site => site, :owner => admin)
+      end
+
+      Folder.editable_for(editor).count.should == folder_count_of_user + 
+                                                folder_count_of_editor + folder_count_of_admin
+    end
+
+  
+  end
+  
 #  pending "add some examples to (or delete) #{__FILE__}"
 end

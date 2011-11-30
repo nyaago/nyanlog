@@ -7,7 +7,7 @@ class ImagesController < ApplicationController
 
   PER_PAGE = 8
 
-  # GET :site/:folder/articles/list
+  # GET :site/:folder/images/list
   # = instace fields receiced to the view
   # * @site
   # * @folder
@@ -27,6 +27,40 @@ class ImagesController < ApplicationController
       format.html { render :action => :list}
     end
   end
+  
+  # GET :site/images/selection_list
+  # GET :site/:folder/images/selection_list
+  # = instace fields receiced to the view
+  # * @site
+  # * @folder
+  # * @articles
+  def selection_list
+    @site = Site.find_by_name(params[:site])
+    if @site.nil?
+      return render_404
+    end
+    @folder = 
+    unless params[:folder].blank?
+      @site.folders.by_id(params[:folder]).first or (render_404 and return)
+    end
+    
+    @images = 
+    if @folder
+      @folder.images.listing(@folder)
+    else
+      Image.editable_for(current_user)
+    end.paginate(:per_page => PER_PAGE, :page => params[:page])
+    @folders = 
+    if current_user.is_admin
+      @site.folders
+    else
+      Folder.editable_for(current_user)
+    end
+    respond_to do |format|
+      format.html { render :action => :selection_list, :layout => 'simple'}
+    end
+  end
+  
   
   # GET :site/:folder/images/new
   # = instace fields receiced to the view
@@ -142,14 +176,20 @@ class ImagesController < ApplicationController
     end
   end
   
+  # get :site/:folder/images/:id
+  # get :site/:folder/images/:id/:style 
+  # == requiest parameters
+  # * :site
+  # * :id
+  # * :style - original (default) | medium | small | thumb 
   def show
     @site = Site.find_by_name(params[:site])
     if @site.nil?
-      return render_404
+      head(:not_found) and return 
     end
     @folder = @site.folders.by_name(params[:folder]).first
     if @folder.nil?
-      return render_404
+      head(:not_found) and return 
     end
     @image = @folder.images.by_id(params[:id]).first
     if @image.nil?

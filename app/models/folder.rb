@@ -52,6 +52,15 @@ class Folder < ActiveRecord::Base
   
   scope   :opened, where('opened_at IS NULL OR opened_at >= ?', Date.today)
 
+  # editable for the user
+  scope   :editable_for, lambda { |user|
+    if user.can_edit_site?(user.site)
+      where("site_id = ?", user.site_id)
+    else
+      where("owner_id = ?", user.id)
+    end
+  }
+
   validates_presence_of   :name
   validates_uniqueness_of :name, :scope => :site_id
   validates_inclusion_of  :ordering_type, :in => ORDERING_TYPES,

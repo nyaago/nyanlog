@@ -111,8 +111,10 @@ class ApplicationController < ActionController::Base
   # Loads the current site and belongings.
   def load_current_site
     @site = 
-    if params[:site]
-      Site.find_by_name(params[:site])
+    unless params[:site].blank? 
+      if  (params[:site].is_a?(String) || params[:site].is_a?(Symbol))
+        Site.find_by_name(params[:site])
+      end
     end
     if @site
       @header_menu = @site.menus.by_menu_type(:header).first

@@ -39,7 +39,6 @@ module ApplicationHelper
     I18n.t value, :scope => [:activerecord, :attributes, :values, model, attribute]
   end
   
-  
   # Return the mark.
   # It refers to I18n entries as following.
   # * <locale>/application_helpers/marks/<key> 

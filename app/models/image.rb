@@ -48,6 +48,12 @@ class Image < ActiveRecord::Base
     where("id = ?", id)
   }
   
+  # editable for the user
+  scope   :editable_for, lambda { |user|
+    folders = Folder.editable_for(user)
+    where("folder_id in (?)", folders.collect {|folder| folder.id})
+  }
+  
   # the title must be present
   validates_presence_of :title
 
@@ -68,7 +74,7 @@ class Image < ActiveRecord::Base
       :default_style => :original,
       :path => "#{@@image_config.path}/:class/:id_partition/:style_:basename.:extension",
 #      :path => ":rails_root/assets/:class/:id_partition/:style_:basename.:extension",
-      :url => "/:class/:id/:style_:basename.:extension'",
+      :url => "/:class/:id/:style'",
       :whiny => false
 
   # Restricts  file extension
