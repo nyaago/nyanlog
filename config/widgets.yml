@@ -1,0 +1,8 @@
+widgets:
+  - name: "monthly_widget"
+    title: "monthly"
+    description: "It is a monthly report link list. "
+  - name: "new_arrival_widget"
+    title: "new arrival"
+    description: "It is the link list of the reports updated newly. "
+

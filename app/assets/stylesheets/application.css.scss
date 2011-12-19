@@ -303,6 +303,9 @@ footer {
   margin: 0 auto;
 }
 
+#user_actions {
+  text-align: right;
+}
 
 /**
  =========
@@ -334,6 +337,16 @@ footer {
 
 .field {
   margin-bottom: 8px;
+  text-align: left;
+}
+
+.field label {
+  text-align: left;
+}
+
+
+.field input {
+  text-align: left;
 }
 
 .note {

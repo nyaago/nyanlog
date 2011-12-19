@@ -47,7 +47,21 @@
       </ul>
     </li>
     <% end %>
-    <% if current_site && current_user.can_manage_site?(current_site) %>
+
+
+    <% if current_site && current_user   %>
+    <li id="menu_item_user">
+      <%= link_to(User.model_name.human, "#") %>
+      <ul>
+        <li>
+        <%= link_to(human_action_name(:widget_sets, :index), widget_sets_path(:site => current_site.name)) %>
+        </li>
+      </ul>
+    </li>
+    <% end %>
+
+
+    <% if current_site && current_user   %>
     <li id="menu_item_sites">
       <%= link_to(Site.model_name.human, "#") %>
       <ul>
@@ -56,16 +70,19 @@
           <li><%= link_to(folder.name, articles_path(:folder => folder.name, 
           :site => current_site.name)) %></li>
         <% end %>
-        <% if current_site %>
+        <% if current_site && current_user.can_manage_site?(current_site) %>
         <li><%= link_to(human_action_name(:folders, :list), 
         folders_path(:action => :list, :site => current_site.name))%></li>
-        <% end %>
         <li>
         <%= link_to(human_action_name(:sites, :edit), edit_site_path(current_site)) %>
         </li>
         <li>
         <%= link_to(human_action_name(:users, :index), users_path(:site => current_site.name)) %>
         </li>
+        <li>
+        <%= link_to(human_action_name(:widget_sets, :index), widget_sets_path(:site => current_site.name)) %>
+        </li>
+        <% end %>
       </ul>
     </li>
     <% end %>

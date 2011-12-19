@@ -52,9 +52,22 @@ class Folder < ActiveRecord::Base
   
   scope   :opened, where('opened_at IS NULL OR opened_at >= ?', Date.today)
 
-  # editable for the user
+  # filtering(editable for the user)
   scope   :editable_for, lambda { |user|
-    if user.can_edit_site?(user.site)
+    if user.is_admin
+      where("")
+    elsif user.can_edit_site?(user.site)
+      where("site_id = ?", user.site_id)
+    else
+      where("owner_id = ?", user.id)
+    end
+  }
+
+  # filtering(can manage for the user)
+  scope   :can_manage_for, lambda { |user|
+    if user.is_admin
+      where("")
+    elsif user.can_manage_site?(user.site)
       where("site_id = ?", user.site_id)
     else
       where("owner_id = ?", user.id)
@@ -70,6 +83,7 @@ class Folder < ActiveRecord::Base
                             :less_than_or_equal_to => MAX_ARTICLE_COUNT_BY_PAGE,
                             :allow_nil => false,
                             :only_integer => 1
+  validates_presence_of :site_id
   
   # 公開開始日時の入力チェック.日付け要素が未入力または、全て入力されて有効な日時になっていればOK?
   validate :opened_at_must_completed_or_nil

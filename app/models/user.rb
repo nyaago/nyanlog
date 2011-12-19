@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
   scope :site_belongs_to, lambda { |site| where("site_id = ?", site.id) }
   # users who can own folders of the site(administrator and users belonging to the site )
   scope :can_own_folder_of, lambda { |site| 
+          where("is_site_admin AND site_id = ? OR is_admin = ?", site.id, true) }
+  scope :can_own_of, lambda { |site| 
           where("site_id = ? OR is_admin = ?", site.id, true) }
   
   validates_presence_of :site_id, :unless => Proc.new { |user| user.is_admin }
@@ -84,6 +86,14 @@ class User < ActiveRecord::Base
     is_admin || (site && (is_site_admin || is_editor) && self.site_id == site.id) ||
     self == folder.owner 
   end
+
+  # whether the user can manage site
+  def can_manage_folder?(folder)
+    site = folder.site
+    is_admin || (site && (is_site_admin ) && self.site_id == site.id) ||
+    self == folder.owner 
+  end
+  
   
   # return folders which the user can edit.
   def editable_folders(current_site = nil)
@@ -101,7 +111,7 @@ class User < ActiveRecord::Base
         site.folders
       end
     else
-      folders
+      folders.editable_for(self)
     end
   end
   

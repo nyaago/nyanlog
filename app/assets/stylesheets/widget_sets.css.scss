@@ -1,0 +1,33 @@
+// Place all the styles related to the widget_sets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#widget_sets {
+  width: 70%;
+}
+
+
+#widget_sets .title {
+  width: 55%;
+}
+
+#widget_sets td.edit {
+  width: 15%;
+}
+
+#widget_sets td.edit_widget_set_elements {
+  width: 15%;
+}
+
+
+#widget_sets td.destroy {
+  width: 15%;
+}
+
+#widget_set_fields {
+  
+}
+
+
+#widget_set_fields #title input {
+  width: 20em;
+}

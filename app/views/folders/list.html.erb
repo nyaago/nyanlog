@@ -25,18 +25,24 @@
     <%= folder.title %>
     </td>
     <td class="actions list">
+    <% if current_user.can_manage_folder?(folder) %>
     <%= link_to human_action_name(nil, :list), 
     articles_path({:folder => folder, :action => :list}) %>
+    <% end %>
     </td>
     <td class="actions edit">
+    <% if current_user.can_manage_folder?(folder) %>
     <%= link_to human_action_name(nil, :edit), 
     edit_folder_path(folder,  url_options_from_params) %>
+    <% end %>
     </td>
     <td class="actions destroy">
+    <% if current_user.can_manage_folder?(folder) %>
     <%= link_to human_action_name(nil, :destroy), 
     folder_path(folder,url_options_from_params), 
     :confirm =>  message(:folders, :destroy_confirmation), 
     :method => :delete %>
+    <% end %>
     </td>
   </tr>
 <% end %>

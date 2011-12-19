@@ -15,7 +15,39 @@ Nyanlog::Application.routes.draw do
 #    match 'index' => 'sites#index'
   get "user_sessions", :to => "user_sessions#new"
   post "user_sessions", :to => "user_sessions#create"
-  delete "user_sessions/destroy", :to => "user_sessions#destroy"
+  get "user_sessions/destroy", :to => "user_sessions#destroy"
+
+  # widget set
+  get ":site/widget_sets/new" , :to => 'widget_sets#new#:site'
+  get ":site/widget_sets/list" , :to => 'widget_sets#list#:site'
+  get ":site/widget_sets/:id/edit" , :to => 'widget_sets#edit#:site#:id'
+  put ":site/widget_sets/:id" , :to => 'widget_sets#update#:site#:id'
+  post ":site/widget_sets" , :to => 'widget_sets#create#:site'
+  delete ":site/widget_sets/:id" , :to => 'widget_sets#destroy#:site#:id'
+  get ":site/widget_sets" , :to => 'widget_sets#index#:site'
+  
+  # widget element set
+  post ":site/widget_set_elements/:widget_set" , 
+        :to => 'widget_set_elements#create#:site#:widget_set'
+  delete ":site/widget_set_elements/:id" , 
+        :to => 'widget_set_elements#destroy#:site#:id'
+  get ":site/widget_set_elements/edit/:id" , 
+        :to => 'widget_set_elements#edit#:site#:id'
+  get ":site/widget_set_elements/:widget_set" , 
+        :to => 'widget_set_elements#index#:site#:widget_set'
+  get ":site/widget_set_elements/selected_list/:widget_set" , 
+        :to => 'widget_set_elements#selected_list#:site#:widget_set'
+  put ":site/:widget_set_elements/:id/move_behind" , 
+        :to => 'widget_set_elements#move_behind#:site#:id'
+  put ":site/:widget_set_elements/:id/move_ahead" , 
+        :to => 'widget_set_elements#move_ahead#:site#:id'
+
+  AppConfig::Widget.array.each do |widget|
+    get ":site/#{widget.name.underscore}/:id/edit", 
+        :to => "#{widget.name.underscore}#edit#:site#:id"
+    put ":site/#{widget.name.underscore}/:id", 
+        :to => "#{widget.name.underscore}#update#:site#:id"
+  end
 
   # folders
   get ":site/folders/new" , :to => 'folders#new#:site'

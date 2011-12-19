@@ -1,0 +1,170 @@
+// Place all the styles related to the widget_set_elements controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/* ウィジット選択ページ
+ ================================== */
+
+
+#widgets {
+  float: left; 
+  border-style: solid; 
+  margin-left: 10px;
+  margin-right: 10px;
+  
+}
+
+#widgets .selectable_widget {
+  width: 20em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: thin solid #cccccc;
+}
+
+  #widgets .selectable_widget .widget_title {
+    width: 18em;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  
+  }
+
+    #widgets .selectable_widget .widget_title h3 {
+      width: 100%;
+      background-color: #cccccc;
+      margin:0;
+      text-align: center;
+      line-height:3;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+
+    #widgets .selectable_widget .widget_title  input {
+      float: left;
+      display: block;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+
+    #widgets .selectable_widget .widget_title  input {
+      float: right;
+      display: block;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+  #widgets .selectable_widget .widget_description {
+    clear: both;
+  }
+
+
+
+
+
+
+
+
+
+#widget_set_elements {
+  float: left; 
+  border-style: solid; 
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+
+#widget_set_elements .selected_widget {
+  width: 24em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: thin solid #cccccc;
+}
+
+  #widget_set_elements .selected_widget .widget_title {
+    width: 22em;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+
+  }
+
+    #widget_set_elements .selected_widget .widget_title h3 {
+      width: 100%;
+      background-color: #cccccc;
+      margin:0;
+      text-align: left;
+      line-height:3;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+      #widget_set_elements .selected_widget .widget_title h3 span {
+        margin-left: 5px;
+      }
+
+    #widget_set_elements .selected_widget .widget_title  input {
+      float: left;
+      display: block;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+
+    #widget_set_elements .selected_widget .widget_title  input {
+      float: right;
+      display: block;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+    #widget_set_elements .selected_widget .widget_title  .actions {
+      display: inline;
+      margin-left: 5px;
+      margin-right: 1px;
+      margin-top: 10px;
+    }
+    #widget_set_elements .selected_widget .widget_title  .actions input {
+      display: inline;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+  #widget_set_elements .selected_widget .widget_description {
+    clear: both;
+  }
+
+
+
+#error_explanation {
+  width: auto;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 10px;
+  background-color: #f0f0f0;
+}
+
+  #error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  #error_explanation ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+

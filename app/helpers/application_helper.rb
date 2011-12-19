@@ -53,12 +53,12 @@ module ApplicationHelper
   
   # return the current site
   def current_site
-    @current_site ||= @site
+    @current_site ||= if @site && !@site.new_record?;@site;end
   end
   
   # return the current folder
   def current_folder
-    @current_folder ||= if @folder;@folder;else;default_folder;end
+    @current_folder ||= if @folder && !@folder.new_record?;@folder;else;default_folder;end
   end
   
   # return folders which the current user can edit.

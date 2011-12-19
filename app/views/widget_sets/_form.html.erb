@@ -1,0 +1,30 @@
+<%= form_for(@widget_set) do |f| %>
+  <% if @widget_set.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= activerecord_error_message(:record_invalid, 
+        :errors => @folder.errors.count) %>
+      </h2>
+      <ul>
+      <% @widget_set.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset id="widget_set_fields">
+    <legend><%= WidgetSet.model_name.human %></legend>
+    <div class="field" id="title">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field" id="owner_id">
+      <%= f.label :owner_id %><br />
+      <%= f.select :owner_id, @users.collect {|user| [user.login, user.id]} , 
+      { :include_blank => true } %>
+    </div>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

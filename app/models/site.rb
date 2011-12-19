@@ -5,6 +5,7 @@ class Site < ActiveRecord::Base
   has_many    :folders, :dependent => :nullify
   has_many    :users
   has_many    :menus
+  has_many    :widget_sets
   has_one     :header_menu,  :conditions => ["menu_type = ?", 'Header']
   has_one     :footer_menu,  :conditions => ["menu_type = ?", 'Footer']
   belongs_to  :updated_by, :class_name => 'User',

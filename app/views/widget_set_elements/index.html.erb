@@ -1,0 +1,79 @@
+<script type="text/javascript">
+//<![CDATA[
+    
+  // 
+  $(document).ready( function(){
+    var editor = $('#widget_edit').WidgetEditor({
+      urlForAdd: '<%= widget_set_element_url(nil, :action => :create, :id => nil) %>',
+      urlForEdit: '<%= edit_widget_set_element_url(nil,  :id => 1).gsub(/\/1$/, "")  %>',
+      urlForDelete: '<%= widget_set_element_url(nil,  :id => 1).gsub(/\/1$/, "")  %>',
+      editButtonText: '<%= human_action_name(:widget_set_elements,:edit) %>',
+      closeButtonText: '<%= human_action_name(:widget_set_elements,:cancel) %>',
+      updateButtonText: '<%= human_action_name(nil,:update) %>',
+      deleteButtonText: '<%= human_action_name(:widget_set_elements,:destroy) %>',
+      urlForSelectedList: 
+        '<%= widget_set_elements_url(:action => :selected_list, :widget_set => @widget_set) + ".json" %>',
+      confirmtionDelete: '<%= message(:widget_set_elements, :destroy_confirmation) %>'
+    });
+  });
+
+
+  
+//]]>
+</script>
+
+
+<h1>
+  <%= human_action_name(:widget_set_elements, :index) + ' - ' + @widget_set.title %>
+</h1>
+
+<script type="text/javascript" charset="utf-8">
+</script>
+
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+
+<p class="explanation"><p>
+<p class="explanation"><p>
+<div id="widget_edit">
+<div id="widgets" >
+  <div class="widget_area_title">
+    <h2>
+      <%= message(:widget_set_elements, :selectable_widget) %>
+    </h2>
+  </div>
+<% @selectable_widgets.each_with_index do |widget, i| %>
+<div class="selectable_widget selectable" id="<%= widget.class_name %>">
+  <div class="widget_title">
+    <h3><span><%= widget.title %></span>
+    <%= hidden_field_tag "widget_type[#{i}]", widget.class_name, :class => 'widget_type' %>
+    <%= button_to_function human_action_name(:widget_set_elements, :new) %>
+  </h3>
+  </div>
+  <div class="widget_description"> 
+  <%= widget.description %>
+	</div>
+</div>
+<% end %>
+  
+</div>
+
+
+<div id="widget_set_elements">
+  <div class="widget_area_title">
+    <h2>
+      <%= message(:widget_set_elements, :selected_widget) %>
+    </h2>
+  </div>
+</div>
+
+  <div id="dialog" style="display: none">
+  </div>
+
+<div style="clear: both;">
+</div>
+</div>

@@ -230,6 +230,12 @@ ja:
       image: '画像'
       menu: 'メニュー'
       menu_item: 'メニュー項目'
+      widget_set: 'ウィジットセット'
+      widget_set_element: 'ウィジットセット'
+      widget: 'ウィジット'
+      monthly_widget: '月別アーカイブ'
+      new_arrival_widget: '新着記事'
+      
       notes:
         user: 'ユーザー'
         user_session: 'ユーザー'
@@ -372,6 +378,26 @@ ja:
           title: 'メニュー項目として表示するタイトルです'
           folder: 'メニュー選択で表示されるフォルダーです'
         
+      widget_set:
+        title: 'タイトル'
+      widget_set_element:
+        title: 'タイトル'
+        widget_set: 'ウィジットセット'
+        widget: 'ウィジット'
+        widget_type: 'ウィジットタイプ'
+        order_of_display: '並び順'
+        
+      widget:
+        
+      monthly_widget:
+        folder: 'フォルダー'
+        title: 'タイトル'
+        element_count: '要素数'
+
+      new_arrival_widget:
+        folder: 'フォルダー'
+        title: 'タイトル'
+        element_count: '要素数'
       
       app_setting:
         default_site_id: 'デフォルトのサイト'
@@ -394,6 +420,9 @@ ja:
             left: '左'
             center: '中央'
             right: '右'
+        widget:
+          folder:
+            viewed: '表示されているフォルダー'
         
       # For example,
       #   user:
@@ -477,6 +506,11 @@ ja:
         destroyed: 'ユーザを削除しました。'
         updated: 'ユーザを更新しました。'
         created: 'ユーザを作成しました。'
+
+    user_sessions:
+      actions:
+        destroy: 'ログアウト'
+        new: 'ログイン'
         
     folders:
       actions:
@@ -493,6 +527,41 @@ ja:
         destroyed: 'フォルダーを削除しました。'
         updated: 'フォルダーを更新しました。'
         created: 'フォルダーを作成しました。'
+
+    widget_sets:
+      actions:
+        index: 'ウィジットセット一覧'
+        new: '新規ウィジットセット'
+        edit: '名称変更'
+        create: 'ウィジットセット作成'
+        update: 'ウィジットセット更新'
+        destroy: 'ウィジットセット削除'
+
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定されたウィジットセットは存在しません。'
+        destroyed: 'ウィジットセットを削除しました。'
+        updated: 'ウィジットセットを更新しました。'
+        created: 'ウィジットセットを作成しました。'
+
+    widget_set_elements:
+      actions:
+        index: 'ウィジット選択'
+        new: '追加'
+        edit: '変更'
+        create: '作成'
+        update: '更新'
+        destroy: '除外'
+        cancel: 'キャンセル'
+
+      messages:
+        destroy_confirmation: '削除してよろしいでしょうか？'
+        not_found: '指定されたウィジットは存在しません。'
+        destroyed: 'ウィジットを除外しました。'
+        updated: 'ウィジットトを更新しました。'
+        created: 'ウィジットセを追加しました。'
+        selectable_widget: '選択可能なウィジット'
+        selected_widget: '選択されているウィジット'
         
     articles:
       actions:
@@ -561,4 +630,10 @@ ja:
         updated: 'アプリケーション設定を更新しました。'
         created: 'アプリケーション設定を作成しました。'
 
-      
+  widgets:
+    monthly_widget:
+      title: '月別アーカイブ'
+      description: '月別の記事リンク一覧です'
+    new_arrival_widget:
+      title: '新着記事'
+      description: '新しく更新された記事のリンク一覧です'

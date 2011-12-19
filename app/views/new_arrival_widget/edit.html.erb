@@ -1,0 +1,22 @@
+<%= form_for(@widget ) do |f| %>
+    <div id="error_explanation" style="display:none">
+      <h2>
+      </h2>
+    </div>
+  <fieldset class="widget_fields"  class="new_arrival_widget_fields">
+    <legend><%= @widget.class.model_name.human %></legend>
+    <div class="field" id="title">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field" id="element_count">
+      <%= f.label :element_count %><br />
+      <%= f.select :element_count, (1..@widget.class.max_element_count).collect{|c| [c,c]} %>
+    </div>
+    <div class="field" id="folder">
+      <%= f.label :folder %><br />
+      <%= f.select :folder_id, selectable_folder_pair  %>
+    </div>
+
+  </fieldset>
+<% end %>
