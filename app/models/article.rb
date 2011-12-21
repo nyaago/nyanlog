@@ -45,6 +45,27 @@ class Article < ActiveRecord::Base
     where("folder_id in (?)", folders.collect {|folder| folder.id})
   }
 
+  # recently updated months
+  # ym attribute (%Y.%m.1) is included in records
+  scope :recently_updated_ym, lambda { |limit|
+    select("DATE_FORMAT(updated_at, '%Y.%m.1') as ym").
+    group('ym').
+    order("ym DESC").
+    limit(limit)
+  }
+
+  # recently updated 
+  scope :recently_updated, lambda { |limit|
+    order("updated_at DESC").
+    limit(limit)
+  }
+  # filtering by the month when articles was updated
+  scope :by_updated_month, lambda { |month|
+    month = if month.instance_of?(String);Date.parse(month);else;month;end
+    where("updated_at >= ? and updated_at < ?", 
+          month.beginning_of_month, month.next_month.beginning_of_month)
+  }
+
   # the title must be present
   validates_presence_of :title
 

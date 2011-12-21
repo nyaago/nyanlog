@@ -18,11 +18,15 @@
       <%= f.label :title %><br />
       <%= f.text_field :title %>
     </div>
+    <% if current_user.is_admin || current_user.is_site_admin %>
     <div class="field" id="owner_id">
       <%= f.label :owner_id %><br />
-      <%= f.select :owner_id, @users.collect {|user| [user.login, user.id]} , 
-      { :include_blank => true } %>
+      <%= f.select :owner_id, 
+      [[human_attribute_value(:widget_set, :owner_id, :me), nil]] + 
+      @users.collect {|user| [user.login, user.id]} , 
+      { :include_blank => false } %>
     </div>
+    <% end %>
   </fieldset>
   <div class="actions">
     <%= f.submit %>

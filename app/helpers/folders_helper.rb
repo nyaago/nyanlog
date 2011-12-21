@@ -1,5 +1,13 @@
 module FoldersHelper
   
+  # Returns array of widget sets for select tag
+  def widget_sets_of_folder_for_select(site, user)
+    [[human_attribute_value(:folder, :widget_set_id, :default), nil]] +
+    site.widget_sets.can_manage_for(user).collect do |widget_set|
+      [widget_set.title, widget_set.id]
+    end
+  end
+  
   # Generates url options  from the request parameters.
   # Returns - url options (hash).
   def url_options_from_params
@@ -107,19 +115,6 @@ module FoldersHelper
   end
 
   private
-  
-  def site(options)
-    site = options[:site]
-    if site.nil? 
-      params[:site]
-    else
-      if site.respond_to?(:name) 
-        site.name 
-      else 
-        site 
-      end
-    end
-  end
   
 
 end

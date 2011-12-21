@@ -5,7 +5,7 @@ module Observer
   class UserAction < ActiveRecord::Observer
     
     # Observed model classes
-    observe Site, Folder, Article, Image, Menu, MenuItem
+    observe Site, Folder, Article, Image, Menu, MenuItem, WidgetSet
 
     def current_user=(user)
       self.class.current_user = user
@@ -24,6 +24,7 @@ module Observer
     def before_create(model)
       if self.current_user
         model.created_by = self.current_user
+        model.updated_by = self.current_user
       end
     end
 

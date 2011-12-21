@@ -13,7 +13,8 @@ class Site < ActiveRecord::Base
   belongs_to  :created_by, :class_name => 'User',
               :foreign_key => 'created_by_id'
   belongs_to  :default_folder, :class_name => 'Folder'
-              
+  belongs_to  :side_widget_set, :class_name => 'WidgetSet'
+  
   scope :listing, order('updated_at desc')
   
   validates_presence_of   :name

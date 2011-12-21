@@ -63,6 +63,13 @@
       <%= f.label :ordering_type %><br />
       <%= f.select :ordering_type, @ordering_types %>
     </div>
+    <div class="field" id="side_widget_id">
+      <%= f.label :side_widget_set_id %><br />
+      <span class="note"><%= note_about_attribute(:folder, :side_widget_set_id )%></span><br />
+      <%= f.select :side_widget_set_id, 
+      widget_sets_of_folder_for_select(current_site, current_user), 
+      {:include_blank => false}
+      %>
     
   </fieldset>
   <div class="actions">

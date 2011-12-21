@@ -1,0 +1,12 @@
+<% if @folder %>
+<section class='new_arrival_widget'>
+<h3>
+<%= @widget.title %>
+</h3>
+<ul>
+<% @widget.data(:site => current_site, :folder => @folder).each do |article| %>
+  <li><%= link_to_article(article) %></li>
+<% end %>
+</ul>
+</section>
+<% end %>

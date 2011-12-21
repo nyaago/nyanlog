@@ -46,6 +46,75 @@ module ApplicationHelper
     I18n.t key, :scope => [:application_helpers, :marks]
   end
   
+  # get side widgets
+  def side_widgets
+    @side_widgets ||= 
+    if instance_variable_defined?(:@folder) && @folder
+      widget_set = WidgetSet.side_widget_set_by_folder(@folder).first
+      if widget_set
+        widget_set.elements.collect do |element|
+          element.widget
+        end
+      end
+    elsif instance_variable_defined?(:@site) && @site
+      widget_set = @site.side_widget_set
+      if widget_set
+        widget_set.elements.collect do |element|
+          element.widget
+        end
+      end
+    else
+      nil
+    end
+  end
+  
+  # Create a  link  tag of  archive of given month.
+  # == parameters
+  # * month
+  # * folder - Folder record
+  # * options - key => option name, value => option value 
+  # ** :format - :default | :short | :long
+  # ** :only_path - true | false
+  def link_to_monthly_articles(month, folder, options = {})
+    month = if month.instance_of?(String);Date.parse(month);else;month;end
+    link_to(localized_month(month, options[:format] || :default), 
+          url_for(:controller => :articles, :action => :month, 
+            :folder => if folder.respond_to?(:name);folder.name;else;folder.to_s;end,
+            :site => site(options.merge({:folder => folder})),
+            :year => month.year, :month => month.month, 
+            :only_path => if options.has_key?(:only_path);options[:only_path];else;false;end))
+  end
+
+  # Create a  link  tag of the article.
+  # == parameters
+  # * article - Article record
+  # * options - key => option name, value => option value 
+  # ** :only_path - true | false
+  def link_to_article(article, options = {})
+    link_to(article.title,
+          article_path(article, 
+                    {:action => :show,
+                    :site => site(options.merge({:folder => article.folder})),
+                    :only_path => if options.has_key?(:only_path);options[:only_path];else;false;end
+                    }))
+  end
+
+  # Create a  link  tag of the article.
+  # == parameters
+  # * folder - Folder record
+  # * options - key => option name, value => option value 
+  # ** :only_path - true | false
+  def link_to_folder(folder, options = {})
+    link_to(folder.title,
+            articles_path(
+                        {:action => :index,
+                        :folder => folder,
+                        :site => site(options.merge({:folder => folder})),
+                        :only_path => if options.has_key?(:only_path);options[:only_path];else;false;end
+                        } ) )
+  end
+
+  
   # return the current login user
   def current_user
     @current_user
@@ -120,5 +189,37 @@ module ApplicationHelper
       '#'
     end)
   end
+  
+  # Returns the localized 
+  # == parameters
+  # * ym - Date object or String object (that can be parsed to the date)
+  # * format - :default | :short | :long
+  def localized_month(ym, format = :default)
+    #ym
+    ym = if ym.kind_of?(String);Date.parse(ym);else;ym;end
+    ym.strftime(I18n.t(format, :scope => [:month, :date, :formats]))
+  end
+
+
+  protected
+  
+  def site(options = {})
+    folder ||= options[:folder]
+    if folder.respond_to?(:name)
+      folder.site.name
+    else
+      site = options[:site]
+      if site.nil? 
+        params[:site]
+      else
+        if site.respond_to?(:name) 
+          site.name 
+        else 
+          site 
+        end
+      end
+    end
+  end
+  
   
 end

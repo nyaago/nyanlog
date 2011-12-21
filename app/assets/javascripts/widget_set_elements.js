@@ -35,6 +35,7 @@
     _setHandlerToAddButtons();
 //    _setHandlerToEditButtons();
     _addSelectedWidgets();
+    
     return instance;
   }
 
@@ -119,6 +120,7 @@
         jQuery.each(data,function(){
           _addSelectedWidget(this);
          });
+         _setOrdering();
       }
     });
   }
@@ -235,6 +237,20 @@
       //$('#dialog').dialog('open');
   }
   
+
+  function _addErrorExplanationInMain(error) {
+    $('#main > #error_explanation').remove();
+    
+    var div = $('<div id="error_explanation"></div>').appendTo($('#main'));
+    
+    div.css("display", "block");
+    var ul = $('<ul></ul>').appendTo(div);
+    jQuery.each(error,function(){
+      $('<li>' + this + '</li>').appendTo(ul);
+     });
+    
+  }
+
   
   function _addErrorExplanation(error) {
     $("*", $('#error_explanation')).remove();
@@ -255,6 +271,51 @@
     if(!elem) return '';
     return elem.text();
   }
+  
+  function _setOrdering() {
+    $('#' + options.selectedDivId).sortable({
+      update: function(event, ui) {
+        _updateOrderingOnDB(this);
+    }});
+  }
+  
+  // 選択済み widget エリアでの並び変え操作をサーバーへ反映させる
+  _updateOrderingOnDB  = function(selectedWidgets) {
+    widgets = [];
+    var matches;
+    $('.selected_widget', $(selectedWidgets)).each(function() { 
+        matches = $(this).attr('id').match(/^widget_set_element_([0-9]+)+$/);
+        if(matches) {
+          widgets.push(matches[1]);
+        }
+      }) ;
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+    $.ajax( {
+      type: "PUT",
+      url: options.urlForSort,
+      dataType: 'json',
+      data: {
+        'authenticity_token': csrfToken,
+        order: widgets.join(',')
+      },
+      success: function(data, dataType) {
+        if(data.status == 'OK') {
+          
+        }
+        else {
+          if(data.error) {
+            _addErrorExplanationInMain(data.error);
+          }
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        // エラー時. 挿入されたwidgetを削除
+        alert(options.msgFailedInConnection);
+      }
+      });
+      //$('#dialog').dialog('open');
+    
+  };
 
   function _addButtonClicked() {
     

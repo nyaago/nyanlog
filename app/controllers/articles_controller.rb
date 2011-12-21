@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   include ArticlesHelper
   include Attribute::OpenAndCloseAt
 
-  skip_auth :index
+  skip_auth :index, :month, :show
 
   PER_PAGE = 8
 
@@ -47,6 +47,46 @@ class ArticlesController < ApplicationController
                           :page => params[:page])
     respond_to do |format|
       format.html 
+    end
+  end
+
+  # GET :site/:folder/:id/show
+  # = instace fields receiced to the view
+  # * @site
+  # * @folder
+  # * @years
+  # * @months
+  # * @days
+  def show
+    @site = Site.find_by_name(params[:site])  or (render_404 and return)
+    @folder = @site.folders.by_name(params[:folder]).first or (render_404 and return)
+    @article = @folder.articles.by_id(params[:id]).first  or (render_404 and return)
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  # GET :site/:folder/:year/:month/month
+  # = instace fields receiced to the view
+  # * @site
+  # * @folder
+  # * @years
+  # * @months
+  # * @days
+  def month
+    @site = Site.find_by_name(params[:site])  or (render_404 and return)
+    @folder = @site.folders.by_name(params[:folder]).first or (render_404 and return)
+    ym = begin
+      Date.new(params[:year].to_i, params[:month].to_i, 1)
+    rescue
+      nil
+    end or (render_404 and return)
+    
+    @articles = @folder.articles.by_updated_month(ym).listing(@folder).
+                paginate(:per_page => @folder.article_count_by_page, 
+                          :page => params[:page])
+    respond_to do |format|
+      format.html
     end
   end
 

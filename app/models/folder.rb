@@ -36,6 +36,7 @@ class Folder < ActiveRecord::Base
               :foreign_key => 'created_by_id'
   belongs_to  :owner, :class_name => 'User',
               :foreign_key => 'owner_id'
+  belongs_to  :side_widget_set, :class_name => 'WidgetSet'
   has_many    :articles,  :dependent => :destroy
   has_many    :images,  :dependent => :destroy
   has_many    :menu_items
@@ -99,6 +100,11 @@ class Folder < ActiveRecord::Base
         :scope => [:activerecord,:attributes,:folder,:ordering_types]), 
       type]
     end
+  end
+  
+  # Returns the active side widget set (self.side_widet_set or self.site.side_widget_set)
+  def active_side_widget_set
+    self.side_widget_set || site.side_widget_set
   end
   
   # the order of  display of articles is set 

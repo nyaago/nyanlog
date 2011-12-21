@@ -31,6 +31,13 @@
                     {:include_blank => true}
       %>
     </div>
+    <div class="field" id="side_widget_id">
+      <%= f.label :side_widget_set_id %><br />
+      <span class="note"><%= note_about_attribute(:site, :side_widget_set_id )%></span><br />
+      <%= f.select :side_widget_set_id, widget_sets_of_site_for_select(current_site), 
+      {:include_blank => false}
+      %>
+    </div>
   </fieldset>
   <div class="actions">
     <%= f.submit %>

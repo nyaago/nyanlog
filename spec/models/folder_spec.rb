@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Folder do
   
   before do
-    @folder = Folder.make
+    @site = Site.make
+    @folder = Folder.make(:site => @site)
   end
   
   describe 'opened_at' do
@@ -176,7 +177,7 @@ describe Folder do
       end
 
       Folder.editable_for(admin).count.should == folder_count_of_user + 
-                                                folder_count_of_editor + folder_count_of_admin
+                                                folder_count_of_editor + folder_count_of_admin + 1
     end
 
 

@@ -90,6 +90,9 @@ class ApplicationController < ActionController::Base
     self.class.can_skip_auth(params[:action].to_sym)
   end
 
+  protected
+  
+
   private
   
   # Sets the current user for observing model updating.

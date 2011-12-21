@@ -1,0 +1,12 @@
+<% if @folder %>
+<section class='monthly_widget'>
+<h3>
+<%= @widget.title %>
+</h3>
+<ul>
+<% @widget.data(:site => current_site, :folder => @folder).each do |monthly| %>
+  <li><%= link_to_monthly_articles(monthly.ym, @folder) %></li>
+<% end %>
+</ul>
+</section>
+<% end %>

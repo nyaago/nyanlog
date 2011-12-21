@@ -9,13 +9,15 @@
 
 <table id="widget_sets">
   <tr>
-    <th class="title"><%= Folder.human_attribute_name(:title) %></th>
+    <th class="title"><%= WidgetSet.human_attribute_name(:title) %></th>
+    <th class="owner"><%= WidgetSet.human_attribute_name(:owner_id) %></th>
     <th colspan="3" class="actions"></th>
   </tr>
 
 <% @widget_sets.each do |widget_set| %>
   <tr>
     <td class="title"><%= widget_set.title %></td>
+    <td class="owner"><%= if widget_set.owner;widget_set.owner.login;end %></td>
     <td class="actions edit_widget_set_elements">
     <%= link_to human_action_name(:widget_set_elements, :index), 
     widget_set_elements_path(url_options_from_params.merge({:widget_set => widget_set.id})) %>

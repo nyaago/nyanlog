@@ -3,13 +3,16 @@ require 'spec_helper'
 describe Article do
 
   before do
-    @folder = Folder.make
+    @site = Site.make
+    @folder = Folder.make(:site => @site)
+
     @article1 = @article = Article.make(:folder => @folder)
     @article2 = Article.make(:folder => @folder)
     @article3 = Article.make(:folder => @folder)
     @article4 = Article.make(:folder => @folder)
     
     @articles = [@article1,@article2,@article3,@article4,]
+
   end
   
   describe 'opened_at' do
@@ -265,5 +268,56 @@ describe Article do
     end
   end
 
+  describe "by_updated_month " do
+    it " articles was  filtered by the month.   " do
+      @article5 = Article.make(:folder => @folder)
+      @article6 = Article.make(:folder => @folder)
+      @article7 = Article.make(:folder => @folder)
+      @other_articles = [@article5,@article6,@article7]
+      
+      today = Date.today
+      @articles.each do |article|
+        def article.record_timestamps; false; end
+        article.updated_at = today
+        article.save!(:validate => false)
+      end
+      @other_articles.each do |article|
+        def article.record_timestamps; false; end
+        article.updated_at = today.next_month
+        article.save!(:validate => false)
+      end
+      @folder.articles.by_updated_month(today).size.should == @articles.size
+      @folder.articles.by_updated_month(today).each do |article|
+        @articles.include?(article).should == true
+      end
+    end
+  end
+
+  describe "recently_updated_ym " do
+    it " return months.   " do
+      @article5 = Article.make(:folder => @folder)
+      @article6 = Article.make(:folder => @folder)
+      @article7 = Article.make(:folder => @folder)
+      @other_articles = [@article5,@article6,@article7]
+      
+      today = Date.today
+      @articles.each do |article|
+        def article.record_timestamps; false; end
+        article.updated_at = today
+        article.save!(:validate => false)
+      end
+      @other_articles.each do |article|
+        def article.record_timestamps; false; end
+        article.updated_at = today.next_month
+        article.save!(:validate => false)
+      end
+      months = @folder.articles.recently_updated_ym(5)
+      Date.parse(months[0].ym).should == today.next_month.beginning_of_month
+      Date.parse(months[1].ym).should == today.beginning_of_month
+    end
+  end
+
+
+  
 
 end

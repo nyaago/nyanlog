@@ -2,6 +2,9 @@ module Widget
 
   # static methods
   module StaticMethods
+    def template
+      "/#{self.name.underscore}/index"
+    end
   end
 
   
@@ -14,6 +17,9 @@ module Widget
   end
 
   # instance methods
+  def template
+    self.class.template
+  end
   
   # 
   unless self.method_defined?(:title)

@@ -284,6 +284,7 @@ ja:
         closed_at: '公開停止日時'
         not_in_public: '非公開（メンバーのみ閲覧）'
         default_folder_id: 'デフォルトのフォルダー'
+        side_widget_set_id: 'サイドバーウィジットセット'
         notes:
           name: 'urlに含まれる名前です。'
           title: 'ページのタイトル、見出しで表示されます。'
@@ -292,6 +293,7 @@ ja:
           closed_at: '公開が停止されることになる日時です。'
           not_in_public: 'チェックすると、メンバーのみ閲覧できます'
           default_folder_id: 'サイトのベースURLにアクセスしたときに表示されるフォルダーです'
+          side_widget_set_id: 'サイドバーに表示される、ウィジットセットです。'
         
       folder:
         name: '名前'
@@ -303,6 +305,7 @@ ja:
         ordering_type: '記事並び順'
         article_count_by_page: '1ページの表示記事数'
         owner_id: '所有者'
+        side_widget_set_id: 'サイドバーウィジットセット'
         ordering_types:
           by_created_at_desc: '作成された順番-降順'
           by_updated_at_desc: '更新された順番-降順'
@@ -318,6 +321,7 @@ ja:
           article_count_by_page: ''
           ordering_type: ''
           owner_id: ''
+          side_widget_set_id: 'サイドバーに表示される、ウィジットセットです。'
       
       article:
         title:  'タイトル'
@@ -380,6 +384,7 @@ ja:
         
       widget_set:
         title: 'タイトル'
+        owner_id: 'オーナー'
       widget_set_element:
         title: 'タイトル'
         widget_set: 'ウィジットセット'
@@ -423,6 +428,15 @@ ja:
         widget:
           folder:
             viewed: '表示されているフォルダー'
+        folder:
+          widget_set_id:
+            default: 'サイトのデフォルト'
+        site:
+          widget_set_id:
+            none: 'なし'
+        widget_set:
+          owner_id:
+            me: 'ログインしているユーザ'
         
       # For example,
       #   user:
@@ -472,7 +486,9 @@ ja:
       actions:
         new: 'ログイン'
         create: 'ログイン'
+        destroy: 'ログアウト'
       messages:
+        not_found: 'みつかりません'
         required_to_login: 'ログインしてください'
         
     sites:
@@ -506,11 +522,6 @@ ja:
         destroyed: 'ユーザを削除しました。'
         updated: 'ユーザを更新しました。'
         created: 'ユーザを作成しました。'
-
-    user_sessions:
-      actions:
-        destroy: 'ログアウト'
-        new: 'ログイン'
         
     folders:
       actions:
@@ -532,7 +543,7 @@ ja:
       actions:
         index: 'ウィジットセット一覧'
         new: '新規ウィジットセット'
-        edit: '名称変更'
+        edit: '編集'
         create: 'ウィジットセット作成'
         update: 'ウィジットセット更新'
         destroy: 'ウィジットセット削除'
@@ -562,6 +573,7 @@ ja:
         created: 'ウィジットセを追加しました。'
         selectable_widget: '選択可能なウィジット'
         selected_widget: '選択されているウィジット'
+        sort_widgets: 'ドラッグ＆ドロップで並べ替えられます'
         
     articles:
       actions:

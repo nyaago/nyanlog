@@ -37,9 +37,11 @@ Nyanlog::Application.routes.draw do
         :to => 'widget_set_elements#index#:site#:widget_set'
   get ":site/widget_set_elements/selected_list/:widget_set" , 
         :to => 'widget_set_elements#selected_list#:site#:widget_set'
-  put ":site/:widget_set_elements/:id/move_behind" , 
+  put ":site/widget_set_elements/sort/:widget_set"  , 
+        :to => 'widget_set_elements#sort#:site#:widget_set'
+  put ":site/widget_set_elements/:id/move_behind" , 
         :to => 'widget_set_elements#move_behind#:site#:id'
-  put ":site/:widget_set_elements/:id/move_ahead" , 
+  put ":site/widget_set_elements/:id/move_ahead" , 
         :to => 'widget_set_elements#move_ahead#:site#:id'
 
   AppConfig::Widget.array.each do |widget|
@@ -64,6 +66,9 @@ Nyanlog::Application.routes.draw do
   put ":site/:folder/:id/move_behind" , :to => 'articles#move_behind#:site#:folder#:id'
   put ":site/:folder/:id/move_ahead" , :to => 'articles#move_ahead#:site#:folder#:id'
   get ":site/:folder/:id/edit" , :to => 'articles#edit#:site#:folder#:id'
+  get ":site/:folder/:id/show" , :to => 'articles#show#:site#:folder#:id'
+  get ":site/:folder/:year/:month/month" , :to => 'articles#month#:site#:folder#:year#:month',
+                                  :constraints => {:year => /\d{4}/,:month => /\d{1,2}/ }
   put ":site/:folder/:id" , :to => 'articles#update#:site#:folder#:id'
   post ":site/:folder" , :to => 'articles#create#:site#:folder'
   delete ":site/:folder/:id" , :to => 'articles#destroy#:site#:id'

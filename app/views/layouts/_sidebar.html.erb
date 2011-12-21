@@ -1,3 +1,11 @@
 <p>
   サイドバー
 </p>
+<% if side_widgets %>
+<div id="side_widget_set">
+<% side_widgets.each do |widget| %>
+  <% @widget = widget %>
+  <%= render :file => @widget.template %>
+<% end %>
+</div>
+<% end %>

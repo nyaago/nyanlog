@@ -54,7 +54,8 @@
       <%= link_to(User.model_name.human, "#") %>
       <ul>
         <li>
-        <%= link_to(human_action_name(:widget_sets, :index), widget_sets_path(:site => current_site.name)) %>
+        <%= link_to(human_action_name(:widget_sets, :index), 
+        widget_sets_path(:site => current_site.name, :action => :index)) %>
         </li>
       </ul>
     </li>
@@ -80,7 +81,8 @@
         <%= link_to(human_action_name(:users, :index), users_path(:site => current_site.name)) %>
         </li>
         <li>
-        <%= link_to(human_action_name(:widget_sets, :index), widget_sets_path(:site => current_site.name)) %>
+        <%= link_to(human_action_name(:widget_sets, :index), 
+        widget_sets_path(:site => current_site.name, :action => :index)) %>
         </li>
         <% end %>
       </ul>

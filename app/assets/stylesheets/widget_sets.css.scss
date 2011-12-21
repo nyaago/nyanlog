@@ -2,12 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #widget_sets {
-  width: 70%;
+  width: 90%;
 }
 
 
 #widget_sets .title {
-  width: 55%;
+  width: 40%;
+}
+
+#widget_sets .owner {
+  width: 15%;
 }
 
 #widget_sets td.edit {

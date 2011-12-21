@@ -4,6 +4,8 @@ class NewArrivalWidget < ActiveRecord::Base
 
   MAX_ELEMENT_COUNT = 20
 
+  belongs_to :folder
+
   before_validation :set_default!
 
   validates_numericality_of :element_count, 
@@ -13,6 +15,19 @@ class NewArrivalWidget < ActiveRecord::Base
 
   def self.max_element_count
     MAX_ELEMENT_COUNT
+  end
+
+  # Returns the new arrival articles
+  # == parameters 
+  # * records - key => record identifier (symbol) , value => activerecord 
+  #   The following records are included. 
+  # ** folder
+  # ** site
+  # ** article | articles
+  def data(records)
+    target_folder = self.folder || records[:folder]
+    return [] unless target_folder
+    target_folder.articles.recently_updated(self.element_count)
   end
 
   private

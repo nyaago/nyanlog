@@ -106,18 +106,6 @@ module ArticlesHelper
 
   private 
   
-  def site(options)
-    site = options[:site]
-    if site.nil? 
-      params[:site]
-    else
-      if site.respond_to?(:name) 
-        site.name 
-      else 
-        site 
-      end
-    end
-  end
   
   def folder(options)
     folder = options[:folder]
