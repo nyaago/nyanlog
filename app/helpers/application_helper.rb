@@ -95,6 +95,7 @@ module ApplicationHelper
           article_path(article, 
                     {:action => :show,
                     :site => site(options.merge({:folder => article.folder})),
+                    :folder => article.folder,
                     :only_path => if options.has_key?(:only_path);options[:only_path];else;false;end
                     }))
   end
@@ -188,6 +189,29 @@ module ApplicationHelper
     else
       '#'
     end)
+  end
+  
+  # Creates the stylesheet link tag of the selected theme.
+  # == option parameters
+  # * :media
+  def theme_stylesheet_link_tag(options = {})
+    theme = 
+    Proc.new do 
+      record = (current_folder || current_site) 
+      if record
+        record.theme
+      else
+        Design::Theme.array.find_by_name('Default')
+      end
+    end.call
+    options = {:media => :all}.merge(options)
+    if theme 
+      ("<link href=\"#{theme.stylesheet_url}?body=1 " +
+      "media=\"#{options[:media]}\" rel=\"stylesheet\" type=\"text/css\" />").html_safe
+#      stylesheet_link_tag(record.theme.stylesheet_url)
+    else
+      ''
+    end
   end
   
   # Returns the localized 

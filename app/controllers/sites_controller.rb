@@ -28,10 +28,7 @@ class SitesController < ApplicationController
 
   # GET sites/edit/:id
   def edit
-    @site = Site.find_by_id(params[:id])
-    if @site.nil?
-      return render_404
-    end
+    @site = Site.find_by_id(params[:id])  or (render_404 and return)
     generate_selections!(@site)
     respond_to do |format|
       format.html # index.html.erb
@@ -49,10 +46,7 @@ class SitesController < ApplicationController
 
   # PUT sites/update/:id
   def update
-    @site = Site.find_by_id(params[:id])
-    if @site.nil?
-      return render_404
-    end
+    @site = Site.find_by_id(params[:id]) or (render_404 and return)
     @site.attributes = params[:site]
     begin
       ActiveRecord::Base.transaction do
@@ -89,7 +83,7 @@ class SitesController < ApplicationController
 
   # DELETE sites/destroy
   def destroy
-    @site = Site.find_by_id(params[:id])
+    @site = Site.find_by_id(params[:id]) 
     if @site.nil?
       flash[:notice] = message(:sites, :not_found)
       return redirect_to :edit
@@ -103,6 +97,33 @@ class SitesController < ApplicationController
     end
   end
 
+  # GET sites/:id/theme_list
+  def theme_list
+    @site ||= Site.find_by_id(params[:id]) or (render_404 and return)
+    @themes = Design::Theme.array
+    respond_to do |format|
+      format.html # 
+    end
+  end
+  
+  # PUT sites/:id/selec_theme
+  def select_theme
+    @site ||= Site.find_by_id(params[:id]) or (render_404 and return)
+    @site.attributes = params[:site]
+    begin
+      ActiveRecord::Base.transaction do
+        @site.save!(:validate => true)
+        flash[:notice] = message(:sites, :theme_updated)
+        return redirect_to url_for(:action => :theme_list, :controller => :sites, :id => @site.id)
+      end
+    rescue ActiveRecord::RecordInvalid  => ex
+      @themes = Design::Theme.array
+      render :action => :theme_list
+    rescue => ex
+      p ex.message
+      raise ex
+    end
+  end
 
   private
 

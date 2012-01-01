@@ -29,4 +29,61 @@
   width: 30em;
 }
 
+/*
+ ===== theme ========
+ */
+#themes {
+  clear: both;
+}
 
+input {
+}
+
+input.theme_radio_button {
+/*  display: none; */
+}
+
+.theme {
+  border-style: solid;
+  border-color: #dddddd;
+  border-width: 3px;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 180px;
+  height: 180px;
+
+  float: left;
+}
+
+.selected_theme {
+  border-style: solid;
+  border-color: #dddddd;
+  border-width: 3px;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 180px;
+  height: 180px;
+
+  float: left; 
+}
+
+
+
+.theme_thumb {
+  width: 180px;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  
+}
+
+
+.selected {
+  border-style: double;
+  border-color: blue;
+}

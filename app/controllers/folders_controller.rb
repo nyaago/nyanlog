@@ -10,10 +10,7 @@ class FoldersController < ApplicationController
   # GET :site/folders
   # it redirects to articles/index of default folder,
   def index
-    @site = Site.find_by_name(params[:site])
-    if @site.nil?
-      return render_404
-    end
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
     if current_user
       if current_user.default_folder
         if current_user.default_folder.site_id != @site.id
@@ -40,10 +37,7 @@ class FoldersController < ApplicationController
   # * @site
   # * @folders
   def list
-    @site = Site.find_by_name(params[:site])
-    if @site.nil?
-      return render_404
-    end
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
     @folders = @site.folders.listing.
                 paginate(:per_page => PER_PAGE, :page => params[:page])
     respond_to do |format|
@@ -61,10 +55,7 @@ class FoldersController < ApplicationController
   # * @ordering_types - How to put a article in order 
   # * @max_article_count_by_page - The max of the articles in every page.
   def new
-    @site = Site.find_by_name(params[:site])
-    if @site.nil?
-      return render_404
-    end
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
     @folder = Folder.new(:site => @site)
     generate_selections!(@folder)
     respond_to do |format|
@@ -75,10 +66,7 @@ class FoldersController < ApplicationController
   # POST :site/folders
   # create a new folder,and redirect to :site/folders/list
   def create
-    @site = Site.find_by_name(params[:site])
-    if @site.nil?
-      return render_404
-    end
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
     @folder = Folder.new(:site => @site)
     @folder.attributes = params[:folder]
     begin
@@ -101,15 +89,9 @@ class FoldersController < ApplicationController
   # * @ordering_types - How to put a article in order 
   # * @max_article_count_by_page - The max of the articles in every page.
   def edit
-    @site = Site.find_by_name(params[:site])
-    if @site.nil?
-      return render_404
-    end
-    @folder = @site.folders.by_name(params[:name]).first
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
+    @folder = @site.folders.by_name(params[:name]).first or (render_404 and return)
     generate_selections!(@folder)
-    if @folder.nil?
-      return render_404
-    end
     respond_to do |format|
       format.html  { render :action => :new}
     end
@@ -118,14 +100,8 @@ class FoldersController < ApplicationController
   # PUT :site/folders/:id
   # update the folder,and redirect to :site/folders/list
   def update
-    @site = Site.find_by_name(params[:site])
-    if @site.nil?
-      return render_404
-    end
-    @folder = @site.folders.by_name(params[:name]).first
-    if @folder.nil?
-      redirect_to :action => :list
-    end
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
+    @folder = @site.folders.by_name(params[:name]).first or (render_404 and return)
     @folder.attributes = params[:folder]
     begin
       @folder.save!(:validate => true)
@@ -140,18 +116,48 @@ class FoldersController < ApplicationController
   # DELETE :site/folders/:id
   # destroy the folder,and redirect to :site/folders/list
   def destroy
-    @site = Site.find_by_name(params[:site])
-    if @site.nil?
-      return render_404
-    end
-    @folder = @site.folders.by_name(params[:name]).first
-    if @folder.nil?
-      flash[:notice] = message(:folder, :not_found)
-      redirect_to :action => :list
-    end
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
+    @folder = @site.folders.by_name(params[:name]).first or (render_404 and return)
     @folder.destroy
     flash[:notice] = message(:folders, :destroyed)
     redirect_to :action => :list
+  end
+  
+  
+  # GET :site/folders/:name/theme_list
+  def theme_list
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
+    @folder = @site.folders.by_name(params[:name]).first or (render_404 and return)
+    @themes = Design::Theme.array
+    respond_to do |format|
+      format.html # 
+    end
+  end
+  
+  # PUT :site/folders/:name/selec_theme
+  def select_theme
+    @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
+    @folder = @site.folders.by_name(params[:name]).first or (render_404 and return)
+    @folder.theme_name = 
+    if params[:folder] && params[:folder][:theme_name]
+      params[:folder][:theme_name]
+    else
+      nil
+    end
+    begin
+      ActiveRecord::Base.transaction do
+        @folder.save!(:validate => true)
+        flash[:notice] = message(:folders, :theme_updated)
+        return redirect_to url_for(:action => :theme_list, :controller => :folders, 
+                              :site => @site.name, :name => @folder.name)
+      end
+    rescue ActiveRecord::RecordInvalid  => ex
+      @themes = Design::Theme.array
+      render :action => :theme_list
+    rescue => ex
+      p ex.message
+      raise ex
+    end
   end
   
   private 

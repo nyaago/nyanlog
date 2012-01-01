@@ -437,6 +437,9 @@ ja:
         widget_set:
           owner_id:
             me: 'ログインしているユーザ'
+        folder:
+          theme_name:
+            inherited: 'サイトの設定を引き継ぐ'
         
       # For example,
       #   user:
@@ -500,12 +503,15 @@ ja:
         update: 'サイト更新'
         destroy: 'サイト削除'
         show: 'サイトの表示'
+        theme_list: 'テーマの変更'
+        select_theme: 'テーマを変更'
       messages:
         destroy_confirmation: '削除してよろしいでしょうか？'
         not_found: '指定されたサイトは存在しません。'
         destroyed: 'サイトを削除しました。'
         updated: 'サイトを更新しました。'
         created: 'サイトを作成しました。'
+        theme_updated: 'テーマを変更しました'
 
     users:
       actions:
@@ -532,12 +538,15 @@ ja:
         update: 'フォルダー更新'
         destroy: 'フォルダー削除'
         show: 'フォルダーの表示'
+        theme_list: 'テーマの変更'
+        select_theme: 'テーマを変更'
       messages:
         destroy_confirmation: '削除してよろしいでしょうか？'
         not_found: '指定されたフォルダーは存在しません。'
         destroyed: 'フォルダーを削除しました。'
         updated: 'フォルダーを更新しました。'
         created: 'フォルダーを作成しました。'
+        theme_updated: 'テーマを変更しました'
 
     widget_sets:
       actions:

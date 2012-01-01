@@ -44,6 +44,11 @@
         <li>
           <%= link_to(human_action_name(:folders, :edit), edit_folder_path(current_folder)) %>
         </li>
+        <li>
+        <%= link_to(human_action_name(:folders, :theme_list), 
+        {:action => :theme_list, :controller => :folders, :site => current_site.name, :name => current_folder.name},
+        {:method => :get}) %>
+        </li>
       </ul>
     </li>
     <% end %>
@@ -79,6 +84,11 @@
         </li>
         <li>
         <%= link_to(human_action_name(:users, :index), users_path(:site => current_site.name)) %>
+        </li>
+        <li>
+        <%= link_to(human_action_name(:sites, :theme_list), 
+        {:action => :theme_list, :controller => :sites, :id => current_site.id},
+        {:method => :get}) %>
         </li>
         <li>
         <%= link_to(human_action_name(:widget_sets, :index), 

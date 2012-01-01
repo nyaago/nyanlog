@@ -102,6 +102,11 @@ class Folder < ActiveRecord::Base
     end
   end
   
+  # Returns theme records (Design::Theme)
+  def theme
+    Design::Theme.array.find_by_name(self.theme_name) || site.theme
+  end
+  
   # Returns the active side widget set (self.side_widet_set or self.site.side_widget_set)
   def active_side_widget_set
     self.side_widget_set || site.side_widget_set

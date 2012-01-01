@@ -2,7 +2,11 @@ Nyanlog::Application.routes.draw do
 
 
   resources :app_settings
+  # sites
+  get "sites/:id/theme_list" , :to => "sites#theme_list#:id"
+  put "sites/:id/select_theme" , :to => "sites#select_theme#:id"
   resources :sites
+  # 
   resources :users
   
 #  get "app_settings", :to => "app_settings#index"
@@ -59,6 +63,9 @@ Nyanlog::Application.routes.draw do
   post ":site/folders" , :to => 'folders#create#:site'
   delete ":site/folders/:name" , :to => 'folders#destroy#:site'
   get ":site" , :to => 'folders#index#:site'
+  get ":site/folders/:name/theme_list" , :to => "folders#theme_list#:site#:name"
+  put ":site/folders/:name/select_theme" , :to => "folders#select_theme#:site#:name"
+
 
   # articles
   get ":site/:folder/new" , :to => 'articles#new#:site#:folder'

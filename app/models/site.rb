@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base
   
   after_create  :create_menus!
+  before_create :set_theme!
   
   has_many    :folders, :dependent => :nullify
   has_many    :users
@@ -21,10 +22,30 @@ class Site < ActiveRecord::Base
   validates_presence_of   :title
   validates_uniqueness_of :name
   
+  # Returns theme records (Design::Theme)
+  def theme
+    Design::Theme.array.find_by_name(self.theme_name || 'Default')
+  end
+  
   private
   
   def create_menus!
     Menu.create(:site => self, :menu_type => 'Header')
+  end
+  
+  def set_theme_name!
+    themes = Design::Theme.array
+    self.theme_name = 
+    if themes.find_by_name('Default')
+      'Default';
+    else
+      if themes.size
+        themes[0].name
+      else
+        nil
+      end
+    end
+    true
   end
   
 end

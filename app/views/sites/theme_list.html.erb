@@ -1,0 +1,79 @@
+<script>
+ $(document).ready(function(){
+   // 
+   $('.theme_radio_button').each( function() {
+     $(this).change(function () {
+       $('.theme_radio_button').each( function() {
+         $(this).parent().parent().removeClass('selected');
+       } );
+       $(this).parent().parent().addClass('selected');
+     });
+   } ) ;
+   // 
+   $('div.theme').each( function() {
+     $(this).click(function () {
+       var  id =  $(this).attr('id');
+       id = id.replace(/theme_/,'');
+       $('.theme_radio_button').each( function() {
+         $(this).parent().parent().removeClass('selected');
+       } );
+       $('.theme_radio_button').val([id]);
+       $(this).addClass('selected');
+     });
+   } ) ;
+   
+ });
+ </script>
+<h1><%= human_action_name(:sites, :theme_list)%></h1>
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+<%= form_for(@site, :url => {:action => :select_theme},:html => {:method => :put }) do |f| %>
+  <% if @site.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= activerecord_error_message(:record_invalid, 
+        :errors => @site.errors.count) %>
+      </h2>
+      <ul>
+      <% @site.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset id="site_fields">
+    <div id="themes">
+      <% @themes.each do |theme| %>
+        <div class="theme" id="theme_<%= theme.name %>">
+          <label for="theme_thumb"> 
+          <% if theme.thumb_url %>
+          <div class="theme_thumb"
+               style="background-image:url(../../<%= theme.thumb_url %>);"> </div> 
+          <% else %>
+          <div class="theme_thumb"
+               style=""> </div> 
+          <% end %>
+          </label>
+           
+          <p class="theme_select"> 
+          <%= f.radio_button :theme_name, theme.name,:class => "theme_radio_button"  %>
+          <label for="theme" id="theme_human_name" > 
+            <%= theme.human_name %>
+          </label> 
+          </p>
+          <div class="theme_description"> 
+          
+          </div>
+        </div>
+      <% end %>
+    </div>  <!-- themes -->
+  </fieldset>
+  <div class="actions">
+    <%= f.submit human_action_name(:sites, :select_theme) %>
+  </div>
+<% end %>
+
