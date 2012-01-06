@@ -117,6 +117,16 @@ class PageDesign < ActiveRecord::Base
     end
   end
   
+  def background_image_exist?
+    self.background_image && self.background_image.size.to_i != 0
+  end
+  
+  def header_image_exist?
+    self.header_image && self.header_image.size.to_i != 0
+  end
+  
+
+
   private
   
   def set_default!

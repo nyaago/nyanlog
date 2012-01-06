@@ -63,8 +63,8 @@ $(document).ready( function()
     <legend><%= PageDesign.human_attribute_name(:background) %></legend>
     <div class="field" id="preview_background_image" >
       <%= label_tag(entry_name(:preview)) %><br />
-      <% if @page_design.background_image && !@page_design.background_image.path.nil? %>
-      <%= background_image_tag %>
+      <% if @page_design.background_image_exist? %>
+      <%= image_tag(page_design_path(@page_design, :action => :background_image)) %>
       <% else %>
       <% end %>
     </div>
@@ -72,12 +72,14 @@ $(document).ready( function()
       <%= f.label :background_image %><br />
       <%= f.file_field :background_image %>
     </div>
+    <% if @page_design.background_image_exist? %>
     <div class="field">
       <%= label_tag(human_action_name(:page_design, :delete_background_image)) %><br />
       <%= button_to_function(human_action_name(:page_design, :delete_background_image), 
       "return deleteImage();") %>
     </div>
-    <%= if @folder %>
+    <% end %>
+    <% if @folder %>
     <div class="field" id="background_interited_from_site">
       <%= f.label :background_interited_from_site %>
       <%= f.check_box :background_interited_from_site %>
@@ -108,6 +110,6 @@ $(document).ready( function()
 
 <%= form_for(@page_design, 
               :url => {:action => :delete_background_image, :site => @site.name, :folder => @folder && @folder.name}, 
-              :html => {:method => :put, :id => 'delete_background_image_image'}) do |f| %>
+              :html => {:method => :put, :id => 'delete_background_image'}) do |f| %>
   
 <% end %>

@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       @user_session.user.auto_login = params[:user][:auto_login]
       @user_session.user.save!(:validate => false)
-      redirect_back_or_default 'sites', 'index'
+      redirect_back_or_default 
     else
       render :action => :new
     end

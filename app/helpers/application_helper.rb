@@ -128,7 +128,7 @@ module ApplicationHelper
   def header_image_path
     page_design = (current_folder && current_folder.page_design) 
     page_design = 
-    unless page_design.header_image && page_design.header_image.path
+    unless page_design && page_design.header_image_exist?
       (current_site  && current_site.page_design)
     end || page_design
     if page_design
@@ -142,7 +142,7 @@ module ApplicationHelper
   def header_image_url
     page_design = (current_folder && current_folder.page_design) 
     page_design = 
-    unless page_design.header_image && page_design.header_image.path
+    unless page_design && page_design.header_image_exist?
       (current_site  && current_site.page_design)
     end || page_design
     if page_design
@@ -165,7 +165,7 @@ module ApplicationHelper
   def background_image_path
     page_design = (current_folder && current_folder.page_design) 
     page_design = 
-    unless page_design.header_image && page_design.background_image.path
+    unless page_design && page_design.background_image_exist?
       (current_site  && current_site.page_design)
     end || page_design
     if page_design
@@ -179,7 +179,7 @@ module ApplicationHelper
   def background_image_url
     page_design = (current_folder && current_folder.page_design) 
     page_design = 
-    unless page_design.header_image && page_design.background_image.path
+    unless page_design && page_design.background_image_exist?
       (current_site  && current_site.page_design)
     end || page_design
     if page_design
@@ -198,6 +198,26 @@ module ApplicationHelper
     end
   end
   
+  # whether the background image exist or not.
+  def background_image_exist?
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    unless page_design && page_design.background_image_exist?
+      (current_site  && current_site.page_design)
+    end || page_design
+    page_design && page_design.background_image_exist?
+  end
+
+  # whether the header image exist or not.
+  def header_image_exist?
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    unless page_design && page_design.header_image_exist?
+      (current_site  && current_site.page_design)
+    end || page_design
+    page_design && page_design.header_image_exist?
+  end
+  
   # Returns background style 
   def background_style
     page_design = (current_folder && current_folder.page_design) 
@@ -207,7 +227,7 @@ module ApplicationHelper
     end || page_design
     if page_design
       '<style type="text/css">' +
-      "body { \n" +
+      " \n #page_wrapper { \n" +
       # image
       if url = page_design_url_by_site_and_folder(current_site, current_folder, :action => :background_image)
         "background-image: url(#{url});" + "\n"
@@ -222,6 +242,10 @@ module ApplicationHelper
       # attachment
       if attachment = page_design.background_attachment
         "background-attachment: #{attachment};" + "\n"
+      end.to_s +
+      # color
+      if color = page_design.background_color
+        "background-color: #{color};" + "\n"
       end.to_s +
       "} \n" +
       '</style>'

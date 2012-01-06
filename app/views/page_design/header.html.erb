@@ -62,8 +62,8 @@ $(document).ready( function()
     <legend><%= PageDesign.human_attribute_name(:header) %></legend>
     <div class="field" id="preview_header_image" >
       <%= label_tag(entry_name(:preview)) %><br />
-      <% if @page_design.header_image && !@page_design.header_image.path.nil? %>
-      <%= header_image_tag %>
+      <% if @page_design.header_image_exist? %>
+      <%= image_tag(page_design_path(@page_design, :action => :header_image)) %>
       <% else %>
       <% end %>
     </div>
@@ -76,11 +76,12 @@ $(document).ready( function()
       <%= f.text_field :header_color %>
       <%= button_to_function ' ', nil, {:id => 'header_color_preview', :class => 'color_preview'} %>
     </div>
+    <% if @page_design.header_image_exist? %>
     <div class="field">
       <%= label_tag(human_action_name(:page_design, :delete_header_image)) %><br />
       <%= button_to_function(human_action_name(:page_design, :delete_header_image), "return deleteImage();") %>
     </div>
-    
+    <% end %>
   </fieldset>
   <div class="actions">
     <%= f.submit %>

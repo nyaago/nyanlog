@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil? 
       flash[:notice] = message(:user_sessions, :required_to_login)
       redirect_to :controller => '/user_sessions', :action => :new,
-                  :back_controller => params[:controller]
+                  :back_uri => request.path_info
       return false
     end
     if self.class.need_admin(params[:action])
@@ -75,26 +75,19 @@ class ApplicationController < ActionController::Base
     render :file => path_for_404, :status => 404
   end
 
-  # Redirects the browser to the target specified by the  'back_controller' request parameter
-  # and the 'back_action' request parameter, Or the target specified by  arguments.   
+  # Redirects the browser to the target specified by the  'back_uri request parameter
+  # , Or the default url .   
   # = parameters
-  # * defaut_controller - The controller name used 
-  # when the parameter 'back_controller' is not included in request parameters.
-  # * defaut_action - The action name used 
-  # when the parameter 'back_action' is not included in request parameters.
-  def redirect_back_or_default(default_controller, default_action = :index)
-    redirect_to(:controller =>  
-                      if params[:back_controller].blank? 
-                        default_controller
-                      else
-                        params[:back_controller]
-                      end,
-                :action => 
-                      if params[:back_action].blank? 
-                        default_action
-                      else
-                        params[:back_action]
-                      end)
+  # * defaut_uri 
+  def redirect_back_or_default(defaut_uri  = 'sites')
+    path = params[:back_uri] || defaut_uri 
+    port = 
+    if request.port.to_i == 80
+      ''
+    else
+      ":#{request.port}"
+    end
+    redirect_to "#{request.protocol}#{request.host}#{port}#{path}"
   end
 
   def message(controller, key, options = {})

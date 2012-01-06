@@ -89,7 +89,12 @@ class PageDesignController < ApplicationController
     @site ||= Site.find_by_name(params[:site]) or (head(:not_found) and return )
     @folder ||= @site.folders.by_name(params[:folder]).first
     render_404 and return if @folder.nil? && !current_user.can_manage_site?(@site)
-    page_design = @site.page_design  or (head(:not_found) and return )
+    page_design = 
+    if @folder
+      @folder.page_design
+    else
+      @site.page_design  
+    end or (head(:not_found) and return )
     begin
       page_design.header_image.destroy
       page_design.save!(:validate => false)
@@ -105,9 +110,15 @@ class PageDesignController < ApplicationController
     @site ||= Site.find_by_name(params[:site]) or (head(:not_found) and return )
     @folder ||= @site.folders.by_name(params[:folder]).first
     render_404 and return if @folder.nil? && !current_user.can_manage_site?(@site)
-    page_design = @site.page_design  or (head(:not_found) and return )
+    page_design = 
+    if @folder
+      @folder.page_design
+    else
+      @site.page_design  
+    end or (head(:not_found) and return )
     begin
       page_design.background_image.destroy
+      page_design.save!(:validate => false)
       flash[:notice] = message(:page_design, :background_image_deleted)
       return redirect_to :action => :background
     rescue ActiveRecord::RecordInvalid  => ex
