@@ -1,0 +1,113 @@
+<%= javascript_include_tag "colorpicker" %>
+<h1>
+  <%= @site.title %>&nbsp;
+  <% if @folder %>
+  <%= @folder.title %>&nbsp;
+  <% end %>
+  <%= human_action_name(:page_design, :background) %>
+</h1>
+
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+
+<script type="text/javascript">
+
+function deleteImage() {
+  $('#delete_background_image').submit();
+  return true;
+}
+
+$(document).ready( function()
+{
+  if(!$("#background_color input:text").val()) {
+    $("#background_color input:text").val("#ffffff");
+  }
+  $("#background_color #background_color_preview").css("width", "2em");
+  $("#background_color #background_color_preview").css("background", 
+                                          $("#background_color input:text").val());
+  $("#background_color input:text").attr('readonly', 'readonly');
+  $("#background_color input").ColorPicker( { 
+    color: $("#background_color input:text").val(),
+    onChange : function( hsb, hex, rgb ){
+			$("#background_color #background_color_preview").css("background", "#"+ hex);
+			$("#background_color input:text").val("#" + hex);
+		},
+    onBeforeShow: function () {
+    		$(this).ColorPickerSetColor($("#background_color input:text").val());
+  	}    	
+  });
+});
+
+</script>
+
+<%= form_for(@page_design, :method => :put) do |f| %>
+  <% if @page_design.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= activerecord_error_message(:record_invalid, 
+        :errors => @page_design.errors.count) %>
+      </h2>
+      <ul>
+      <% @page_design.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag(:back_action, 'background') %>
+  <fieldset id="page_design_fields">
+    <legend><%= PageDesign.human_attribute_name(:background) %></legend>
+    <div class="field" id="preview_background_image" >
+      <%= label_tag(entry_name(:preview)) %><br />
+      <% if @page_design.background_image && !@page_design.background_image.path.nil? %>
+      <%= background_image_tag %>
+      <% else %>
+      <% end %>
+    </div>
+    <div class="field" id="background_image" >
+      <%= f.label :background_image %><br />
+      <%= f.file_field :background_image %>
+    </div>
+    <div class="field">
+      <%= label_tag(human_action_name(:page_design, :delete_background_image)) %><br />
+      <%= button_to_function(human_action_name(:page_design, :delete_background_image), 
+      "return deleteImage();") %>
+    </div>
+    <%= if @folder %>
+    <div class="field" id="background_interited_from_site">
+      <%= f.label :background_interited_from_site %>
+      <%= f.check_box :background_interited_from_site %>
+    </div>
+    <% end %>
+    <div class="field" id="background_color">
+      <%= f.label :background_color %><br />
+      <%= f.text_field :background_color %>
+      <%= button_to_function ' ', nil, {:id => 'background_color_preview', :class => 'color_preview'} %>
+    </div>
+    <div class="field" id="background_position">
+      <%= f.label :background_position %>
+      <%= select_for_background_position(f) %>
+    </div>
+    <div class="field" id="background_repeat">
+      <%= f.label :background_repeat %>
+      <%= select_for_background_repeat(f) %>
+    </div>
+    <div class="field" id="background_attachment">
+      <%= f.label :background_attachment %>
+      <%= select_for_background_attachment(f) %>
+    </div>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= form_for(@page_design, 
+              :url => {:action => :delete_background_image, :site => @site.name, :folder => @folder && @folder.name}, 
+              :html => {:method => :put, :id => 'delete_background_image_image'}) do |f| %>
+  
+<% end %>

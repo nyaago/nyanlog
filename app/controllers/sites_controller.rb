@@ -2,6 +2,8 @@ class SitesController < ApplicationController
   
   PER_PAGE = 8
   
+  site_admin_action :edit, :update, :new, :create, :destroy, :select_theme, :theme_list
+  
   # GET sites
   def index
     @site = 

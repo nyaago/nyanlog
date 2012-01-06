@@ -4,4 +4,4 @@ image:
   resize_medium: "250x250>"  # 
   resize_small: "160x160>"  # 
   resize_thumb: "80x80#"  # 
-  path: "/Users/nyaago/tmp"
+  path: "/Users/nyaago/images"

@@ -21,6 +21,29 @@ Nyanlog::Application.routes.draw do
   post "user_sessions", :to => "user_sessions#create"
   get "user_sessions/destroy", :to => "user_sessions#destroy"
 
+  # page_design
+  get ":site/:folder/page_design/header" , :to => 'page_design#header#:site#:folder'
+  get ":site/:folder/page_design/background" , :to => 'page_design#background#:site#:folder'
+  get ":site/:folder/page_design/html_css" , :to => 'page_design#html_css#:site#:folder'
+  get ":site/page_design/header" , :to => 'page_design#header#:site'
+  get ":site/page_design/background" , :to => 'page_design#background#:site'
+  get ":site/page_design/html_css" , :to => 'page_design#html_css#:site'
+  put ":site/page_design" , :to => 'page_design#update#:site'
+  put ":site/:folder/page_design" , :to => 'page_design#update#:site#:folder'
+  post ":site/page_design" , :to => 'page_design#update#:site'
+  post ":site/:folder/page_design" , :to => 'page_design#update#:site#:folder'
+  get ":site/:folder/page_design/header_image" , :to => 'page_design#header_image#:site#:folder'
+  get ":site/:folder/page_design/background_image" , :to => 'page_design#background_image#:site#:folder'
+  get ":site/page_design/header_image" , :to => 'page_design#header_image#:site'
+  get ":site/page_design/background_image" , :to => 'page_design#background_image#:site'
+  put ":site/:folder/page_design/delete_header_image" , 
+        :to => 'page_design#delete_header_image#:site#:folder'
+  put ":site/:folder/page_design/delete_background_image" , 
+        :to => 'page_design#delete_background_image#:site#:folder'
+  put ":site/page_design/delete_header_image" , :to => 'page_design#delete_header_image#:site'
+  put ":site/page_design/delete_background_image" , :to => 'page_design#delete_background_image#:site'
+
+
   # widget set
   get ":site/widget_sets/new" , :to => 'widget_sets#new#:site'
   get ":site/widget_sets/list" , :to => 'widget_sets#list#:site'

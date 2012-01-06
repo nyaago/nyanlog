@@ -305,14 +305,13 @@ footer {
   float: right;
 }
 
-#user_nav li {
+#user_nav>ul>li {
   width: 85px;
   text-align: center;
 }
 
 #user_nav li li {
   text-align: left;
-  width: 120px;
 }
 
 #user_nav ul a {

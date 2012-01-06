@@ -40,6 +40,7 @@ class Folder < ActiveRecord::Base
   has_many    :articles,  :dependent => :destroy
   has_many    :images,  :dependent => :destroy
   has_many    :menu_items
+  has_one     :page_design, :dependent => :destroy
 
   scope   :listing, order('updated_at desc')
   
@@ -90,6 +91,13 @@ class Folder < ActiveRecord::Base
   validate :opened_at_must_completed_or_nil
   # 公開停止日時の入力チェック.日付け要素が未入力または、全て入力されて有効な日時になっていればOK?
   validate :closed_at_must_completed_or_nil
+  
+  # Returns the active page design.
+  # the self.page_design will be returned if self has it. 
+  # Otherwise self.site.page_design　will be returned.
+  def active_page_design
+    self.page_design || self.site.page_design
+  end
   
   
   # array of ordeting types

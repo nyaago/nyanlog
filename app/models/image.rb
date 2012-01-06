@@ -65,7 +65,7 @@ class Image < ActiveRecord::Base
   @@image_config = AppConfig::Image.instance
   
   # setup about  an attached file (Paperclip)
-   has_attached_file :image,
+  has_attached_file :image,
      :styles => {
        :medium=> @@image_config.resize_medium,  # 
        :small=> @@image_config.resize_small,  # 

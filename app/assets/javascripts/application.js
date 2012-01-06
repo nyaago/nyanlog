@@ -5,9 +5,8 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery_ujs
-//= require_tree .
-
+//= require jquery-ui-1.8.16.custom.min
+//= require jquery.droppy
 
 $.fn.ajaxReplace = function(options) {
 

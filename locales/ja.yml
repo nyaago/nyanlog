@@ -166,6 +166,10 @@ ja:
       even: "は偶数にしてください。"
       taken: "はすでに存在します。"
       
+      alphanumetic: 'はアルファベット文字と数字文字だけで入力してください'
+      folder: '存在するフォルダーを指定してください。'
+      site: '存在するサイトを指定してください。'
+      
     folder:
       messages:
         invalid_date: 'の入力が不正です。全て入力するか全て未入力にしてください。'
@@ -193,7 +197,8 @@ ja:
     marks:
       above: '△'
       below: '▽'
-
+    entry_names:
+      preview: 'プレビュー'
     
 
   # Active Record models configuration
@@ -235,6 +240,7 @@ ja:
       widget: 'ウィジット'
       monthly_widget: '月別アーカイブ'
       new_arrival_widget: '新着記事'
+      page_design: 'ページデザイン'
       
       notes:
         user: 'ユーザー'
@@ -392,6 +398,24 @@ ja:
         widget_type: 'ウィジットタイプ'
         order_of_display: '並び順'
         
+      page_design:
+        site_id: 'サイト'
+        folder_id: 'フォルダー'
+        stylesheet: 'スタイルシート'
+        header: 'ヘッダー'
+        header_image: 'ヘッダー画像'
+        header_color: 'ヘッダー色'
+        background: '背景'
+        background_interited_from_site: '背景の設定をサイトの設定から継承する'
+        background_color: '背景色'
+        background_image: '背景画像'
+        background_position: '背景画像の場所'
+        background_repeat: '背景画像の繰り返し'
+        background_attachment: '背景画像のスクロール'
+        html_css: 'ヘッダー/フッターとスタイルシート'
+        header_html: 'ヘッダー'
+        footer_html: 'フッター'
+        
       widget:
         
       monthly_widget:
@@ -440,7 +464,21 @@ ja:
         folder:
           theme_name:
             inherited: 'サイトの設定を引き継ぐ'
-        
+
+        page_design:
+          background_position: 
+            left: '左'
+            center: '中央'
+            right: '右'
+          background_repeat: 
+            repeat-x: '水平方向に繰り返し'
+            repeat-y: '垂直方向に繰り返し'
+            repeat: 'タイル'
+            no-repeat: '繰り返しなし'
+          background_attachment: 
+            fixed: '固定'
+            scroll: 'スクロール'
+
       # For example,
       #   user:
       #     login: "Handle"
@@ -583,7 +621,20 @@ ja:
         selectable_widget: '選択可能なウィジット'
         selected_widget: '選択されているウィジット'
         sort_widgets: 'ドラッグ＆ドロップで並べ替えられます'
-        
+
+    page_design:
+      actions:
+        header: 'ヘッダー画像設定'
+        background: '背景設定'
+        html_css: 'ヘッダー/フッターとスタイルシート'
+        update: 'ページデザインを更新'
+        delete_header_image: '画像を削除'
+        delete_background_image: '画像を削除'
+      messages:
+        updated: 'ページデザインを更新しました。'
+        header_image_deleted: '画像を削除'
+        background_image_deleted: '画像を削除'
+
     articles:
       actions:
         index: '記事表示'

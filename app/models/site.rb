@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base
   
   after_create  :create_menus!
+  after_create  :create_belongings!
   before_create :set_theme!
   
   has_many    :folders, :dependent => :nullify
@@ -9,6 +10,7 @@ class Site < ActiveRecord::Base
   has_many    :widget_sets
   has_one     :header_menu,  :conditions => ["menu_type = ?", 'Header']
   has_one     :footer_menu,  :conditions => ["menu_type = ?", 'Footer']
+  has_one     :page_design, :dependent => :destroy
   belongs_to  :updated_by, :class_name => 'User',
               :foreign_key => 'updated_by_id'
   belongs_to  :created_by, :class_name => 'User',
@@ -27,10 +29,20 @@ class Site < ActiveRecord::Base
     Design::Theme.array.find_by_name(self.theme_name || 'Default')
   end
   
+  # Returns the active page design.
+  # the self.page_design will be returned. 
+  def active_page_design
+    self.page_design
+  end
+  
   private
   
   def create_menus!
     Menu.create(:site => self, :menu_type => 'Header')
+  end
+
+  def create_belongings!
+    PageDesign.create(:site => self)
   end
   
   def set_theme_name!

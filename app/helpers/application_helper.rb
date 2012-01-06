@@ -45,6 +45,15 @@ module ApplicationHelper
   def mark(key)
     I18n.t key, :scope => [:application_helpers, :marks]
   end
+
+  # Return the entry name.
+  # It refers to I18n entries as following.
+  # * <locale>/application_helpers/marks/<key> 
+  def entry_name(key)
+    I18n.t key, :scope => [:application_helpers, :entry_names]
+  end
+  
+
   
   # get side widgets
   def side_widgets
@@ -115,6 +124,156 @@ module ApplicationHelper
                         } ) )
   end
 
+  # Returns header image path
+  def header_image_path
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    unless page_design.header_image && page_design.header_image.path
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design
+      page_design_path(page_design, :action => :header_image)
+    else
+      ''
+    end
+  end
+
+  # Returns header image url
+  def header_image_url
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    unless page_design.header_image && page_design.header_image.path
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design
+      page_design_url(page_design, :action => :header_image)
+    else
+      ''
+    end
+  end
+  
+  # Returns header image tag
+  def header_image_tag
+    if url = header_image_url
+      image_tag(url)
+    else
+      ''
+    end
+  end
+  
+  # Returns background image path
+  def background_image_path
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    unless page_design.header_image && page_design.background_image.path
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design
+      page_design_path(page_design, :action => :background_image)
+    else
+      ''
+    end
+  end
+
+  # Returns background image url
+  def background_image_url
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    unless page_design.header_image && page_design.background_image.path
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design
+      page_design_url(page_design, :action => :background_image)
+    else
+      ''
+    end
+  end
+  
+  # Returns background image tag
+  def background_image_tag
+    if url = background_image_url
+      image_tag(url)
+    else
+      ''
+    end
+  end
+  
+  # Returns background style 
+  def background_style
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    if page_design.nil? || page_design.background_interited_from_site
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design
+      '<style type="text/css">' +
+      "body { \n" +
+      # image
+      if url = page_design_url_by_site_and_folder(current_site, current_folder, :action => :background_image)
+        "background-image: url(#{url});" + "\n"
+      end.to_s +
+      # repeat
+      if repeat = page_design.background_repeat
+      end.to_s +
+      # position
+      if position = page_design.background_position
+        "background-posision: #{position};" + "\n"
+      end.to_s +
+      # attachment
+      if attachment = page_design.background_attachment
+        "background-attachment: #{attachment};" + "\n"
+      end.to_s +
+      "} \n" +
+      '</style>'
+    else
+      ''
+    end.html_safe
+  end
+  
+  # Returns user stylsheet contents.
+  def user_stylesheet
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    if page_design.nil? || page_design.stylesheet.to_s.strip.blank?
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design && !page_design.stylesheet.blank?
+      ('<style type="text/css">' +
+      page_design.stylesheet +
+      '</style>').html_safe
+    else
+      ''
+    end
+  end
+  
+  # Returns user header html contents.
+  def user_header
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    if page_design.nil? || page_design.header_html.to_s.strip.blank?
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design &&  !page_design.header_html.to_s.strip.blank?
+      page_design.header_html
+    else
+      ''
+    end.html_safe
+  end
+
+  # Returns user footer html contents.
+  def user_footer
+    page_design = (current_folder && current_folder.page_design) 
+    page_design = 
+    if page_design.nil? || page_design.footer_html.to_s.strip.blank?
+      (current_site  && current_site.page_design)
+    end || page_design
+    if page_design &&  !page_design.footer_html.to_s.strip.blank?
+      page_design.footer_html
+    else
+      ''
+    end.html_safe
+  end
+  
   
   # return the current login user
   def current_user

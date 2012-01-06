@@ -1,0 +1,94 @@
+<%= javascript_include_tag "colorpicker" %>
+<h1>
+  <%= @site.title %>&nbsp;
+  <% if @folder %>
+  <%= @folder.title %>&nbsp;
+  <% end %>
+  <%= human_action_name(:page_design, :header) %>
+</h1>
+
+<% unless flash[:notice].blank? %>
+<p id="notice"><%= flash[:notice] %></p>
+<% end %>
+<% unless flash[:warning].blank? %>
+<p id="notice"><%= flash[:warning] %></p>
+<% end %>
+
+<script type="text/javascript">
+
+function deleteImage() {
+  $('#delete_header_image').submit();
+  return true;
+}
+
+$(document).ready( function()
+{
+  if(!$("#header_color input:text").val()) {
+    $("#header_color input:text").val("#ffffff");
+  }
+  $("#header_color #header_color_preview").css("width", "2em");
+  $("#header_color #header_color_preview").css("background", $("#header_color input:text").val());
+  $("#header_color input:text").attr('readonly', 'readonly');
+  $("#header_color input").ColorPicker( { 
+    color: $("#header_color input:text").val(),
+    onChange : function( hsb, hex, rgb ){
+			$("#header_color #header_color_preview").css("background", "#"+ hex);
+			$("#header_color input:text").val("#" + hex);
+		},
+    onBeforeShow: function () {
+    		$(this).ColorPickerSetColor($("#header_color input:text").val());
+  	}    	
+  });
+});
+
+</script>
+
+<%= form_for(@page_design, :method => :put) do |f| %>
+  <% if @page_design.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= activerecord_error_message(:record_invalid, 
+        :errors => @page_design.errors.count) %>
+      </h2>
+      <ul>
+      <% @page_design.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag(:back_action, 'header') %>
+  <fieldset id="page_design_fields">
+    <legend><%= PageDesign.human_attribute_name(:header) %></legend>
+    <div class="field" id="preview_header_image" >
+      <%= label_tag(entry_name(:preview)) %><br />
+      <% if @page_design.header_image && !@page_design.header_image.path.nil? %>
+      <%= header_image_tag %>
+      <% else %>
+      <% end %>
+    </div>
+    <div class="field" id="header_image" >
+      <%= f.label :header_image %><br />
+      <%= f.file_field :header_image %>
+    </div>
+    <div class="field" id="header_color">
+      <%= f.label :header_color %><br />
+      <%= f.text_field :header_color %>
+      <%= button_to_function ' ', nil, {:id => 'header_color_preview', :class => 'color_preview'} %>
+    </div>
+    <div class="field">
+      <%= label_tag(human_action_name(:page_design, :delete_header_image)) %><br />
+      <%= button_to_function(human_action_name(:page_design, :delete_header_image), "return deleteImage();") %>
+    </div>
+    
+  </fieldset>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= form_for(@page_design, 
+              :url => {:action => :delete_header_image, :site => @site.name,:folder =>  @folder && @folder.name}, 
+              :html => {:method => :put, :id => 'delete_header_image'}) do |f| %>
+  
+<% end %>

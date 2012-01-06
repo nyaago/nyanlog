@@ -1,10 +1,10 @@
 <script type='text/javascript'>
   $(function() {
-    $('#user_nav ul').droppy();
+    $('.droppy').droppy();
   });
 </script>
-<nav id="user_nav" class="drop_nav">
-  <ul>
+<nav id="user_nav">
+  <ul  class="droppy">
     <% if current_folder && current_user.can_edit_folder?(current_folder) %>
     <li id="menu_item_articles_index">
     <%= link_to(human_action_name(:articles, :index), 
@@ -45,6 +45,25 @@
           <%= link_to(human_action_name(:folders, :edit), edit_folder_path(current_folder)) %>
         </li>
         <li>
+        <%= link_to(PageDesign.model_name.human, "#") %>
+        <ul>
+          <li>
+          <%= link_to(human_action_name(:page_design, :header), 
+          url_for(:controller => :page_design, :site => current_site.name, :folder => current_folder.name, 
+          :action => :header)) %>
+          </li>
+          <li>
+          <%= link_to(human_action_name(:page_design, :background), 
+          url_for(:controller => :page_design, :site => current_site.name, :folder => current_folder.name, 
+          :action => :background)) %>
+          </li>
+          <li>
+          <%= link_to(human_action_name(:page_design, :html_css), 
+          url_for(:controller => :page_design, :site => current_site.name, :folder => current_folder.name, 
+          :action => :html_css)) %>
+          </li>
+        </ul>
+        <li>
         <%= link_to(human_action_name(:folders, :theme_list), 
         {:action => :theme_list, :controller => :folders, :site => current_site.name, :name => current_folder.name},
         {:method => :get}) %>
@@ -52,20 +71,6 @@
       </ul>
     </li>
     <% end %>
-
-
-    <% if current_site && current_user   %>
-    <li id="menu_item_user">
-      <%= link_to(User.model_name.human, "#") %>
-      <ul>
-        <li>
-        <%= link_to(human_action_name(:widget_sets, :index), 
-        widget_sets_path(:site => current_site.name, :action => :index)) %>
-        </li>
-      </ul>
-    </li>
-    <% end %>
-
 
     <% if current_site && current_user   %>
     <li id="menu_item_sites">
@@ -79,6 +84,23 @@
         <% if current_site && current_user.can_manage_site?(current_site) %>
         <li><%= link_to(human_action_name(:folders, :list), 
         folders_path(:action => :list, :site => current_site.name))%></li>
+        <li>
+        <%= link_to(PageDesign.model_name.human, "#") %>
+        <ul>
+          <li>
+          <%= link_to(human_action_name(:page_design, :header), 
+          page_design_path(current_site.page_design, :action => :header)) %>
+          </li>
+          <li>
+          <%= link_to(human_action_name(:page_design, :background), 
+          page_design_path(current_site.page_design, :action => :background)) %>
+          </li>
+          <li>
+          <%= link_to(human_action_name(:page_design, :html_css), 
+          page_design_path(current_site.page_design, :action => :html_css)) %>
+          </li>
+        </ul>
+        </li>
         <li>
         <%= link_to(human_action_name(:sites, :edit), edit_site_path(current_site)) %>
         </li>

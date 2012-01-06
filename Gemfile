@@ -39,6 +39,7 @@ gem 'rspec'
 gem 'rspec-rails'
 
 
+gem "nokogiri"
 gem "authlogic"
 gem "will_paginate"
 gem 'paperclip'
