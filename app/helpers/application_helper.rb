@@ -339,7 +339,7 @@ module ApplicationHelper
   
   def render_menu(menu)
     def render_menu_recursive(menu_items, depth)
-      menu_items.inject("<ul class='top_menu_#{depth}'>") do |html, child|
+      menu_items.inject("<ul class='top_menu_#{depth} droppy'>") do |html, child|
         html + 
         if child.children_count > 0
           "<li>" + 
