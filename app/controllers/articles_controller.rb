@@ -21,8 +21,8 @@ class ArticlesController < ApplicationController
     if @folder.nil?
       return render_404
     end
-    @articles = @folder.articles.listing(@folder).
-                paginate(:per_page => PER_PAGE, :page => params[:page])
+    @articles = @folder.articles.listing(@folder).page(params[:page]).per(PER_PAGE)
+#                paginate(:per_page => PER_PAGE, :page => params[:page])
     respond_to do |format|
       format.html { render :action => :list}
     end
@@ -42,9 +42,9 @@ class ArticlesController < ApplicationController
     if @folder.nil?
       return render_404
     end
-    @articles = @folder.articles.listing(@folder).
-                paginate(:per_page => @folder.article_count_by_page, 
-                          :page => params[:page])
+    @articles = @folder.articles.listing(@folder).page(params[:page]).per(@folder.article_count_by_page)
+#                paginate(:per_page => @folder.article_count_by_page, 
+#                          :page => params[:page])
     respond_to do |format|
       format.html 
     end
@@ -83,8 +83,7 @@ class ArticlesController < ApplicationController
     end or (render_404 and return)
     
     @articles = @folder.articles.by_updated_month(ym).listing(@folder).
-                paginate(:per_page => @folder.article_count_by_page, 
-                          :page => params[:page])
+                        page(params[:page]).per(@folder.article_count_by_page)
     respond_to do |format|
       format.html
     end
@@ -225,7 +224,7 @@ class ArticlesController < ApplicationController
       end
     end
     @articles = @folder.articles.listing(@folder).
-                paginate(:per_page => PER_PAGE, :page => params[:page])
+                  page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :file => '/articles/_article_table', :layout => false}
     end
@@ -251,8 +250,7 @@ class ArticlesController < ApplicationController
         @article.move_behind!
       end
     end
-    @articles = @folder.articles.listing(@folder).
-                paginate(:per_page => PER_PAGE, :page => params[:page])
+    @articles = @folder.articles.listing(@folder).page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :file => '/articles/_article_table', :layout => false}
     end

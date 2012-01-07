@@ -21,8 +21,7 @@ class ImagesController < ApplicationController
     if @folder.nil?
       return render_404
     end
-    @images = @folder.images.listing(@folder).
-                paginate(:per_page => PER_PAGE, :page => params[:page])
+    @images = @folder.images.listing(@folder).page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :action => :list}
     end
@@ -49,7 +48,7 @@ class ImagesController < ApplicationController
       @folder.images.listing(@folder)
     else
       Image.editable_for(current_user)
-    end.paginate(:per_page => PER_PAGE, :page => params[:page])
+    end.page(params[:page]).per(PER_PAGE)
     @folders = 
     if current_user.is_admin
       @site.folders
@@ -235,7 +234,7 @@ class ImagesController < ApplicationController
       end
     end
     @images = @folder.images.listing(@folder).
-                paginate(:per_page => PER_PAGE, :page => params[:page])
+                .page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :file => '/images/_image_table', :layout => false}
     end
@@ -262,7 +261,7 @@ class ImagesController < ApplicationController
       end
     end
     @images = @folder.images.listing(@folder).
-                paginate(:per_page => PER_PAGE, :page => params[:page])
+                .page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :file => '/images/_image_table', :layout => false}
     end

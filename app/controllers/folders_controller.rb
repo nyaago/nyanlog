@@ -38,8 +38,7 @@ class FoldersController < ApplicationController
   # * @folders
   def list
     @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
-    @folders = @site.folders.listing.
-                paginate(:per_page => PER_PAGE, :page => params[:page])
+    @folders = @site.folders.listing.page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :action => :list}
     end

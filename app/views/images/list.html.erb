@@ -13,7 +13,7 @@
 <%= render 'image_table' %>
 <br />
 
-<%= will_paginate @images,:previous_label => '<=', :next_label => '=>' %>
+<%= paginate @images  %>
 
 <div class="actions">
 <%= link_to human_action_name(:images, :new), 

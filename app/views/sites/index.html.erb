@@ -54,7 +54,8 @@
 
 <br />
 
-<%= will_paginate @sites %>
+<%= paginate @sites %>
+
 <% if current_user.is_admin %>
 <div class="actions">
 <%= link_to human_action_name(:sites, :new), new_site_path %>

@@ -41,5 +41,6 @@ gem 'rspec-rails'
 
 gem "nokogiri"
 gem "authlogic"
-gem "will_paginate"
+#gem "will_paginate"
+gem "kaminari"
 gem 'paperclip'

@@ -24,7 +24,7 @@
 <%= render 'article_table' %>
 <br />
 
-<%= will_paginate @articles,:previous_label => '<=', :next_label => '=>' %>
+<%= paginate @articles  %>
 
 <div class="actions">
 <%= link_to human_action_name(:articles, :new), 

@@ -716,3 +716,11 @@ ja:
     new_arrival_widget:
       title: '新着記事'
       description: '新しく更新された記事のリンク一覧です'
+
+  views:
+     pagination:
+       previous: "« 前ページ"
+       next: "次ページ »"
+       first: "先頭"
+       last: "最後"
+       truncate: "..."

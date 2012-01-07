@@ -20,8 +20,7 @@ class UsersController < ApplicationController
     unless current_user.can_manage_site?(@site)
       return render_404
     end
-    @users = User.filter_by_user(current_user).listing.
-      paginate(:page => params[:page], :per_page => PER_PAGE)
+    @users = User.filter_by_user(current_user).listing.page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html # index.html.erb
     end

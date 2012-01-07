@@ -10,7 +10,7 @@ class SitesController < ApplicationController
     if params[:site]
       Site.find_by_name(params[:site])
     end
-    @sites = Site.listing.paginate(:page => params[:page], :per_page => PER_PAGE)
+    @sites = Site.listing..page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html # index.html.erb
     end
