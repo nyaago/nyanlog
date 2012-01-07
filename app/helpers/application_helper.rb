@@ -27,16 +27,16 @@ module ApplicationHelper
   
   # Return the note about activerecord model attribute.
   # It refers to I18n entries as following.
-  # * <locale>/activerecord/attributes/<model>/notes/<attribute> 
+  # * <locale>/activerecord/attribute_notes/<model>/<attribute> 
   def note_about_attribute(model, attribute)
-    I18n.t attribute, :scope => [:activerecord, :attributes, model, :notes]
+    I18n.t attribute, :scope => [:activerecord, :attribute_notes, model]
   end
 
   # Return the activerecord model attribute humanized value.
   # It refers to I18n entries as following.
-  # * <locale>/activerecord/attributes/<model>/<attribute>/<value> 
+  # * <locale>/activerecord/attribute_values/<model>/<attribute>/<value> 
   def human_attribute_value(model, attribute, value)
-    I18n.t value, :scope => [:activerecord, :attributes, :values, model, attribute]
+    I18n.t value, :scope => [:activerecord, :attribute_values, model, attribute]
   end
   
   # Return the mark.

@@ -105,7 +105,7 @@ class Folder < ActiveRecord::Base
   def self.ordering_types
     ORDERING_TYPES.collect do |type|
       [I18n.t(type.underscore, 
-        :scope => [:activerecord,:attributes,:folder,:ordering_types]), 
+        :scope => [:activerecord,:attribute_values,:folder,:ordering_types]), 
       type]
     end
   end

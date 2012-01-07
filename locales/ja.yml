@@ -242,13 +242,13 @@ ja:
       new_arrival_widget: '新着記事'
       page_design: 'ページデザイン'
       
-      notes:
-        user: 'ユーザー'
-        user_session: 'ユーザー'
-        site: 'サイト'
-        article: '記事'
-        image: '画像'
-        folder: 'フォルダー'
+    motel_notes:
+      user: 'ユーザー'
+      user_session: 'ユーザー'
+      site: 'サイト'
+      article: '記事'
+      image: '画像'
+      folder: 'フォルダー'
       # For example,
       #   user: "Dude"
       # will translate User model name to "Dude"
@@ -267,18 +267,6 @@ ja:
         password_confirmation: 'パスワード確認'
         auto_login: "次回自動ログインする"
         default_folder_id: 'デフォルトのフォルダー'
-        notes:
-          login: ""
-          email: "送信先となるEMailアドレスです"  
-          site_id: 'ユーザが属するサイト'
-          role: 'ユーザの役割'
-          password: ""  
-          password_confirmation: ''
-          auto_login: ""
-          is_admin: 'アプリケーション全体の管理者です'
-          is_site_admin: 'サイトの管理者です'
-          is_editor: '（オーナーとなっている記事以外を編集できる）編集者です'
-          default_folder_id: 'ユーザーがサイトのベースURLにアクセスしたときに表示されるフォルダーです'
         
       user_session:
         
@@ -291,15 +279,6 @@ ja:
         not_in_public: '非公開（メンバーのみ閲覧）'
         default_folder_id: 'デフォルトのフォルダー'
         side_widget_set_id: 'サイドバーウィジットセット'
-        notes:
-          name: 'urlに含まれる名前です。'
-          title: 'ページのタイトル、見出しで表示されます。'
-          description: 'メタタグのcontentに書き込まれる内容です'
-          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
-          closed_at: '公開が停止されることになる日時です。'
-          not_in_public: 'チェックすると、メンバーのみ閲覧できます'
-          default_folder_id: 'サイトのベースURLにアクセスしたときに表示されるフォルダーです'
-          side_widget_set_id: 'サイドバーに表示される、ウィジットセットです。'
         
       folder:
         name: '名前'
@@ -312,22 +291,6 @@ ja:
         article_count_by_page: '1ページの表示記事数'
         owner_id: '所有者'
         side_widget_set_id: 'サイドバーウィジットセット'
-        ordering_types:
-          by_created_at_desc: '作成された順番-降順'
-          by_updated_at_desc: '更新された順番-降順'
-          by_created_at_asc: '作成された順番-昇順' 
-          by_updated_at_asc: '更新された順番-昇順' 
-          specifying: '明示する（初期-作成昇順）' 
-        notes:
-          name: 'urlに含まれる名前です。'
-          title: 'ページのタイトル、見出しで表示されます。'
-          description: 'メタタグのcontentに書き込まれる内容です。入力しなければ、サイトの設定が使用されます。'
-          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
-          closed_at: '公開が停止されることになる日時です。'
-          article_count_by_page: ''
-          ordering_type: ''
-          owner_id: ''
-          side_widget_set_id: 'サイドバーに表示される、ウィジットセットです。'
       
       article:
         title:  'タイトル'
@@ -336,12 +299,6 @@ ja:
         order_of_display: '表示順'
         opened_at: '公開開始日時'
         closed_at: '公開停止日時'
-        notes:
-          title: 'ページのタイトル、見出しで表示されます。'
-          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
-          closed_at: '公開が停止されることになる日時です。'
-          content: ''
-          order_of_display: ''
       
       image:
         title:  'タイトル'
@@ -357,13 +314,6 @@ ja:
         image_file_size: '画像サイズ'
         style: 'サイズ'
         alignment: 'アラインメント'
-        notes:
-          title: 'ページのタイトル、見出しで表示されます。'
-          alternative:  '画像タグのalt属性に設定される代替テキストです'
-          opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
-          closed_at: '公開が停止されることになる日時です。'
-          content: ''
-          order_of_display: ''
         
       
       menu:
@@ -384,9 +334,6 @@ ja:
         menu:  'メニュー'
         children: '子要素'
         children_count: '子要素数'
-        notes:
-          title: 'メニュー項目として表示するタイトルです'
-          folder: 'メニュー選択で表示されるフォルダーです'
         
       widget_set:
         title: 'タイトル'
@@ -430,55 +377,115 @@ ja:
       
       app_setting:
         default_site_id: 'デフォルトのサイト'
-        notes:
-          default_site_id: 'ゲストがTopのURLを訪れたときに表示されるサイトです。'
       
-      values:
-        menu:
-          menu_type: 
-            header: 'ヘッダーナビゲーション'
-            footer: 'フッターーナビゲーション'
-        image:
-          size:
-            original: 'オリジナル'
-            medium: '中ぐらいの画像'
-            small: '小さい画像'
-            thumb: 'サムネイル'
-          alignment:
-            none: 'なし'
-            left: '左'
-            center: '中央'
-            right: '右'
-        widget:
-          folder:
-            viewed: '表示されているフォルダー'
+    attribute_values:
+      menu:
+        menu_type: 
+          header: 'ヘッダーナビゲーション'
+          footer: 'フッターーナビゲーション'
+      image:
+        size:
+          original: 'オリジナル'
+          medium: '中ぐらいの画像'
+          small: '小さい画像'
+          thumb: 'サムネイル'
+        alignment:
+          none: 'なし'
+          left: '左'
+          center: '中央'
+          right: '右'
+      widget:
         folder:
-          widget_set_id:
-            default: 'サイトのデフォルト'
-        site:
-          widget_set_id:
-            none: 'なし'
-        widget_set:
-          owner_id:
-            me: 'ログインしているユーザ'
-        folder:
-          theme_name:
-            inherited: 'サイトの設定を引き継ぐ'
+          viewed: '表示されているフォルダー'
+      folder:
+        widget_set_id:
+          default: 'サイトのデフォルト'
+      site:
+        widget_set_id:
+          none: 'なし'
+      widget_set:
+        owner_id:
+          me: 'ログインしているユーザ'
+      folder:
+        theme_name:
+          inherited: 'サイトの設定を引き継ぐ'
+        ordering_types:
+          by_created_at_desc: '作成された順番-降順'
+          by_updated_at_desc: '更新された順番-降順'
+          by_created_at_asc: '作成された順番-昇順' 
+          by_updated_at_asc: '更新された順番-昇順' 
+          specifying: '明示する（初期-作成昇順）' 
 
-        page_design:
-          background_position: 
-            left: '左'
-            center: '中央'
-            right: '右'
-          background_repeat: 
-            repeat-x: '水平方向に繰り返し'
-            repeat-y: '垂直方向に繰り返し'
-            repeat: 'タイル'
-            no-repeat: '繰り返しなし'
-          background_attachment: 
-            fixed: '固定'
-            scroll: 'スクロール'
 
+      page_design:
+        background_position: 
+          left: '左'
+          center: '中央'
+          right: '右'
+        background_repeat: 
+          repeat-x: '水平方向に繰り返し'
+          repeat-y: '垂直方向に繰り返し'
+          repeat: 'タイル'
+          no-repeat: '繰り返しなし'
+        background_attachment: 
+          fixed: '固定'
+          scroll: 'スクロール'
+            
+    attribute_notes:
+      user:
+        login: ""
+        email: "送信先となるEMailアドレスです"  
+        site_id: 'ユーザが属するサイト'
+        role: 'ユーザの役割'
+        password: ""  
+        password_confirmation: ''
+        auto_login: ""
+        is_admin: 'アプリケーション全体の管理者です'
+        is_site_admin: 'サイトの管理者です'
+        is_editor: '（オーナーとなっている記事以外を編集できる）編集者です'
+        default_folder_id: 'ユーザーがサイトのベースURLにアクセスしたときに表示されるフォルダーです'
+        
+      site:
+        name: 'urlに含まれる名前です。'
+        title: 'ページのタイトル、見出しで表示されます。'
+        description: 'メタタグのcontentに書き込まれる内容です'
+        opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+        closed_at: '公開が停止されることになる日時です。'
+        not_in_public: 'チェックすると、メンバーのみ閲覧できます'
+        default_folder_id: 'サイトのベースURLにアクセスしたときに表示されるフォルダーです'
+        side_widget_set_id: 'サイドバーに表示される、ウィジットセットです。'
+        
+      folder:
+        name: 'urlに含まれる名前です。'
+        title: 'ページのタイトル、見出しで表示されます。'
+        description: 'メタタグのcontentに書き込まれる内容です。入力しなければ、サイトの設定が使用されます。'
+        opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+        closed_at: '公開が停止されることになる日時です。'
+        article_count_by_page: ''
+        ordering_type: ''
+        owner_id: ''
+        side_widget_set_id: 'サイドバーに表示される、ウィジットセットです。'
+        
+      article:
+        title: 'ページのタイトル、見出しで表示されます。'
+        opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+        closed_at: '公開が停止されることになる日時です。'
+        content: ''
+        order_of_display: ''
+      image:
+        title: 'ページのタイトル、見出しで表示されます。'
+        alternative:  '画像タグのalt属性に設定される代替テキストです'
+        opened_at: '公開されることになる日時。この日時が設定されなければ、すぐに公開されます。'
+        closed_at: '公開が停止されることになる日時です。'
+        content: ''
+        order_of_display: ''
+      menu_item:
+        title: 'メニュー項目として表示するタイトルです'
+        folder: 'メニュー選択で表示されるフォルダーです'
+        
+      app_setting:
+        default_site_id: 'ゲストがTopのURLを訪れたときに表示されるサイトです。'
+          
       # For example,
       #   user:
       #     login: "Handle"
