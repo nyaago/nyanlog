@@ -104,6 +104,9 @@
         <li>
         <%= link_to(human_action_name(:sites, :edit), edit_site_path(current_site)) %>
         </li>
+        <li><%= link_to(human_action_name(:menu_items, :index), 
+        menu_items_path(:action => :index, :site => current_site.name, :menu_type => 'Header'))%></li>
+        <li>
         <li>
         <%= link_to(human_action_name(:users, :index), users_path(:site => current_site.name)) %>
         </li>

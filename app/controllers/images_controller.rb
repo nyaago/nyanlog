@@ -233,8 +233,7 @@ class ImagesController < ApplicationController
         @image.move_ahead!
       end
     end
-    @images = @folder.images.listing(@folder).
-                .page(params[:page]).per(PER_PAGE)
+    @images = @folder.images.listing(@folder).page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :file => '/images/_image_table', :layout => false}
     end
@@ -260,8 +259,7 @@ class ImagesController < ApplicationController
         @image.move_behind!
       end
     end
-    @images = @folder.images.listing(@folder).
-                .page(params[:page]).per(PER_PAGE)
+    @images = @folder.images.listing(@folder).page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html { render :file => '/images/_image_table', :layout => false}
     end

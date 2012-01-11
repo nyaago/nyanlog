@@ -94,7 +94,7 @@ class PageDesign < ActiveRecord::Base
   # Each entry is array including the human name and the name.
   def self.background_position_entries
     BACKGROUND_POSITION_ENTRIES.collect do |entry|
-      [I18n.t(entry, :scope => [:activerecord, :attributes, :values, :page_design, :background_position]), 
+      [I18n.t(entry, :scope => [:activerecord, :attribute_values, :page_design, :background_position]), 
       entry]
     end
   end
@@ -103,7 +103,7 @@ class PageDesign < ActiveRecord::Base
   # Each entry is array including the human name and the name.
   def self.background_repeat_entries
     BACKGROUND_REPEAT_ENTRIES.collect do |entry|
-      [I18n.t(entry, :scope => [:activerecord, :attributes, :values, :page_design, :background_repeat]), 
+      [I18n.t(entry, :scope => [:activerecord, :attribute_values, :page_design, :background_repeat]), 
       entry]
     end
   end
@@ -112,7 +112,7 @@ class PageDesign < ActiveRecord::Base
   # Each entry is array including the human name and the name.
   def self.background_attachment_entries
     BACKGROUND_ATTACHMENT_ENTRIES.collect do |entry|
-      [I18n.t(entry, :scope => [:activerecord, :attributes, :values, :page_design, :background_attachment]), 
+      [I18n.t(entry, :scope => [:activerecord, :attribute_values, :page_design, :background_attachment]), 
       entry]
     end
   end
