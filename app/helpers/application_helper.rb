@@ -58,15 +58,15 @@ module ApplicationHelper
   # get side widgets
   def side_widgets
     @side_widgets ||= 
-    if instance_variable_defined?(:@folder) && @folder
-      widget_set = WidgetSet.side_widget_set_by_folder(@folder).first
+    if current_folder
+      widget_set = WidgetSet.side_widget_set_by_folder(current_folder).first
       if widget_set
         widget_set.elements.collect do |element|
           element.widget
         end
       end
-    elsif instance_variable_defined?(:@site) && @site
-      widget_set = @site.side_widget_set
+    elsif current_site
+      widget_set = current_site.side_widget_set
       if widget_set
         widget_set.elements.collect do |element|
           element.widget
@@ -205,7 +205,7 @@ module ApplicationHelper
     unless page_design && page_design.background_image_exist?
       (current_site  && current_site.page_design)
     end || page_design
-    page_design && page_design.background_image_exist?
+    !!(page_design && page_design.background_image_exist?)
   end
 
   # whether the header image exist or not.
@@ -215,7 +215,7 @@ module ApplicationHelper
     unless page_design && page_design.header_image_exist?
       (current_site  && current_site.page_design)
     end || page_design
-    page_design && page_design.header_image_exist?
+    !!(page_design && page_design.header_image_exist?)
   end
   
   # Returns background style 
@@ -237,7 +237,7 @@ module ApplicationHelper
       end.to_s +
       # position
       if position = page_design.background_position
-        "background-posision: #{position};" + "\n"
+        "background-position: #{position};" + "\n"
       end.to_s +
       # attachment
       if attachment = page_design.background_attachment

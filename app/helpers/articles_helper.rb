@@ -120,4 +120,22 @@ module ArticlesHelper
     end
   end
   
+  def site(options = {})
+    folder ||= options[:folder]
+    if folder.respond_to?(:name)
+      folder.site.name
+    else
+      site = options[:site]
+      if site.nil? 
+        params[:site]
+      else
+        if site.respond_to?(:name) 
+          site.name 
+        else 
+          site 
+        end
+      end
+    end
+  end
+  
 end

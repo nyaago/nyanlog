@@ -65,6 +65,16 @@ class Image < ActiveRecord::Base
   @@image_config = AppConfig::Image.instance
   
   # setup about  an attached file (Paperclip)
+  env = 
+  if ENV['RAILS_ENV'].nil?
+    "development/"
+  else
+    if ENV['RAILS_ENV'] == 'production'
+      ''
+    else
+      "#{ENV['RAILS_ENV']}/"
+    end  
+  end
   has_attached_file :image,
      :styles => {
        :medium=> @@image_config.resize_medium,  # 
@@ -72,7 +82,7 @@ class Image < ActiveRecord::Base
        :thumb => @@image_config.resize_thumb  # 
       },
       :default_style => :original,
-      :path => "#{@@image_config.path}/:class/:id_partition/:style_:basename.:extension",
+      :path => "#{env}#{@@image_config.path}/:class/:id_partition/:style_:basename.:extension",
 #      :path => ":rails_root/assets/:class/:id_partition/:style_:basename.:extension",
       :url => "/:class/:id/:style'",
       :whiny => false

@@ -55,12 +55,22 @@ class PageDesign < ActiveRecord::Base
   @@image_config = AppConfig::Image.instance
   
   # setup about  an header image file (Paperclip)
+  env = 
+  if ENV['RAILS_ENV'].nil?
+    "development/"
+  else
+    if ENV['RAILS_ENV'] == 'production'
+      ''
+    else
+      "#{ENV['RAILS_ENV']}/"
+    end  
+  end
   has_attached_file :header_image,
      :styles => {
        :thumb => @@image_config.resize_thumb  # 
       },
       :default_style => :original,
-      :path => "#{@@image_config.path}/header_images/:id_partition/:style_:basename.:extension",
+      :path => "#{env}#{@@image_config.path}/header_images/:id_partition/:style_:basename.:extension",
       :url => "/header_images/:id/:style'",
       :whiny => false
 
@@ -78,7 +88,7 @@ class PageDesign < ActiveRecord::Base
        :thumb => @@image_config.resize_thumb  # 
       },
       :default_style => :original,
-      :path => "#{@@image_config.path}/background_images/:id_partition/:style_:basename.:extension",
+      :path => "#{env}#{@@image_config.path}/background_images/:id_partition/:style_:basename.:extension",
       :url => "/background_images/:id/:style'",
       :whiny => false
 

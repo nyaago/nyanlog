@@ -4,7 +4,15 @@ describe Folder do
   
   before do
     @site = Site.make
-    @folder = Folder.make(:site => @site)
+    @site2 = Site.make
+    @admin = User.make(:is_admin => true)
+    @site_admin = User.make(:is_site_admin => true, :site => @site)
+    @site2_admin = User.make(:is_site_admin => true, :site => @site2)
+    @editor = User.make(:is_site_admin => true, :site => @site)
+    @user = User.make(:site => @site2)
+    @owner = User.make(:site => @site)
+    
+    @folder = Folder.make(:site => @site, :owner => @owner)
   end
   
   describe 'opened_at' do
@@ -202,9 +210,63 @@ describe Folder do
       Folder.editable_for(editor).count.should == folder_count_of_user + 
                                                 folder_count_of_editor + folder_count_of_admin
     end
-
   
   end
+  
+  describe "can_manage_for" do
+    
+    it " the administrator can  manage the folder " do
+      Folder.can_manage_for(@admin).include?(@folder).should == true
+    end
+
+    it " the site administrator can  manage the folder " do
+      Folder.can_manage_for(@site_admin).include?(@folder).should == true
+    end
+
+    it " the site administrator at the other site can not  manage the folder " do
+      Folder.can_manage_for(@site2_admin).include?(@folder).should == false
+    end
+
+    it " the owner can  manage the folder " do
+      Folder.can_manage_for(@owner).include?(@folder).should == true
+    end
+
+    it " non owner can not manage the folder" do
+      Folder.can_manage_for(@user).include?(@folder).should == false
+    end
+    
+  end
+
+
+  describe "editable_for" do
+    
+    it " the administrator can  edit the folder " do
+      Folder.editable_for(@admin).include?(@folder).should == true
+    end
+
+    it " the site administrator can  edit the folder " do
+      Folder.editable_for(@site_admin).include?(@folder).should == true
+    end
+
+    it " the site administrator at the other site can not  edit the folder " do
+      Folder.editable_for(@site2_admin).include?(@folder).should == false
+    end
+
+    it " the editor can  edit the folder " do
+      Folder.editable_for(@editor).include?(@folder).should == true
+    end
+
+
+    it " the owner can  edit the folder " do
+      Folder.editable_for(@owner).include?(@folder).should == true
+    end
+
+    it " non owner can not edit the folder" do
+      Folder.editable_for(@user).include?(@folder).should == false
+    end
+    
+  end
+
   
 #  pending "add some examples to (or delete) #{__FILE__}"
 end

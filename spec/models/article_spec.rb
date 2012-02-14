@@ -6,10 +6,10 @@ describe Article do
     @site = Site.make
     @folder = Folder.make(:site => @site)
 
-    @article1 = @article = Article.make(:folder => @folder)
-    @article2 = Article.make(:folder => @folder)
-    @article3 = Article.make(:folder => @folder)
-    @article4 = Article.make(:folder => @folder)
+    @article1 = @article = Article.make(:folder => @folder, :order_of_display => 1 )
+    @article2 = Article.make(:folder => @folder, :order_of_display => 2)
+    @article3 = Article.make(:folder => @folder, :order_of_display => 3)
+    @article4 = Article.make(:folder => @folder, :order_of_display => 4)
     
     @articles = [@article1,@article2,@article3,@article4,]
 

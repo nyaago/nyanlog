@@ -39,7 +39,7 @@ def uploaded_file(filename, content_type)
 
   t.binmode
 
-  path = RAILS_ROOT + "/spec/fixtures/images/" + filename
+  path = ::Rails.root.to_s + "/spec/images/" + filename
 
   FileUtils.copy_file(path, t.path)
 

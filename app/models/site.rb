@@ -2,7 +2,7 @@ class Site < ActiveRecord::Base
   
   after_create  :create_menus!
   after_create  :create_belongings!
-  before_create :set_theme!
+  before_create :set_theme_name!
   
   has_many    :folders, :dependent => :nullify
   has_many    :users
