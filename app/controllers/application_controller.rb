@@ -31,8 +31,6 @@ class ApplicationController < ActionController::Base
     @site
   end
 
-  
-
   # Checks whether authenticated or not.
   # If not authenticated,it redirects the browser to the login page.
   # 認証の確認.
@@ -62,7 +60,6 @@ class ApplicationController < ActionController::Base
   # Renders the 404 (page which is not found) page.
   # It is rendered if 'public/404_<locale>.html' can be read. 
   # Otherwise, 'public/404.html' is displayed. 
-  
   def render_404
     def path_for_404
       path = "#{::Rails.root.to_s}/public/404_#{I18n.locale.to_s}.html"  
@@ -122,7 +119,7 @@ class ApplicationController < ActionController::Base
   
   # Loads the current site and belongings.
   def load_current_site
-    @site = 
+    @site ||= 
     unless params[:site].blank? 
       if  (params[:site].is_a?(String) || params[:site].is_a?(Symbol))
         Site.find_by_name(params[:site])
@@ -131,10 +128,9 @@ class ApplicationController < ActionController::Base
     if @site
       @header_menu = @site.menus.by_menu_type(:header).first
     end
-    
+    @site
   end
-  
-  
+
   
   protected
   

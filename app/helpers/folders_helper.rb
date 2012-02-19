@@ -33,7 +33,7 @@ module FoldersHelper
         options[:action] 
       end,
     :controller => 'folders',
-    :site => site(options) || if folder;folder.name;end,
+    :site => get_site(options) || if folder && folder.respond_to?(:site);folder.site.name;end,
     :name => 
       if folder.nil? 
         params[:name] 
@@ -57,7 +57,7 @@ module FoldersHelper
     url_for(options.merge( {
     :controller => 'folders',
     :action => :new,
-    :site => site(options)
+    :site => get_site(options)
     } ))
   end
 
@@ -80,7 +80,7 @@ module FoldersHelper
           folder 
         end 
       end,
-    :site => site(options)
+    :site => get_site(options)
     } ))
   end
   
@@ -106,7 +106,7 @@ module FoldersHelper
       else 
         options[:action] 
       end,
-    :site => site(options)
+    :site => get_site(options)
     } ))
   end
   
@@ -116,7 +116,7 @@ module FoldersHelper
 
   private
   
-  def site(options = {})
+  def get_site(options = {})
     folder ||= options[:folder]
     if folder.respond_to?(:name)
       folder.site.name

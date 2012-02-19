@@ -79,6 +79,7 @@ Nyanlog::Application.routes.draw do
   end
 
   # folders
+  get ":site/folders/:name" , :to => 'folders#index#:site#:name'
   get ":site/folders/new" , :to => 'folders#new#:site'
   get ":site/folders/list" , :to => 'folders#list#:site'
   get ":site/folders/:name/edit" , :to => 'folders#edit#:site#:name'

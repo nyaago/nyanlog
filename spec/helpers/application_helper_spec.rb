@@ -5,12 +5,17 @@ describe ApplicationHelper do
   
   require 'articles_helper'
   include ArticlesHelper
+  require 'folders_helper'
+  include FoldersHelper
   require 'page_design_helper'
   include PageDesignHelper
   
   before  do 
     @site = Site.make
     @folder = Folder.make(:site => @site)
+    @folders = (1..10).collect do
+      Folder.make(:site => @site)
+    end
     @articles = (1..20).collect do
       Article.make(:folder => @folder)
     end
@@ -370,5 +375,55 @@ describe ApplicationHelper do
     
   end
 
+  describe " render menu " do
+    
+    
+    it " no hierarchical menu" do
+      current_folder = @folder
+      current_site = @site
+      
+      menu = Menu.create(:site => @site, :menu_type => 'Header')
+      @folders.each do |folder|
+        item = MenuItem.new(:menu => menu, :folder => folder, :title => 'title')
+        item.save!(:validate => true)
+        menu.menu_items << item
+      end
+      menu.save!(:validate => true)
+      @folders.each do |folder|
+        re = Regexp.new("<li><a href=\"" + folder_path(folder))
+        render_menu(menu).should match(re)
+      end
+    end
+
+    it " hierarchical menu" do
+      current_folder = @folder
+      current_site = @site
+      
+      menu = Menu.create(:site => @site, :menu_type => 'Header')
+      prev_item = nil
+      @folders.each_with_index do |folder, i|
+        if i % 2 == 1
+          item = MenuItem.new(:menu => menu, :folder => folder, :title => 'title', :parent => prev_item)
+        else
+          item = MenuItem.new(:menu => menu, :folder => folder, :title => 'title')
+        end
+        item.save!(:validate => true)
+        menu.menu_items << item
+        prev_item = item
+      end
+      menu.save!(:validate => true)
+      @folders.each_with_index do |folder, i|
+        if i % 2 == 1
+          re = Regexp.new("<ul class='top_menu_2.*<li><a href=\"" + folder_path(folder))
+        else
+          re = Regexp.new("<li><a href=\"" + folder_path(folder))
+        end
+        render_menu(menu).should match(re)
+      end
+    end
+
+
+    
+  end
   
 end

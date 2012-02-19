@@ -89,7 +89,7 @@ module ApplicationHelper
     link_to(localized_month(month, options[:format] || :default), 
           url_for(:controller => :articles, :action => :month, 
             :folder => if folder.respond_to?(:name);folder.name;else;folder.to_s;end,
-            :site => site(options.merge({:folder => folder})),
+            :site => get_site(options.merge({:folder => folder})),
             :year => month.year, :month => month.month, 
             :only_path => if options.has_key?(:only_path);options[:only_path];else;false;end))
   end
@@ -103,7 +103,7 @@ module ApplicationHelper
     link_to(article.title,
           article_path(article, 
                     {:action => :show,
-                    :site => site(options.merge({:folder => article.folder})),
+                    :site => get_site(options.merge({:folder => article.folder})),
                     :folder => article.folder,
                     :only_path => if options.has_key?(:only_path);options[:only_path];else;false;end
                     }))
@@ -119,7 +119,7 @@ module ApplicationHelper
             articles_path(
                         {:action => :index,
                         :folder => folder,
-                        :site => site(options.merge({:folder => folder})),
+                        :site => get_site(options.merge({:folder => folder})),
                         :only_path => if options.has_key?(:only_path);options[:only_path];else;false;end
                         } ) )
   end
@@ -337,6 +337,7 @@ module ApplicationHelper
     end
   end
   
+  
   def render_menu(menu)
     def render_menu_recursive(menu_items, depth)
       menu_items.inject("<ul class='top_menu_#{depth} droppy'>") do |html, child|
@@ -358,7 +359,6 @@ module ApplicationHelper
     else
       ''
     end.html_safe
-
   end
   
   def render_menu_item(menu_item)
@@ -410,7 +410,7 @@ module ApplicationHelper
 
   protected
   
-  def site(options = {})
+  def get_site(options = {})
     folder ||= options[:folder]
     if folder.respond_to?(:name)
       folder.site.name
