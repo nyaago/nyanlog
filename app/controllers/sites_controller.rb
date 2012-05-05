@@ -2,7 +2,9 @@ class SitesController < ApplicationController
   
   PER_PAGE = 8
   
+  admin_action :index
   site_admin_action :edit, :update, :new, :create, :destroy, :select_theme, :theme_list
+  skip_auth :default, :show
   
   # GET sites
   def index
@@ -13,6 +15,21 @@ class SitesController < ApplicationController
     @sites = Site.listing.page(params[:page]).per(PER_PAGE)
     respond_to do |format|
       format.html # index.html.erb
+    end
+  end
+  
+  # GET sites/:id
+  # if the id parameter is requested, it redirects to folders/index,
+  # otherwise it redirects to site/index
+  def show
+    @site = 
+    if params[:id]
+      Site.find_by_id(params[:id])
+    end
+    if @site
+      redirect_to :controller => :folders, :action => :index, :site => @site.name
+    else
+      redirect_to :controller => :sites, :action => :index
     end
   end
   

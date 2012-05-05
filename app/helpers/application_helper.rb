@@ -368,7 +368,7 @@ module ApplicationHelper
   def render_menu_item_link(menu_item)
     link_to(menu_item.title_for_display, 
     if menu_item.folder
-      folder_path(menu_item.folder)
+      folder_path(menu_item.folder, :action => :index)
     else
       '#'
     end)

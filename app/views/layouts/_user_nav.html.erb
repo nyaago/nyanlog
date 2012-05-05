@@ -73,14 +73,19 @@
     <% end %>
 
     <% if current_site && current_user   %>
+    <li id="menu_item_folders">
+      <%= link_to(human_action_name(:folders, :list), "#") %>
+      <ul>
+      <% editable_folders.each do |folder| %>
+        <li><%= link_to(folder.name, articles_path(:folder => folder.name, 
+        :site => current_site.name)) %></li>
+      <% end %>
+      </ul>
+    </li>
     <li id="menu_item_sites">
       <%= link_to(Site.model_name.human, "#") %>
       <ul>
         <li>
-        <% editable_folders.each do |folder| %>
-          <li><%= link_to(folder.name, articles_path(:folder => folder.name, 
-          :site => current_site.name)) %></li>
-        <% end %>
         <% if current_site && current_user.can_manage_site?(current_site) %>
         <li><%= link_to(human_action_name(:folders, :list), 
         folders_path(:action => :list, :site => current_site.name))%></li>

@@ -2,6 +2,8 @@
 #
 class FoldersController < ApplicationController
 
+  skip_auth :index
+
   include FoldersHelper
   include Attribute::OpenAndCloseAt
 
