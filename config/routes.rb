@@ -79,7 +79,7 @@ Nyanlog::Application.routes.draw do
   end
 
   # folders
-  get ":site/folders/:name" , :to => 'folders#index#:site#:name'
+  
   get ":site/folders/new" , :to => 'folders#new#:site'
   get ":site/folders/list" , :to => 'folders#list#:site'
   get ":site/folders/:name/edit" , :to => 'folders#edit#:site#:name'
@@ -89,7 +89,7 @@ Nyanlog::Application.routes.draw do
   get ":site" , :to => 'folders#index#:site'
   get ":site/folders/:name/theme_list" , :to => "folders#theme_list#:site#:name"
   put ":site/folders/:name/select_theme" , :to => "folders#select_theme#:site#:name"
-
+  get ":site/folders/:name" , :to => 'folders#index#:site#:name'
 
   # articles
   get ":site/:folder/new" , :to => 'articles#new#:site#:folder'
