@@ -18,10 +18,10 @@ $(function() {
 
 <div id="articles"> 
 <% @articles.each do |article| %>
-  <div class="article" id="article_<%= article.id %>">
-    <h2 class="article_title">
+  <article class="article" id="article_<%= article.id %>">
+    <h1 class="article_title">
       <%= article.title %>
-    </h2>
+    </h1>
     <div class="article_informations">
       <span class="updated_at">
       <%= I18n.l(article.updated_at.to_date ,:format => :default) %>
@@ -30,7 +30,7 @@ $(function() {
     <div class="content">
       <%= article.content.html_safe %>
     </div>
-  </div>
+  </article>
 <% end %>
 </div>
 

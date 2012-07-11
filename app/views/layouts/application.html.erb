@@ -12,17 +12,18 @@
 </head>
 <body>
 <div id="page_wrapper">
-<div id="header_wrapper">
 <header>
     <%= render "/layouts/header" %>
 </header>   <!-- header -->
+<% if current_user %>
+<div id="user_nav_wrapper">
+   <%= render "/layouts/user_nav" %>
 </div>
+<% end %>    
+
 <div id="container_wrapper">
 <div id="container">
-  <%= render "/layouts/user_actions" %>
-  <% if current_user %>
-   <%= render "/layouts/user_nav" %>
-  <% end %>    
+  
   <div id="sidebar">
       
   <%= render "/layouts/sidebar" %>

@@ -20,9 +20,9 @@
 
 /* Everything else is theming */
  
-.droppy { background-color: #30A8C3; height: 24px; }
+.droppy { height: 24px; }
 .droppy *:hover { background-color: none; }
-.droppy a { border-right: 1px solid white; color: white; font-size: 12px; padding: 6px; line-height: 1; }
+.droppy a { border-right: 0px solid white; color: white; padding: 3px; height: 18px; }
   .droppy li.hover a { background-color: #5E5A5A; }
   .droppy ul { top: 25px; }
     .droppy ul li a { background-color: #5E5A5A; }

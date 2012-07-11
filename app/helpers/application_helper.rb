@@ -407,6 +407,19 @@ module ApplicationHelper
     ym.strftime(I18n.t(format, :scope => [:month, :date, :formats]))
   end
 
+  def site_title
+    if current_site
+      current_site.title
+    else
+      ""
+    end
+    
+  end
+  
+  # Returns the title that rendered in header
+  def header_title
+    "<h1>".html_safe + h(site_title) + "</h1>".html_safe
+  end
 
   protected
   

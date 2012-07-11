@@ -1,7 +1,14 @@
-<section>
+<section id="global_header">
 <%= header_image_tag %>
+<%= render "/layouts/user_actions" %>
+</section>
+<section id="header_title">
+	<%= header_title %>
+</section>
+<section id="user_header">
 <p>
   <%= user_header %>
 </p>
 </section>
 <%= render "/layouts/top_nav" %>
+

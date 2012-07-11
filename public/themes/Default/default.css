@@ -42,21 +42,23 @@ td{
 }
 
 h1 {
-  margin-top: 0.5em;
-  margin-bottom: 0.9em;
-  width: 60%;
-  position: static;
+  margin: 0px;
+  font-weight: bolder;
   font-size: 1.5em;
-  background-color: #FF9999;
-  padding: 3px 6px;
-  border: solid 1px #FF6633;
+  text-indent: 0em;
+  display: block;
+  font-weight: bold;
+  height: 25px;
+  line-height: 25px;
+  /*
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
+  */
 }
 
 h2 {
   margin-top: 0.5em;
-  font-size: 1.2em;
+  font-size: 1.25em;
 }
 
 /*
@@ -100,17 +102,17 @@ pre {
 body {
   margin: 0;
   padding: 0;
+  font-size: 1em;
   text-align: center; 
-  font:  "Lucida Grande", "Lucida Sans Unicode", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Helvetica, Arial, Verdana sans-serif;
-  *font-family:  "Lucida Grande", "ＭＳ Ｐゴシック", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif; 
-  background-color: #ffffcc; 
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Helvetica, Arial, Verdana, sans-serif;
+  background-color: #ffffff; 
 /*  background-color: transparent;   */
 /*  -webkit-font-smoothing: antialiased; */
 }
 
 #page_wrapper {
   text-align: center;
-  background-color: #ffffcc; 
+  background-color: #ffffff; 
 }
 
 #container_wrapper {
@@ -121,6 +123,20 @@ body {
 #header_wrapper {
   text-align: center;
 }
+
+#user_nav_wrapper {
+  text-align: center;
+  clear: both;
+  text-align: center;
+  width: 950px;
+  margin: 0 auto;
+  margin-top: 12px;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  background-color: #ffffff; 
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+}
+
 
 #footer_wrapper {
   margin-top: 12px;
@@ -136,17 +152,16 @@ body {
   margin: 0 auto;
   padding: 0.5em 0.5em 0.5em 0.5em;
   background-color: #ffffff; 
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
 }
 
 #user_nav {
   text-align: left;
   top: 0px;
-  width: 80%;
+  width: 100%;
   margin-bottom: 10px;
   margin-top: 5px;
-  padding-left: 1em;
 }
 
 #top_nav {
@@ -182,8 +197,8 @@ header {
   margin: 0 auto;
   padding: 0.5em 0.5em 0.5em 0.5em;
   background-color: #ffffff; 
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
 }
 
 footer {
@@ -195,7 +210,31 @@ footer {
 
 #user_actions {
   text-align: right;
+  float: right;
 }
+
+/**
+ =========
+ Header Layout
+ =========
+*/
+header #header_title {
+}
+
+header #global_title {
+}
+
+header #global_title h1 {
+  display: inline-block;
+}
+
+header #global_title h2{
+  display: inline-block;
+  margin-left: 1em;
+}
+
+
+
 
 /**
  =========
@@ -260,10 +299,17 @@ footer {
 /*
  top navigation menu
 */
-
-#top_nav #menu_item_settings {
-  float: right;
+#top_nav {
+  width : 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
 }
+
+
+
 
 
 #top_nav ul {
@@ -271,53 +317,64 @@ footer {
 }  
 
 #top_nav .droppy {
-  height: 40px;
+  height: 36px;
+  background-color: white;
 }  
 
 
 #top_nav .droppy ul ul {
   left: 131px;
+  
 }  
   
 #top_nav>.droppy>li {
-  width: 130px;
+/*  width: 130px; */
+  
   text-align: center;
-  height: 40px;
-  border-right: 1px solid white
 }
 
 #top_nav>.droppy>li>ul {
-  top: 43px;
+  top: 38px;
 }
 
 #top_nav>.droppy>li>a {
   border-bottom: none;
+  line-height: 1;
+  height: 20px;
+  
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #top_nav>.droppy>li>ul a {
 }
 
 #top_nav ul li {
-  background-color: #cccc99;
+/*  background-color: #cccc99; */
   color: #333333;
-  border-bottom: 1px solid white
+  border-bottom: 1px solid white;
+  
 }
 
-#top_nav li li {
-  text-align: left;
+#top_nav ul li a:hover {
+  background-color: #999966; 
 }
+
 
 #top_nav ul a {
   background-color: #cccc99;
   color: #333333;
   text-decoration: none;
+  border-right-width: 1px;
 }
 
 
 
 
 
-#top_nav ul *:hover { background-color: #999966; }
+#top_nav ul :hover { }
 
 #top_nav li ul li {
 /*  width: 150px; */
@@ -325,41 +382,147 @@ footer {
 
 
 /*
+ =========
  user navigation menu
+ =========
 */
 
-
+#user_nav {
+  height: 24px;
+}
+#user_nav>ul {
+  background-color: #333366;
+  height: 25px;
+}
 #user_nav #menu_item_settings {
   float: right;
 }
 
+#user_nav #menu_item_sites {
+  float: right;
+}
+
 #user_nav #menu_item_folders {
-  width: 120px;
+  float: right;
+}
+
+
+#user_nav #menu_item_folders {
+  width: 140px;
 }
 
 
 #user_nav>ul>li {
-  width: 85px;
+  width: 110px;
+  height: 24px;
   text-align: center;
+  border-right-color: white;
+  border-right-width: 0px;
+  border-right-style: solid;
+  border-left-color: white;
+  border-left-width: 0px;
+  border-left-style: solid;
+  margin-left: 0px;
+  margin-right: 0px;
 }
+
+#user_nav>ul>li>a {
+  height: 18px;
+  padding-left: 3px;
+  padding-right: 3px;
+
+}
+
+#user_nav>ul>li>ul {
+  top: 25px;
+}
+
+#user_nav ul ul {
+  width: 235px;
+}
+
+#user_nav ul ul ul {
+  left: -235px;
+}
+
+
+
+
+
+#user_nav>ul>li>ul ul {
+  top: 0px;
+}
+
 
 #user_nav li li {
   text-align: left;
 }
 
 #user_nav ul a {
-  background-color: #cccc99;
-  color: #333333;
+  background-color: #333366;
+  color: #ffffff;
   text-decoration: none;
+}
+
+#user_nav>ul>li a {
+  
 }
 
 
 
-#user_nav ul *:hover { background-color: #999966; }
+#user_nav ul *:hover { 
+  background-color: #000033; 
+}
 
 #user_nav li ul li {
 /*  width: 150px; */
 }
+
+
+/**
+ =====================
+*/
+
+#articles article h1 {
+  border-left: 6px solid #ffcc66;
+  font-weight: bold;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left: 4px;
+  font-size: 1.1em;
+  text-align: left;
+  height: 1.3em;
+  line-height: 1.3em;
+
+}
+
+#articles article {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  margin-left: 0px;
+  margin-right: 2px;
+  padding: 8px 8px ;
+  border-color: #999999;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  
+}
+
+#articles article .article_informations {
+  text-align: right;
+}
+
+#articles article .content {
+  margin-top: 4px;
+  margin-left: 6px;
+}
+
+#articles article .content li {
+  margin-left: 2em;
+}
+
 
 
 
@@ -411,7 +574,7 @@ footer {
   text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
-  font-size: 12px;
+  font-size: 1em;
   margin: -7px;
   margin-bottom: 0px;
   background-color: #c00;
@@ -419,7 +582,7 @@ footer {
 }
 
 #error_explanation ul li {
-  font-size: 12px;
+  font-size: 1em;
   list-style: square;
 }
 

@@ -38,7 +38,7 @@
         </li>
       </ul>
     </li>
-    <li id="menu_item_folders">
+    <li id="menu_item_folder">
       <%= link_to(Folder.model_name.human, "#") %>
       <ul>
         <li>
@@ -72,16 +72,17 @@
     </li>
     <% end %>
 
-    <% if current_site && current_user   %>
-    <li id="menu_item_folders">
-      <%= link_to(human_action_name(:folders, :list), "#") %>
+    <% if current_user.is_admin %>
+    <li id="menu_item_settings">
+      <%= link_to('application', "#") %>
       <ul>
-      <% editable_folders.each do |folder| %>
-        <li><%= link_to(folder.name, articles_path(:folder => folder.name, 
-        :site => current_site.name)) %></li>
-      <% end %>
+        <li><%= link_to(human_action_name(:sites, :index), sites_path) %></li>
+        <li><%= link_to(human_action_name(:users, :index), users_path) %></li>
+        <li><%= link_to(human_action_name(:app_settings, :index), app_settings_path) %></li>
       </ul>
     </li>
+    <% end %>
+    <% if current_site && current_user   %>
     <li id="menu_item_sites">
       <%= link_to(Site.model_name.human, "#") %>
       <ul>
@@ -127,16 +128,17 @@
         <% end %>
       </ul>
     </li>
-    <% end %>
-    <% if current_user.is_admin %>
-    <li id="menu_item_settings">
-      <%= link_to('application', "#") %>
+    <li id="menu_item_folders">
+      <%= link_to(human_action_name(:folders, :list), "#") %>
       <ul>
-        <li><%= link_to(human_action_name(:sites, :index), sites_path) %></li>
-        <li><%= link_to(human_action_name(:users, :index), users_path) %></li>
-        <li><%= link_to(human_action_name(:app_settings, :index), app_settings_path) %></li>
+      <% editable_folders.each do |folder| %>
+        <li><%= link_to(folder.name, articles_path(:folder => folder.name, 
+        :site => current_site.name)) %></li>
+      <% end %>
       </ul>
     </li>
+	
     <% end %>
+	
   </ul>
 </nav>
