@@ -3,6 +3,10 @@ class Article < ActiveRecord::Base
   include ::Attribute::OpenAndCloseAt
   include ::Attribute::OrderOfDisplay
   
+  attr_accessible :title, :content
+  attr_accessible :opened_year, :opened_month, :opened_day, :opened_hour, :opened_min
+  attr_accessible :closed_year, :closed_month, :closed_day, :closed_hour, :closed_min
+
   #
   # Attribute::OrderOfDisplay::StaticMethods.parent_attrs
   parent_attrs  :folder_id

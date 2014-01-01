@@ -1,5 +1,8 @@
 class Site < ActiveRecord::Base
   
+  attr_accessible :name, :title, :default_folder_id, :side_widget_set_id
+  attr_accessible :theme_name
+
   after_create  :create_menus!
   after_create  :create_belongings!
   before_create :set_theme_name!

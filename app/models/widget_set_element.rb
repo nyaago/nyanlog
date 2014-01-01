@@ -1,5 +1,8 @@
 class WidgetSetElement < ActiveRecord::Base
   
+  attr_accessible :widget_set, :widget
+
+
   belongs_to  :widget_set
   belongs_to  :widget,  :polymorphic => true
   

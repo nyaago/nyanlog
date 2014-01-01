@@ -1,5 +1,7 @@
 class NewArrivalWidget < ActiveRecord::Base
 
+  attr_accessible :element_count, :folder_id, :title
+
   include Widget
 
   MAX_ELEMENT_COUNT = 20

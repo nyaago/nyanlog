@@ -2,6 +2,9 @@ class MenuItem < ActiveRecord::Base
   
   ERROR_TRANSLATION_SCOPE = [:errors, :menu_item, :messages]
   
+  attr_accessible  :parent_id, :folder_id, :title
+
+  
   MAX_HIERARCHY = 3
   
   include ::Attribute::OrderOfDisplay

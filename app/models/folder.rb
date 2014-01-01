@@ -1,5 +1,13 @@
 class Folder < ActiveRecord::Base
 
+
+  attr_accessible :name, :title, :description, :owner_id 
+  attr_accessible :opened_year, :opened_month, :opened_day, :opened_hour, :opened_min 
+  attr_accessible :closed_year, :closed_month, :closed_day, :closed_hour, :closed_min 
+  attr_accessible :article_count_by_page, :ordering_type, :side_widget_set_id
+  attr_accessible :theme_name
+  attr_accessible :site
+
   include ::Attribute::OpenAndCloseAt
   
   MAX_ARTICLE_COUNT_BY_PAGE = 15

@@ -2,6 +2,8 @@
 # User model
 class User < ActiveRecord::Base
   
+  attr_accessible :login, :password, :password_confirmation, :email, :is_admin, :is_site_admin, :is_editor
+
   LEN_REISSUE_PASSWORD = 30
   
   belongs_to  :updated_by, :class_name => 'User',
