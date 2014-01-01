@@ -24,6 +24,7 @@
       <span class="note"><%= note_about_attribute(:site, :title )%></span><br />
       <%= f.text_field :title %>
     </div>
+    <% unless @site.new_record? %>
     <div class="field" id="default_folder_id">
       <%= f.label :default_folder_id %><br />
       <span class="note"><%= note_about_attribute(:site, :default_folder_id )%></span><br />
@@ -38,6 +39,7 @@
       {:include_blank => false}
       %>
     </div>
+    <% end %>
   </fieldset>
   <div class="actions">
     <%= f.submit %>

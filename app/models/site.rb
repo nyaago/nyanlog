@@ -41,11 +41,16 @@ class Site < ActiveRecord::Base
   private
   
   def create_menus!
-    Menu.create(:site => self, :menu_type => 'Header')
+    menu = Menu.new
+    menu.site = self
+    menu.menu_type = 'Header'
+    menu.save!(:validate => true)
   end
 
   def create_belongings!
-    PageDesign.create(:site => self)
+    page_design = PageDesign.new
+    page_design.site = self
+    page_design.save!(:validate => true)
   end
   
   def set_theme_name!
