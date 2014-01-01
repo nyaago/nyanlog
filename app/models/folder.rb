@@ -1,6 +1,6 @@
 class Folder < ActiveRecord::Base
 
-  include Attribute::OpenAndCloseAt
+  include ::Attribute::OpenAndCloseAt
   
   MAX_ARTICLE_COUNT_BY_PAGE = 15
 

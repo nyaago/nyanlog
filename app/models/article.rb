@@ -1,7 +1,7 @@
 class Article < ActiveRecord::Base
 
-  include Attribute::OpenAndCloseAt
-  include Attribute::OrderOfDisplay
+  include ::Attribute::OpenAndCloseAt
+  include ::Attribute::OrderOfDisplay
   
   #
   # Attribute::OrderOfDisplay::StaticMethods.parent_attrs

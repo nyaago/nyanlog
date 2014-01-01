@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
 
-  include Attribute::OpenAndCloseAt
-  include Attribute::OrderOfDisplay
+  include ::Attribute::OpenAndCloseAt
+  include ::Attribute::OrderOfDisplay
 
 
   parent_attrs  :folder_id

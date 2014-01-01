@@ -4,7 +4,7 @@ class MenuItem < ActiveRecord::Base
   
   MAX_HIERARCHY = 3
   
-  include Attribute::OrderOfDisplay
+  include ::Attribute::OrderOfDisplay
   
   #
   acts_as_tree
