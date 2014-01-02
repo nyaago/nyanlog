@@ -1,6 +1,6 @@
 class NewArrivalWidget < ActiveRecord::Base
 
-  attr_accessible :element_count, :folder_id, :title
+  #attr_accessible :element_count, :folder_id, :title
 
   include Widget
 

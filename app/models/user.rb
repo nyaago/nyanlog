@@ -2,8 +2,8 @@
 # User model
 class User < ActiveRecord::Base
   
-  attr_accessible :login, :password, :password_confirmation, :email, :is_admin, :is_site_admin, :is_editor
-  attr_accessible :site_id
+  #attr_accessible :login, :password, :password_confirmation, :email, :is_admin, :is_site_admin, :is_editor
+  #attr_accessible :site_id
 
   LEN_REISSUE_PASSWORD = 30
   

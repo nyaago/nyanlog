@@ -1,9 +1,9 @@
 class PageDesign < ActiveRecord::Base
 
 
-  attr_accessible :header_image, :header_color
-  attr_accessible :background_image, :background_color, :background_position, :background_repeat, :background_attachment
-  attr_accessible :stylesheet, :header_html, :footer_html
+  #attr_accessible :header_image, :header_color
+  #attr_accessible :background_image, :background_color, :background_position, :background_repeat, :background_attachment
+  #attr_accessible :stylesheet, :header_html, :footer_html
 
   # 
   TRANSLATION_SCOPE = ["errors", "page_design", "messages"].freeze

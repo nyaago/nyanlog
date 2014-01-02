@@ -2,7 +2,7 @@ class MonthlyWidget < ActiveRecord::Base
   
   include Widget
   
-  attr_accessible :element_count, :folder_id, :title
+  #attr_accessible :element_count, :folder_id, :title
 
   MAX_ELEMENT_COUNT = 20
   

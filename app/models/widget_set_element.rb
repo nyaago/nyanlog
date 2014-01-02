@@ -1,6 +1,6 @@
 class WidgetSetElement < ActiveRecord::Base
   
-  attr_accessible :widget_set, :widget
+  #attr_accessible :widget_set, :widget
 
 
   belongs_to  :widget_set
