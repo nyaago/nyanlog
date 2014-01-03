@@ -69,7 +69,7 @@ class FoldersController < ApplicationController
   def create
     @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
     @folder = Folder.new(:site => @site)
-    @folder.attributes = params[:folder]
+    @folder.attributes = params[:folder].permit(Folder.accessible_attributes)
     begin
       @folder.save!(:validate => true)
       flash[:notice] = message(:folders, :created)
@@ -103,7 +103,7 @@ class FoldersController < ApplicationController
   def update
     @site ||= Site.find_by_id(params[:site]) or (render_404 and return)
     @folder = @site.folders.by_name(params[:name]).first or (render_404 and return)
-    @folder.attributes = params[:folder]
+    @folder.attributes = params[:folder].permit(Folder.accessible_attributes)
     begin
       @folder.save!(:validate => true)
       flash[:notice] = message(:folders, :updated)

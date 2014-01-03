@@ -1,10 +1,6 @@
 class PageDesign < ActiveRecord::Base
 
 
-  #attr_accessible :header_image, :header_color
-  #attr_accessible :background_image, :background_color, :background_position, :background_repeat, :background_attachment
-  #attr_accessible :stylesheet, :header_html, :footer_html
-
   # 
   TRANSLATION_SCOPE = ["errors", "page_design", "messages"].freeze
   #
@@ -104,6 +100,28 @@ class PageDesign < ActiveRecord::Base
   # Restricts file size
   validates_attachment_size :background_image,
     :less_than => 3.megabytes
+
+  #attr_accessible :header_image, :header_color
+  #attr_accessible :background_image, :background_color, :background_position, :background_repeat, :background_attachment
+  #attr_accessible :stylesheet, :header_html, :footer_html
+
+  def self.accessible_attributes
+    self.accessible_header_attributes +  self.accessible_background_attributes + self.accessible_layout_attributes
+  end
+
+
+  def self.accessible_header_attributes
+    [:header_image, :header_color]
+  end
+
+  def self.accessible_background_attributes
+    [:background_image, :background_color, :background_position, :background_repeat, :background_attachment]
+  end
+
+  def self.accessible_layout_attributes
+    [:stylesheet, :header_html, :footer_html]
+  end
+
 
   # Returns array of background posision entries.
   # Each entry is array including the human name and the name.

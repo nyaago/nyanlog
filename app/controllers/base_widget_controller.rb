@@ -22,8 +22,7 @@ class BaseWidgetController < ApplicationController
     @widget = model_class.find_by_id(params[:id])  or (render_404 and return)
     widget_set = @widget.widget_set or (render_404 and return)
     widget_set.site_id == @site.id or (render_404 and return)
-
-    @widget.attributes = params[record_parameter_name.to_sym]
+    @widget.attributes = params[record_parameter_name.to_sym].permit(model_class.accessible_attributes)
     begin
       ActiveRecord::Base.transaction do
         @widget.save!(:validate => true)
@@ -33,9 +32,12 @@ class BaseWidgetController < ApplicationController
             { 'widget' => @widget, 'widget_set_element' => @widget.widget_set_element }.to_json }
         end
       end
-    rescue
+    rescue => ex
+      p "@@@@@@@@@"
       respond_to do |format|
-        #p({ 'error' => @widget.errors.full_messages}.to_json )
+        puts ex.message
+        puts ex.backtrace
+#        p({ 'error' => @widget.errors.full_messages}.to_json )
         format.json { render :text => { 'error' => @widget.errors.full_messages}.to_json }
       end
     end

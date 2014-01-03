@@ -72,7 +72,7 @@ class PageDesignController < ApplicationController
     else
       @site.page_design
     end || PageDesign.new
-    @page_design.attributes = params[:page_design]
+    @page_design.attributes = params[:page_design].permit(PageDesign.accessible_attributes)
     @page_design.site = @site
     @page_design.folder = @folder
     begin

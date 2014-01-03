@@ -42,5 +42,9 @@ class NewArrivalWidget < ActiveRecord::Base
     true
   end
 
+  def self.accessible_attributes
+    [:element_count, :folder_id, :title]    
+  end
+
 
 end

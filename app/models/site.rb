@@ -1,8 +1,5 @@
 class Site < ActiveRecord::Base
   
-#  attr_accessible :name, :title, :default_folder_id, :side_widget_set_id
-#  attr_accessible :theme_name
-
   after_create  :create_menus!
   after_create  :create_belongings!
   before_create :set_theme_name!
@@ -26,7 +23,16 @@ class Site < ActiveRecord::Base
   validates_presence_of   :name
   validates_presence_of   :title
   validates_uniqueness_of :name
-  
+
+
+  def self.accessible_attributes
+    [:name, :title, :default_folder_id, :side_widget_set_id, :theme_name]
+  end
+
+  def self.accessible_theme_attributes
+    [:theme_name]
+  end
+ 
   # Returns theme records (Design::Theme)
   def theme
     Design::Theme.array.find_by_name(self.theme_name || 'Default')

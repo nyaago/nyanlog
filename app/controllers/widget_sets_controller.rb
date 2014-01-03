@@ -26,7 +26,7 @@ class WidgetSetsController < ApplicationController
   def create
     @site ||= Site.find_by_name(params[:site])  or (render_404 and return)
     @widget_set = WidgetSet.new
-    @widget_set.attributes = params[:widget_set]
+    @widget_set.attributes = params[:widget_set].permit(WidgetSet.accessible_attributes)
     @widget_set.site = @site
     begin
       @widget_set.save!(:validate => true)
@@ -55,7 +55,7 @@ class WidgetSetsController < ApplicationController
   def update
     @site ||= Site.find_by_name(params[:site])  or (render_404 and return)
     @widget_set = @site.widget_sets.by_id(params[:id]).first or (render_404 and return)
-    @widget_set.attributes = params[:widget_set]
+    @widget_set.attributes = params[:widget_set].permit(WidgetSet.accessible_attributes)
     begin
       @widget_set.save!(:validate => true)
       flash[:notice] = message(:widget_sets, :updated)

@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     unless current_user.can_manage_user?(@user)
       return render_404
     end
-    @user.attributes = params[:user]
+    @user.attributes = params[:user].permit(User.accessible_attributes_by_admin)
     begin
       @user.save!(:validate => true)
       flash[:notice] = message(:users, :updated)
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
 
   # POST users/create
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params[:user].permit(User.accessible_attributes_by_admin))
     begin
       @user.save!(:validate => true)
       flash[:notice] = message(:users, :created)

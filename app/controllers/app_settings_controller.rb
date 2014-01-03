@@ -45,7 +45,7 @@ class AppSettingsController < ApplicationController
 
   # POST /app_settings
   def create
-    @app_setting = AppSetting.new(params[:app_setting])
+    @app_setting = AppSetting.new(params[:app_setting].permit(AppSetting.accessible_attributes))
     respond_to do |format|
       if @app_setting.save
         format.html { redirect_to '/', 
@@ -60,7 +60,7 @@ class AppSettingsController < ApplicationController
   def update
     @app_setting = AppSetting.find(params[:id])
     respond_to do |format|
-      if @app_setting.update_attributes(params[:app_setting])
+      if @app_setting.update_attributes(params[:app_setting].permit(AppSetting.accessible_attributes))
         format.html { redirect_to '/', 
             :notice => message(:app_settings, :updated) }
       else

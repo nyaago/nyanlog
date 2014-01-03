@@ -2,8 +2,6 @@
 # User model
 class User < ActiveRecord::Base
   
-  #attr_accessible :login, :password, :password_confirmation, :email, :is_admin, :is_site_admin, :is_editor
-  #attr_accessible :site_id
 
   LEN_REISSUE_PASSWORD = 30
   
@@ -62,6 +60,23 @@ class User < ActiveRecord::Base
     config.maintain_sessions = true
   end
   
+
+  def self.accessible_attributes
+    [:login, :password, :password_confirmation, :email]
+  end
+
+
+  def self.accessible_attributes_by_site_admin
+    self.accessible_attributes + [:is_site_admin, :is_editor] 
+  end
+
+  def self.accessible_attributes_by_admin
+    accessible_attributes_by_site_admin + [:is_admin, :site_id]
+  end
+
+
+
+
   # whether the user can manage users
   def can_manage_users?
     is_admin || is_site_admin

@@ -121,7 +121,7 @@ class ImagesController < ApplicationController
       return render_404
     end
     @image = Image.new(:folder => @folder)
-    @image.attributes = params[:image]
+    @image.attributes = params[:image].permit(Image.accessible_attributes)
     begin
       @image.save!(:validate => true)
       flash[:notice] = message(:images, :created)
@@ -146,7 +146,7 @@ class ImagesController < ApplicationController
     if @image.nil?
       return render_404
     end
-    @image.attributes = params[:image]
+    @image.attributes = params[:image].permit(Image.accessible_attributes)
     begin
       @image.save!(:validate => true)
       flash[:notice] = message(:images, :updated)

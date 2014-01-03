@@ -48,7 +48,7 @@ Nyanlog::Application.routes.draw do
   get ":site/widget_sets/new" , :to => 'widget_sets#new#:site'
   get ":site/widget_sets/list" , :to => 'widget_sets#list#:site'
   get ":site/widget_sets/:id/edit" , :to => 'widget_sets#edit#:site#:id'
-  put ":site/widget_sets/:id" , :to => 'widget_sets#update#:site#:id'
+  patch ":site/widget_sets/:id" , :to => 'widget_sets#update#:site#:id'
   post ":site/widget_sets" , :to => 'widget_sets#create#:site'
   delete ":site/widget_sets/:id" , :to => 'widget_sets#destroy#:site#:id'
   get ":site/widget_sets" , :to => 'widget_sets#index#:site'
@@ -56,7 +56,7 @@ Nyanlog::Application.routes.draw do
   # widget element set
   post ":site/widget_set_elements/:widget_set" , 
         :to => 'widget_set_elements#create#:site#:widget_set'
-  delete ":site/widget_set_elements/:id" , 
+  delete ":site/widget_set_elements/:wisget_set/:id" , 
         :to => 'widget_set_elements#destroy#:site#:id'
   get ":site/widget_set_elements/edit/:id" , 
         :to => 'widget_set_elements#edit#:site#:id'
@@ -83,7 +83,7 @@ Nyanlog::Application.routes.draw do
   get ":site/folders/new" , :to => 'folders#new#:site'
   get ":site/folders/list" , :to => 'folders#list#:site'
   get ":site/folders/:name/edit" , :to => 'folders#edit#:site#:name'
-  put ":site/folders/:name" , :to => 'folders#update#:site#:name'
+  patch ":site/folders/:name" , :to => 'folders#update#:site#:name'
   post ":site/folders" , :to => 'folders#create#:site'
   delete ":site/folders/:name" , :to => 'folders#destroy#:site'
   get ":site" , :to => 'folders#index#:site'

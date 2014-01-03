@@ -3,10 +3,6 @@ class Article < ActiveRecord::Base
   include ::Attribute::OpenAndCloseAt
   include ::Attribute::OrderOfDisplay
   
-  #attr_accessible :title, :content
-  #attr_accessible :opened_year, :opened_month, :opened_day, :opened_hour, :opened_min
-  #attr_accessible :closed_year, :closed_month, :closed_day, :closed_hour, :closed_min
-
   #
   # Attribute::OrderOfDisplay::StaticMethods.parent_attrs
   parent_attrs  :folder_id
@@ -78,4 +74,10 @@ class Article < ActiveRecord::Base
   # 公開停止日時の入力チェック.日付け要素が未入力または、全て入力されて有効な日時になっていればOK?
   validate :closed_at_must_completed_or_nil
   
+  def self.accessible_attributes
+    @accessible_attributes ||= [:title, :content] +
+    [:opened_year, :opened_month, :opened_day, :opened_hour, :opened_min] +
+    [:closed_year, :closed_month, :closed_day, :closed_hour, :closed_min]
+  end
+
 end

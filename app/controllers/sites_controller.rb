@@ -66,7 +66,7 @@ class SitesController < ApplicationController
   # PUT sites/update/:id
   def update
     @site = Site.find_by_id(params[:id]) or (render_404 and return)
-    @site.attributes = params[:site]
+    @site.attributes = params[:site].permit(Site.accessible_attributes)
     begin
       ActiveRecord::Base.transaction do
         @site.save!(:validate => true)
@@ -84,7 +84,7 @@ class SitesController < ApplicationController
 
   # POST sites/create
   def create
-    @site = Site.new(params[:site])
+    @site = Site.new(params[:site].permit(Site.accessible_attributes))
     begin
       ActiveRecord::Base.transaction do
         @site.save!(:validate => true)
@@ -128,7 +128,7 @@ class SitesController < ApplicationController
   # PUT sites/:id/selec_theme
   def select_theme
     @site ||= Site.find_by_id(params[:id]) or (render_404 and return)
-    @site.attributes = params[:site]
+    @site.attributes = params[:site].permit(Site.accessible_theme_attributes)
     begin
       ActiveRecord::Base.transaction do
         @site.save!(:validate => true)

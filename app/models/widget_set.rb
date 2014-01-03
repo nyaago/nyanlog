@@ -2,8 +2,6 @@ class WidgetSet < ActiveRecord::Base
 
   require 'csv'
 
-  #attr_accessible :title, :owner_id
-
   # Sets owner if owner is nil (set same value with the created_by user).
   after_create  :set_owner_if_nil!
 
@@ -56,6 +54,11 @@ class WidgetSet < ActiveRecord::Base
 
   #
   validates_presence_of :site_id
+
+
+  def self.accessible_attributes
+    @accessible_attributes ||= [:title, :owner_id]
+  end
 
   # sort elements 
   # == parameters

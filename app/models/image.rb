@@ -98,6 +98,13 @@ class Image < ActiveRecord::Base
 
   public
 
+  def self.accessible_attributes
+    @accessible_attributes ||= [:title, :description, :image, :alternative] +
+    [:opened_year, :opened_month, :opened_day, :opened_hour, :opened_min] +
+    [:closed_year, :closed_month, :closed_day, :closed_hour, :closed_min]
+  end
+
+
   # the mock uploading a file.
   def self.uploaded_file_mock(path, content_type)
 

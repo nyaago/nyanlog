@@ -152,7 +152,7 @@ class ArticlesController < ApplicationController
     if @article.nil?
       return render_404
     end
-    @article.attributes = params[:article]
+    @article.attributes = params[:article].permit(Article.accessible_attributes)
     begin
       @article.save!(:validate => true)
       flash[:notice] = message(:articles, :updated)
@@ -174,7 +174,7 @@ class ArticlesController < ApplicationController
       return render_404
     end
     @article = Article.new(:folder => @folder)
-    @article.attributes = params[:article]
+    @article.attributes = params[:article].permit(Article.accessible_attributes)
     begin
       @article.save!(:validate => true)
       flash[:notice] = message(:articles, :created)
